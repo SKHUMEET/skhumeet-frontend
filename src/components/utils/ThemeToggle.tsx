@@ -2,22 +2,22 @@ import React from "react";
 import styled from "styled-components";
 function ThemeToggle({
   onChangeColorMode,
-  isDark,
+  theme,
 }: {
   onChangeColorMode: () => void;
-  isDark: boolean;
+  theme: "light" | "dark";
 }) {
   return (
-    <ToggleWrapper onClick={onChangeColorMode} mode={isDark}>
-      {isDark ? "🌕" : "🌞"}
+    <ToggleWrapper onClick={onChangeColorMode}>
+      {theme === "light" ? "🌞" : "🌕"}
     </ToggleWrapper>
   );
 }
 
 export default ThemeToggle;
 
-const ToggleWrapper = styled.button<{ mode: boolean }>`
-  background-color: ${(props) => props.theme.color.backgroundColor};
+const ToggleWrapper = styled.button`
+  background-color: ${({ theme }) => theme.color.background};
   border: 1px solid gray;
   display: flex;
   justify-content: center;

@@ -3,11 +3,17 @@ import NavBar from "@/components/utils/NavBar";
 
 import React from "react";
 import styled from "styled-components";
-const Layout = ({ children, onChangeColorMode, isDark }: any) => {
+
+interface LayoutProps {
+  children: React.ReactNode;
+  onChangeColorMode: () => void;
+  theme: "light" | "dark";
+}
+const Layout = ({ children, onChangeColorMode, theme }: LayoutProps) => {
   return (
     <LayoutContainer>
       <LayoutWrapper>
-        <NavBar onChangeColorMode={onChangeColorMode} isDark={isDark} />
+        <NavBar onChangeColorMode={onChangeColorMode} theme={theme} />
         <ChildrenWrapper>{children}</ChildrenWrapper>
       </LayoutWrapper>
     </LayoutContainer>
@@ -19,8 +25,6 @@ export default Layout;
 const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${(props) => props.theme.color.backgroundColor};
-  color: ${(props) => props.theme.color.textColor};
 `;
 const LayoutWrapper = styled.div`
   display: flex;
@@ -35,7 +39,7 @@ const LayoutWrapper = styled.div`
     width: 90vw;
   }
   @media screen and (max-width: ${(props) => props.theme.breakpoints.small}) {
-    width: 95vw;
+    width: 100vw;
   }
 `;
 

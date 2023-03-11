@@ -10,8 +10,8 @@ export const lightTheme = {
     large: "1200px",
   },
   color: {
-    textColor: "#0b0b0b",
-    backgroundColor: "#fff",
+    text: "#202124",
+    background: "#fefefe",
   },
 };
 export const darkTheme = {
@@ -21,7 +21,7 @@ export const darkTheme = {
     large: "1200px",
   },
   color: {
-    textColor: "#fff",
-    backgroundColor: "#2b2b2b",
+    text: "#fefefe",
+    background: "#2b2b2b",
   },
 };
