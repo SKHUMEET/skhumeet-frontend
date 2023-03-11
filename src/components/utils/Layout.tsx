@@ -1,19 +1,17 @@
 // 레이아웃
 import NavBar from "@/components/utils/NavBar";
 
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 interface LayoutProps {
-  children: React.ReactNode;
-  onChangeColorMode: () => void;
-  theme: "light" | "dark";
+  children: ReactNode;
 }
-const Layout = ({ children, onChangeColorMode, theme }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <LayoutContainer>
       <LayoutWrapper>
-        <NavBar onChangeColorMode={onChangeColorMode} theme={theme} />
+        <NavBar />
         <ChildrenWrapper>{children}</ChildrenWrapper>
       </LayoutWrapper>
     </LayoutContainer>

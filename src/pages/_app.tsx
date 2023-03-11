@@ -2,7 +2,7 @@ import Layout from "@/components/utils/Layout";
 import type { AppProps } from "next/app";
 import { useState } from "react";
 import { lightTheme, darkTheme } from "@/styles/theme";
-import { ThemeProvider } from "styled-components";
+import ThemeProvider from "@/context/ThemeProvider";
 import { GlobalStyle } from "../styles/GlobalStyle";
 export default function App({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -10,9 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider>
       <GlobalStyle />
-      <Layout onChangeColorMode={_toggleSwitch} theme={theme}>
+      <Layout>
         <Component {...pageProps} />
       </Layout>
     </ThemeProvider>

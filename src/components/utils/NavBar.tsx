@@ -3,11 +3,8 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
-interface NavBarProps {
-  onChangeColorMode: () => void;
-  theme: "light" | "dark";
-}
-const NavBar = ({ onChangeColorMode, theme }: NavBarProps) => {
+
+const NavBar = () => {
   const router = useRouter();
 
   return (
@@ -16,7 +13,7 @@ const NavBar = ({ onChangeColorMode, theme }: NavBarProps) => {
         <LinkWrapper active={router.pathname === "/" ? "active" : ""} href="/">
           Home
         </LinkWrapper>
-        <ThemeToggle onChangeColorMode={onChangeColorMode} theme={theme} />
+        <ThemeToggle />
       </NavWrapper>
     </Nav>
   );

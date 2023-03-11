@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-function ThemeToggle({
-  onChangeColorMode,
-  theme,
-}: {
-  onChangeColorMode: () => void;
-  theme: "light" | "dark";
-}) {
+import { CustomThemeContext } from "@/context/ThemeProvider";
+
+function ThemeToggle() {
+  const { theme, onChangeTheme } = useContext(CustomThemeContext);
   return (
-    <ToggleWrapper onClick={onChangeColorMode}>
+    <ToggleWrapper onClick={onChangeTheme}>
       {theme === "light" ? "🌞" : "🌕"}
     </ToggleWrapper>
   );
