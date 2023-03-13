@@ -1,7 +1,78 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "@/styles/Home.module.css";
+import HomeList from "@/components/List/HomeList";
+import styled from "styled-components";
+
+const mock_data = [
+  {
+    category: "한솥밥",
+    items: [
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: false },
+      { title: "[모집]000모집" },
+      { title: "[모집]000모집", isRecruiting: true },
+    ],
+  },
+  {
+    category: "한솥밥",
+    items: [
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: false },
+      { title: "[모집]000모집" },
+      { title: "[모집]000모집", isRecruiting: true },
+    ],
+  },
+  {
+    category: "한솥밥",
+    items: [
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: false },
+      { title: "[모집]000모집" },
+      { title: "[모집]000모집", isRecruiting: true },
+    ],
+  },
+  {
+    category: "한솥밥",
+    items: [
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: false },
+      { title: "[모집]000모집" },
+      { title: "[모집]000모집", isRecruiting: true },
+    ],
+  },
+];
 
 export default function Home() {
-  return <>home</>;
+  return (
+    <HomeContainer>
+      <Banner />
+      <ListGridWrapper>
+        {mock_data.map((el) => (
+          <HomeList category={el.category} items={el.items} key={el.category} />
+        ))}
+      </ListGridWrapper>
+    </HomeContainer>
+  );
 }
+
+const HomeContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Banner = styled.div`
+  width: 100%;
+  height: 30vh;
+  background-color: blue;
+`;
+
+const ListGridWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.medium}) {
+    grid-template-columns: 1fr;
+  }
+`;

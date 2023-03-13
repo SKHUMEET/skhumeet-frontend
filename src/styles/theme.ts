@@ -12,6 +12,7 @@ export const lightTheme = {
   color: {
     text: "#202124",
     background: "#fefefe",
+    hover: "#c6c6c6",
   },
 };
 export const darkTheme = {
@@ -23,5 +24,6 @@ export const darkTheme = {
   color: {
     text: "#fefefe",
     background: "#2b2b2b",
+    hover: "#c6c6c6",
   },
 };
