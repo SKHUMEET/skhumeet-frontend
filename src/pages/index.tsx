@@ -42,6 +42,26 @@ const mock_data = [
       { title: "[모집]000모집", isRecruiting: true },
     ],
   },
+  {
+    category: "한솥밥",
+    items: [
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: false },
+      { title: "[모집]000모집" },
+      { title: "[모집]000모집", isRecruiting: true },
+    ],
+  },
+  {
+    category: "한솥밥",
+    items: [
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: true },
+      { title: "[모집]000모집", isRecruiting: false },
+      { title: "[모집]000모집" },
+      { title: "[모집]000모집", isRecruiting: true },
+    ],
+  },
 ];
 
 export default function Home() {
@@ -72,7 +92,7 @@ const Banner = styled.div`
 const ListGridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.medium}) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.small}) {
     grid-template-columns: 1fr;
   }
 `;

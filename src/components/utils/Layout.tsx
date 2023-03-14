@@ -1,8 +1,6 @@
-// 레이아웃
-import NavBar from "@/components/utils/NavBar";
-
 import React, { ReactNode } from "react";
 import styled from "styled-components";
+import NavBar from "@/components/utils/NavBar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -34,17 +32,26 @@ const LayoutWrapper = styled.div`
     width: 80vw;
   }
   @media screen and (max-width: ${(props) => props.theme.breakpoints.medium}) {
-    width: 90vw;
-  }
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.small}) {
     width: 100vw;
   }
 `;
 
 const ChildrenWrapper = styled.div`
   display: flex;
+  width: 100%;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+`;
+
+const NavigateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  height: 200px;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.large}) {
+    display: none;
+  }
 `;
