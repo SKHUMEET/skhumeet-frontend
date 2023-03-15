@@ -5,9 +5,6 @@ import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
 
-interface MenuProps {
-  isOpen: boolean;
-}
 const NavBar = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -27,25 +24,25 @@ const NavBar = () => {
           </LinkWrapper>{" "}
           <LinkWrapper
             active={router.pathname === "/a" ? "active" : ""}
-            href="/"
+            href="/a"
           >
             어울림
           </LinkWrapper>{" "}
           <LinkWrapper
             active={router.pathname === "/b" ? "active" : ""}
-            href="/"
+            href="/b"
           >
             동아리
           </LinkWrapper>{" "}
           <LinkWrapper
             active={router.pathname === "/c" ? "active" : ""}
-            href="/"
+            href="/c"
           >
             기숙사
           </LinkWrapper>{" "}
           <LinkWrapper
             active={router.pathname === "/d" ? "active" : ""}
-            href="/"
+            href="/d"
           >
             학부활동
           </LinkWrapper>
@@ -57,21 +54,22 @@ const NavBar = () => {
 
 export default NavBar;
 const Nav = styled.nav`
-  display: flex;
+  top: 0;
+  display: sticky;
   width: 100%;
   align-items: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   height: 7vh;
+  position: sticky;
+  background: ${({ theme }) => theme.color.background};
 `;
 const NavWrapper = styled.div`
   display: flex;
-  gap: 10px;
   width: 100%;
   height: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
 `;
 
 const Logo = styled.a`
@@ -107,11 +105,15 @@ const LinkWrapper = styled(Link)<{ active: string }>`
   font-size: 18px;
   text-decoration: none;
   color: ${(props) => props.theme.color.text};
+
   ${(props) =>
     props.active === "active" &&
     css`
       text-decoration: underline;
-      text-decoration-color: grey;
+      text-decoration-color: ${props.theme.color.text};
       text-underline-offset: 8px;
     `};
+  :hover {
+    color: ${(props) => props.theme.color.hover};
+  }
 `;
