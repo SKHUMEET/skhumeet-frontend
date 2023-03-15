@@ -17,35 +17,17 @@ const NavBar = () => {
         <Logo>로고</Logo>
         <SidebarModal handleToggle={toggleMenu} isOpen={isOpen}>
           <LinkWrapper
-            active={router.pathname === "/" ? "active" : ""}
-            href="/"
+            active={router.pathname === "/hansotbab" ? "active" : ""}
+            href="/hansotbab"
           >
             한솥밥
           </LinkWrapper>{" "}
           <LinkWrapper
-            active={router.pathname === "/a" ? "active" : ""}
-            href="/a"
+            active={router.pathname === "/eoullim" ? "active" : ""}
+            href="/eoullim"
           >
             어울림
           </LinkWrapper>{" "}
-          <LinkWrapper
-            active={router.pathname === "/b" ? "active" : ""}
-            href="/b"
-          >
-            동아리
-          </LinkWrapper>{" "}
-          <LinkWrapper
-            active={router.pathname === "/c" ? "active" : ""}
-            href="/c"
-          >
-            기숙사
-          </LinkWrapper>{" "}
-          <LinkWrapper
-            active={router.pathname === "/d" ? "active" : ""}
-            href="/d"
-          >
-            학부활동
-          </LinkWrapper>
         </SidebarModal>
       </NavWrapper>
     </Nav>
@@ -79,39 +61,19 @@ const Logo = styled.a`
   height: 100%;
 `;
 
-// const MenuContainer = styled.div<MenuProps>`
-//   display: flex;
-//   flex-direction: column;
-//   transition: all 0.5s ease-in-out;
-//   ${({ isOpen, theme }) =>
-//     isOpen
-//       ? css`
-//           position: absolute;
-//           width: 30vw;
-//           display: flex;
-//           flex-direcion: column;
-//           background-color: ${theme.color.background};
-//           right: 0;
-//           top: 6vh;
-//         `
-//       : css`
-//           display: none;
-//         `}
-// `;
-
 const LinkWrapper = styled(Link)<{ active: string }>`
-  display: block;
+  display: flex;
   font-weight: 600;
   font-size: 18px;
   text-decoration: none;
   color: ${(props) => props.theme.color.text};
-
+  margin: 5px;
   ${(props) =>
     props.active === "active" &&
     css`
-      text-decoration: underline;
-      text-decoration-color: ${props.theme.color.text};
-      text-underline-offset: 8px;
+      /* text-decoration: underline; */
+      color: ${props.theme.color.hover};
+      /* text-underline-offset: 8px; */
     `};
   :hover {
     color: ${(props) => props.theme.color.hover};

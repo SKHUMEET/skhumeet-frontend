@@ -24,6 +24,7 @@ const HamburgerIcon = styled.div<SidebarProps>`
   ${({ isOpen, theme }) =>
     isOpen
       ? css`
+          z-index: 3;
           &::before {
             transform: rotate(45deg);
           }
@@ -51,21 +52,26 @@ const Sidebar = styled.div<SidebarProps>`
   position: fixed;
   top: 6vh;
   right: 10vw;
-  width: 30vw;
+  width: 20vw;
   padding: 1rem;
   background-color: transparent;
   color: ${({ theme }) => theme.color.text};
-  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(150%)")};
+  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(350%)")};
   transition: transform 0.3s ease-out;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  align-content: flex-end;
   z-index: ${({ isOpen }) => (isOpen ? "3" : "-1")};
   transition: 0.5s ease-in-out;
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     right: 0vw;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    width: 10vw;
+    top: 10vh;
+    z-index: 1;
+    left: 80vw;
+    align-content: flex-start;
+    transform: translateX(0);
   }
 `;
 
@@ -74,14 +80,38 @@ const Overlay = styled.div<SidebarProps>`
   bottom: 0;
   top: 0;
   right: 10vw;
-  width: 30vw;
-  background: ${({ theme }) => theme.color.background};
+  width: 20vw;
   z-index: ${({ isOpen }) => (isOpen ? "2" : "-1")};
-  opacity: ${({ isOpen }) => (isOpen ? "0.5" : "0")};
-  transition: opacity 0.3s ease-out;
-  cursor: ${({ isOpen }) => (isOpen ? "pointer" : "default")};
+  /* opacity: ${({ isOpen }) => (isOpen ? "0.5" : "0")}; */
+  transition: 0.5s;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      cursor: pointer;
+      background: ${({ theme }) => theme.color.background};
+      box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      backdrop-filter: blur(25px);
+      transition: 0.5s;
+    `}
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     right: 0vw;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    width: 10vw;
+    left: 80vw;
+    height: 20vh;
+    top: 10vh;
+    margin-right: 5px;
+    background: ${({ theme }) => theme.color.background};
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(25px);
+    transition: 0.5s;
   }
 `;
 
@@ -100,7 +130,7 @@ export default function SidebarModal({
     <>
       <HamburgerIcon isOpen={isOpen} onClick={handleToggle} />
       <Sidebar isOpen={isOpen}>{children}</Sidebar>
-      <Overlay isOpen={isOpen} onClick={handleToggle} />
+      <Overlay isOpen={isOpen} onClick={handleToggle}></Overlay>
     </>
   );
 }
