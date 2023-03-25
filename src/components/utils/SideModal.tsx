@@ -64,8 +64,14 @@ const Sidebar = styled.div<SidebarProps>`
   transition: 0.5s ease-in-out;
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     right: 0vw;
+    width: 40vw;
   }
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    width: 100vw;
+  }
+  /* 전체화면일 때 */
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    margin-left: 10px;
     width: 10vw;
     top: 10vh;
     z-index: 1;
@@ -82,7 +88,6 @@ const Overlay = styled.div<SidebarProps>`
   right: 10vw;
   width: 20vw;
   z-index: ${({ isOpen }) => (isOpen ? "2" : "-1")};
-  /* opacity: ${({ isOpen }) => (isOpen ? "0.5" : "0")}; */
   transition: 0.5s;
 
   ${({ isOpen }) =>
@@ -99,13 +104,18 @@ const Overlay = styled.div<SidebarProps>`
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     right: 0vw;
+    width: 40vw;
   }
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    width: 100vw;
+  }
+  /* 전체화면일 때 */
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     width: 10vw;
     left: 80vw;
     height: 20vh;
     top: 10vh;
-    margin-right: 5px;
+    margin-left: 10px;
     background: ${({ theme }) => theme.color.background};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
