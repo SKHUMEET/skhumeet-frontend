@@ -82,17 +82,16 @@ const Sidebar = styled.div<SidebarProps>`
 `;
 
 const Overlay = styled.div<SidebarProps>`
-  position: fixed;
-  bottom: 0;
-  top: 0;
-  right: 10vw;
-  width: 20vw;
   z-index: ${({ isOpen }) => (isOpen ? "2" : "-1")};
   transition: 0.5s;
-
+  position: fixed;
   ${({ isOpen }) =>
     isOpen &&
     css`
+      bottom: 0;
+      top: 0;
+      right: 10vw;
+      width: 20vw;
       cursor: pointer;
       background: ${({ theme }) => theme.color.background};
       box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);

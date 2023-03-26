@@ -1,9 +1,13 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React from "react";
 import { IdProps } from "@/types";
+import Seo from "@/components/utils/Seo";
 
 const Detail = ({ id }: IdProps) => {
-  return <div>Detail</div>;
+  <>
+    <Seo title="어울림" />
+    console.log(id); return <div>Detail</div>
+  </>;
 };
 
 export default Detail;

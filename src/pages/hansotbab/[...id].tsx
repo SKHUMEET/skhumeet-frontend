@@ -1,9 +1,16 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React from "react";
 import { IdProps } from "@/types";
+import Seo from "@/components/utils/Seo";
 
 const Detail = ({ id }: IdProps) => {
-  return <div>Detail</div>;
+  console.log(id);
+  return (
+    <>
+      <Seo title="한솥밥" />
+      <div>index</div>
+    </>
+  );
 };
 
 export default Detail;
@@ -13,7 +20,7 @@ export const getServerSideProps: GetServerSideProps<IdProps> = async (
 ) => {
   const { query } = context;
 
-  const id = query.mainPostId as string;
+  const id = query.id as string;
 
   return {
     props: {
