@@ -37,7 +37,6 @@ const NavBar = () => {
 export default NavBar;
 const Nav = styled.nav`
   top: 0;
-  display: sticky;
   width: 100%;
   align-items: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,

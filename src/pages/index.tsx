@@ -1,4 +1,5 @@
 import HomeList from "@/components/List/HomeList";
+import Seo from "@/components/utils/Seo";
 import styled from "styled-components";
 
 const mock_data = [
@@ -67,6 +68,7 @@ const mock_data = [
 export default function Home() {
   return (
     <HomeContainer>
+      <Seo />
       <Banner />
       <ListGridWrapper>
         {mock_data.map((el) => (
