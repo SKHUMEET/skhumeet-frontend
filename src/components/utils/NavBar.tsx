@@ -17,17 +17,38 @@ const NavBar = () => {
         <Logo>로고</Logo>
         <SidebarModal handleToggle={toggleMenu} isOpen={isOpen}>
           <LinkWrapper
-            active={router.pathname === "/hansotbab" ? "active" : ""}
+            active={router.pathname.startsWith("/hansotbab")}
             href="/hansotbab"
           >
             한솥밥
-          </LinkWrapper>{" "}
+          </LinkWrapper>
           <LinkWrapper
-            active={router.pathname === "/eoullim" ? "active" : ""}
+            active={router.pathname.startsWith("/eoullim")}
             href="/eoullim"
           >
             어울림
-          </LinkWrapper>{" "}
+          </LinkWrapper>
+          <LinkWrapper
+            active={router.pathname.startsWith("/study")}
+            href="/study"
+          >
+            스터디
+          </LinkWrapper>
+          <LinkWrapper
+            active={router.pathname.startsWith("/club")}
+            href="/club"
+          >
+            동아리
+          </LinkWrapper>
+          <LinkWrapper
+            active={router.pathname.startsWith("/departmentEvent")}
+            href="/departmentEvent"
+          >
+            학과활동
+          </LinkWrapper>
+          <LinkWrapper active={router.pathname.startsWith("/etc")} href="/etc">
+            기타
+          </LinkWrapper>
         </SidebarModal>
       </NavWrapper>
     </Nav>
@@ -60,7 +81,7 @@ const Logo = styled.a`
   height: 100%;
 `;
 
-const LinkWrapper = styled(Link)<{ active: string }>`
+const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
   font-weight: 600;
   font-size: 18px;
@@ -68,11 +89,11 @@ const LinkWrapper = styled(Link)<{ active: string }>`
   color: ${(props) => props.theme.color.text};
   margin: 5px;
   ${(props) =>
-    props.active === "active" &&
+    props.active &&
     css`
-      /* text-decoration: underline; */
-      color: ${props.theme.color.hover};
-      /* text-underline-offset: 8px; */
+      text-decoration: underline;
+      /* color: ${props.theme.color.hover}; */
+      text-underline-offset: 8px;
     `};
   :hover {
     color: ${(props) => props.theme.color.hover};
