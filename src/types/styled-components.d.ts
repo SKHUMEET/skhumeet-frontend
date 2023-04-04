@@ -11,7 +11,7 @@ declare module "styled-components" {
       text: string;
       background: string;
       hover: string;
-      // main: string;
+      main: string;
       // sub: string;
       // point: string;
     };
