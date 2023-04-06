@@ -1,54 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
+import { CategoryKorean, Category } from "@/types";
 
 const NavBar = () => {
+  const category: Category[] = [
+    "hansotbab",
+    "eoullim",
+    "study",
+    "club",
+    "contest",
+    "departmentEvent",
+    "etc",
+  ];
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [router]);
+
   return (
     <Nav>
       <NavWrapper>
-        <Logo>로고</Logo>
+        <TopWrapper>
+          <LogoWraper>
+            <Logo onClick={() => router.push("/")}>로고</Logo>
+          </LogoWraper>
+        </TopWrapper>
         <SidebarModal handleToggle={toggleMenu} isOpen={isOpen}>
-          <LinkWrapper
-            active={router.pathname.startsWith("/hansotbab")}
-            href="/hansotbab"
-          >
-            한솥밥
-          </LinkWrapper>
-          <LinkWrapper
-            active={router.pathname.startsWith("/eoullim")}
-            href="/eoullim"
-          >
-            어울림
-          </LinkWrapper>
-          <LinkWrapper
-            active={router.pathname.startsWith("/study")}
-            href="/study"
-          >
-            스터디
-          </LinkWrapper>
-          <LinkWrapper
-            active={router.pathname.startsWith("/club")}
-            href="/club"
-          >
-            동아리
-          </LinkWrapper>
-          <LinkWrapper
-            active={router.pathname.startsWith("/departmentEvent")}
-            href="/departmentEvent"
-          >
-            학과활동
-          </LinkWrapper>
-          <LinkWrapper active={router.pathname.startsWith("/etc")} href="/etc">
-            기타
-          </LinkWrapper>
+          {category.map((el: Category) => (
+            <LinkWrapper
+              active={router.pathname.startsWith(`/${el}`)}
+              href={`/${el}`}
+              key={el}
+            >
+              {CategoryKorean[el]}
+            </LinkWrapper>
+          ))}
         </SidebarModal>
       </NavWrapper>
     </Nav>
@@ -74,11 +70,32 @@ const NavWrapper = styled.div`
   align-items: center;
 `;
 
+const TopWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  width: 100%;
+  posision: fixed;
+  height: 7vh;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    border-bottom: 2px solid ${({ theme }) => theme.color.main};
+  }
+`;
+const LogoWraper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Logo = styled.a`
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: none;
   height: 100%;
+  :hover {
+    color: ${({ theme }) => theme.color.hover};
+    box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main};
+  }
 `;
 
 const LinkWrapper = styled(Link)<{ active: boolean }>`
