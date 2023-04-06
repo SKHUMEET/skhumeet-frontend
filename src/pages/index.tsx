@@ -99,7 +99,7 @@ const HomeContainer = styled.div`
 const Banner = styled.div`
   width: 100%;
   height: 30vh;
-  background-color: blue;
+  background-color: ${({ theme }) => theme.color.main};
 `;
 
 const ListGridWrapper = styled.div`
