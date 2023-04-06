@@ -1,29 +1,22 @@
+import { Category, IdProps } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React from "react";
-import { IdProps } from "@/types";
-import Seo from "@/components/utils/Seo";
 
-const Detail = ({ id }: IdProps) => {
-  console.log(id);
-  return (
-    <>
-      <Seo title="한솥밥" />
-      <div>index</div>
-    </>
-  );
+const Detail = ({ category, id }: IdProps) => {
+  return <div>[id]</div>;
 };
 
 export default Detail;
-
 export const getServerSideProps: GetServerSideProps<IdProps> = async (
   context: GetServerSidePropsContext
 ) => {
   const { query } = context;
-
-  const id = query.id as string;
+  const category = query.category as Category;
+  const id = query.id as unknown as number;
 
   return {
     props: {
+      category,
       id,
     },
   };
