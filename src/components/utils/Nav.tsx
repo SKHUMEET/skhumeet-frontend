@@ -87,7 +87,7 @@
 //   display: block;
 //   width: 30px;
 //   height: 30px;
-//   background-color: transparent;
+//   background-: transparent;
 //   border: none;
 //   padding: 0;
 //   cursor: pointer;
