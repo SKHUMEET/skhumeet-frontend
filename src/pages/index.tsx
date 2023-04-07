@@ -1,5 +1,7 @@
 import HomeList from "@/components/List/HomeList";
+import Pagination from "@/components/Pagination";
 import Seo from "@/components/utils/Seo";
+import { useState } from "react";
 import styled from "styled-components";
 
 const mock_data = [
@@ -66,6 +68,10 @@ const mock_data = [
 ];
 
 export default function Home() {
+  const [page, setPage] = useState<number>(1);
+
+  const [totalPage, setTotalPage] = useState<number>(0);
+
   return (
     <HomeContainer>
       <Seo />
@@ -75,6 +81,11 @@ export default function Home() {
           <HomeList category={el.category} items={el.items} key={el.category} />
         ))}
       </ListGridWrapper>
+      <Pagination
+        totalPages={totalPage}
+        currentPage={page}
+        onPageChange={setPage}
+      ></Pagination>
     </HomeContainer>
   );
 }

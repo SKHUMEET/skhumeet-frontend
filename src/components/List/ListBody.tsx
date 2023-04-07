@@ -3,7 +3,7 @@ import { CategoryProps, CategoryKorean } from "@/types";
 
 import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
-import { Mockdata } from "../../../mockData";
+import { Mockdata } from "@/mockData";
 const ListBody = ({ category }: CategoryProps) => {
   const listStyle =
     category === "departmentEvent" || category === "club" ? "card" : "list";
