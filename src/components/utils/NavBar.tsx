@@ -75,7 +75,7 @@ const TopWrapper = styled.div`
   justify-content: space-between;
   top: 0;
   width: 100%;
-  posision: fixed;
+  position: fixed;
   height: 7vh;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {

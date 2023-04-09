@@ -27,6 +27,10 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid #d3d3d3;
 `;
 
 export const TitleWrapper = styled.div`

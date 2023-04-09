@@ -15,6 +15,7 @@ const SubmitBtn = styled.button`
   padding: 2px 5px;
 
   background-color: ${({ theme }) => theme.color.main};
+  
   color: white;
   border: 1px solid ${({ theme }) => theme.color.main};
   border-radius: 3px;
