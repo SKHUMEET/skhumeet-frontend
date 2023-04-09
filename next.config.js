@@ -4,6 +4,23 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/oauth2.0/:path*", // url이 source에 해당될 경우
+  //       destination: "https://nid.naver.com/oauth2.0/:path*", // destination으로 redirect
+  //     },
+  //   ];
+  // },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*", // path 주소
+        destination: "http://api-skhumeet.duckdns.org//api/:path*",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

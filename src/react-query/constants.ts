@@ -6,5 +6,5 @@ export const queryKeys = {
   contest: "contest",
   departmentEvent: "departmentEvent",
   etc: "etc",
-  user: "user",
+  member: "member",
 };
