@@ -1,13 +1,13 @@
 import ListBody from "@/components/List/ListBody";
 import Seo from "@/components/utils/Seo";
 import React from "react";
-import { Category, CategoryKorean, CategoryProps } from "@/types";
+import { Category, ConvertKorean, CategoryProps } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 const index = ({ category }: CategoryProps) => {
   return (
     <>
-      <Seo title={CategoryKorean[category]} />
+      <Seo title={ConvertKorean[category]} />
       <ListBody category={category} />
     </>
   );

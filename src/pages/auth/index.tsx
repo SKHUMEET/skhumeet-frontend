@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Router from "next/router";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
@@ -22,6 +21,7 @@ const Auth = () => {
     nickname: "",
     profile_image: "",
   });
+  
   useEffect(() => {
     const naver = (window as any).naver;
 
@@ -119,20 +119,23 @@ const Auth = () => {
 export default Auth;
 
 const Wrapper = styled.div`
-  max-width: 100%;
-  max-height: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  overflow: auto;
-  position: fixed;
-  background-color: ${({ theme }) => theme.color.background};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
+
+  position: fixed;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  overflow: auto;
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 const Header = {
