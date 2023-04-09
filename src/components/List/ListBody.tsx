@@ -4,6 +4,7 @@ import { CategoryProps, CategoryKorean } from "@/types";
 import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
 import { Mockdata } from "@/mockData";
+import Btn from "../Btn";
 const ListBody = ({ category }: CategoryProps) => {
   const listStyle =
     category === "departmentEvent" || category === "club" ? "card" : "list";
@@ -14,7 +15,7 @@ const ListBody = ({ category }: CategoryProps) => {
         <ListBodyHeader>
           <div>{CategoryKorean[category]}</div>
           <div>
-            <>작성하기</>
+            <Btn />
           </div>
         </ListBodyHeader>
         <ListTable

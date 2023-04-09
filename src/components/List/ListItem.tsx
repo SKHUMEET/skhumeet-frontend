@@ -29,13 +29,13 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
-const Category = styled.span`
+export const Category = styled.span`
   width: fit-content;
   padding: 2px 5px;
   margin-bottom: 3px;
@@ -48,11 +48,11 @@ const Category = styled.span`
   text-align: center;
 `;
 
-const Title = styled.div`
+export const Title = styled.div`
   font-weight: 600;
 `;
 
-const Time = styled.p`
+export const Time = styled.span`
   margin-bottom: 10px;
 
   color: #999999;
