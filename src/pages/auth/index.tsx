@@ -21,7 +21,7 @@ const Auth = () => {
     nickname: "",
     profile_image: "",
   });
-  
+
   useEffect(() => {
     const naver = (window as any).naver;
 
@@ -53,8 +53,10 @@ const Auth = () => {
           const profile_image = naverLogin.user.getProfileImage() as string;
 
           await findMemeberById(id).then((res) => {
-            console.log(res);
-            res.status === 404 && setIsProfileRegister(true);
+            console.log("res", res);
+            res.response &&
+              res.response.status === 404 &&
+              setIsProfileRegister(true);
           });
 
           setForm({ ...form, id, name, nickname, profile_image });
@@ -132,7 +134,7 @@ const Wrapper = styled.div`
   max-width: 100%;
   max-height: 100%;
   margin: auto;
-  
+
   left: 0;
   right: 0;
   top: 0;

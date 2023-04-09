@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { LoginUserProfileProps } from "@/pages/auth/profileRegister";
+import { LoginUserProfileProps } from "@/pages/auth";
 import styled from "styled-components";
 import { useAuth } from "@/hooks/user";
 
@@ -45,16 +45,8 @@ const ProfileRegisterForm = ({
 export default ProfileRegisterForm;
 
 const Container = styled.div`
-  max-width: 100%;
-  max-height: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  overflow: auto;
-  position: fixed;
-  background-color: ${({ theme }) => theme.color.background};
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,6 +55,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 50%;
   height: 50%;
+  background-color: ${({ theme }) => theme.color.background};
   border: 3px solid ${({ theme }) => theme.color.main};
   border-radius: 20px;
   display: flex;
