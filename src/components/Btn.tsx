@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-export default function Btn() {
+export default function Btn({children,onClick}:{children:ReactNode,onClick:()=>void}) {
   return (
     <>
-      <SubmitBtn>작성하기</SubmitBtn>
+      <SubmitBtn onClick={onClick}>{children}</SubmitBtn>
     </>
   );
 }
@@ -15,6 +15,7 @@ const SubmitBtn = styled.button`
   padding: 2px 5px;
 
   background-color: ${({ theme }) => theme.color.main};
+  
   color: white;
   border: 1px solid ${({ theme }) => theme.color.main};
   border-radius: 3px;

@@ -14,8 +14,8 @@ const ListCardItem = () => {
       <Title>ListCardItem</Title>
       <Img src="/Test.jpg" alt="" />
       <TitleWrapper>
-      <Category>모집 완료</Category>
-      <FaRegCommentAlt />
+        <Category>모집 완료</Category>
+        <FaRegCommentAlt />
       </TitleWrapper>
     </Container>
   );
@@ -24,20 +24,20 @@ const ListCardItem = () => {
 export default ListCardItem;
 
 const Container = styled.div`
-height: 41vh;
-margin: 2px 5px;
-padding: 10px 15px;
+  height: 44.5vh;
+  margin: 2px 5px;
+  padding: 10px 15px;
 
-border: 1px solid #c3c3c3;
-border-radius: 1rem;
+  border: 1px solid #c3c3c3;
+  border-radius: 1rem;
 `;
 
 const Img = styled.img`
   width: 100%;
-  margin: 10px 0;
+  margin: 20px 0;
 
   border-radius: 5px;
-`
+`;
 
 const TitleWrapper = styled.div`
   display: flex;

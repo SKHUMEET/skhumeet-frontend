@@ -8,61 +8,61 @@ const mock_data = [
   {
     category: "한솥밥",
     items: [
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: false },
-      { title: "[모집]000모집" },
-      { title: "[모집]000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: false },
+      { title: "모집 | 000모집" },
+      { title: "모집 | 000모집", isRecruiting: true },
     ],
   },
   {
     category: "한솥밥",
     items: [
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: false },
-      { title: "[모집]000모집" },
-      { title: "[모집]000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: false },
+      { title: "모집 | 000모집" },
+      { title: "모집 | 000모집", isRecruiting: true },
     ],
   },
   {
     category: "한솥밥",
     items: [
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: false },
-      { title: "[모집]000모집" },
-      { title: "[모집]000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: false },
+      { title: "모집 | 000모집" },
+      { title: "모집 | 000모집", isRecruiting: true },
     ],
   },
   {
     category: "한솥밥",
     items: [
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: false },
-      { title: "[모집]000모집" },
-      { title: "[모집]000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: false },
+      { title: "모집 | 000모집" },
+      { title: "모집 | 000모집", isRecruiting: true },
     ],
   },
   {
     category: "한솥밥",
     items: [
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: false },
-      { title: "[모집]000모집" },
-      { title: "[모집]000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: false },
+      { title: "모집 | 000모집" },
+      { title: "모집 | 000모집", isRecruiting: true },
     ],
   },
   {
     category: "한솥밥",
     items: [
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: true },
-      { title: "[모집]000모집", isRecruiting: false },
-      { title: "[모집]000모집" },
-      { title: "[모집]000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: true },
+      { title: "모집 | 000모집", isRecruiting: false },
+      { title: "모집 | 000모집" },
+      { title: "모집 | 000모집", isRecruiting: true },
     ],
   },
 ];
@@ -91,20 +91,24 @@ export default function Home() {
 }
 
 const HomeContainer = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
+
+  width: 100%;
 `;
 
 const Banner = styled.div`
   width: 100%;
   height: 30vh;
+
   background-color: ${({ theme }) => theme.color.main};
 `;
 
 const ListGridWrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   @media screen and (max-width: ${(props) => props.theme.breakpoints.small}) {
     grid-template-columns: 1fr;
   }

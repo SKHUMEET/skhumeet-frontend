@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
-import { CategoryKorean, Category } from "@/types";
+import { ConvertKorean, Category } from "@/types";
 import ToggleUser from "@/components/utils/ToggleUser";
 
 const NavBar = () => {
@@ -32,9 +32,9 @@ const NavBar = () => {
     <Nav>
       <NavWrapper>
         <TopWrapper>
-          <LogoWraper>
+          <LogoWrapper>
             <Logo onClick={() => router.push("/")}>로고</Logo>
-          </LogoWraper>
+          </LogoWrapper>
           <NavUser>
             <ToggleUser />
           </NavUser>
@@ -46,7 +46,7 @@ const NavBar = () => {
               href={`/${el}`}
               key={el}
             >
-              {CategoryKorean[el]}
+              {ConvertKorean[el]}
             </LinkWrapper>
           ))}
         </SidebarModal>
@@ -56,46 +56,56 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
 const Nav = styled.nav`
   top: 0;
-  width: 100%;
   align-items: center;
+
+  position: sticky;
+  width: 100%;
+  height: 7vh;
+
+  background: ${({ theme }) => theme.color.background};
+
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-  height: 7vh;
-  position: sticky;
-  background: ${({ theme }) => theme.color.background};
 `;
+
 const NavWrapper = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
   justify-content: space-between;
   align-items: center;
+
+  width: 100%;
+  height: 100%;
 `;
 
 const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+
   top: 0;
   width: 100%;
-  posision: fixed;
   height: 7vh;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     border-bottom: 2px solid ${({ theme }) => theme.color.main};
   }
 `;
-const LogoWraper = styled.div`
+
+const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+
 const Logo = styled.a`
+  height: 100%;
+
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: none;
-  height: 100%;
+
   :hover {
     color: ${({ theme }) => theme.color.hover};
     box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main};
@@ -104,19 +114,25 @@ const Logo = styled.a`
 
 const NavUser = styled.div`
   display: flex;
+
   position: relative;
   width: 15%;
   height: 100%;
-  /* background: red; */
+
   text-align: end;
 `;
+
 const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
+
+  margin: 5px;
+
   font-weight: 600;
   font-size: 18px;
   text-decoration: none;
+
   color: ${(props) => props.theme.color.text};
-  margin: 5px;
+
   ${(props) =>
     props.active &&
     css`
@@ -124,6 +140,7 @@ const LinkWrapper = styled(Link)<{ active: boolean }>`
       /* color: ${props.theme.color.hover}; */
       text-underline-offset: 8px;
     `};
+
   :hover {
     color: ${(props) => props.theme.color.hover};
   }

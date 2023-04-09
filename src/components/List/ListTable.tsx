@@ -59,7 +59,8 @@ export const ListContainer = styled.div`
 const ListContainer2 = styled.div<{ itemStyle: "list" | "card" }>`
   ${(props) =>
     props.itemStyle === "list"
-      ? css``
+      ? css`
+        `
       : css`
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -73,7 +74,6 @@ export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
     props.itemStyle === "list"
       ? css`
           width: 100%;
-          border-bottom: 1px solid #d3d3d3;
         `
       : css`
           /* grid-template-rows: repeat(3fr); */
