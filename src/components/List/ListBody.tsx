@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { CategoryProps, CategoryKorean } from "@/types";
+import React from "react";
+import { CategoryProps, ConvertKorean } from "@/types";
 
 import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
@@ -7,6 +7,7 @@ import ListTable from "@/components/List/ListTable";
 import { Mockdata } from "@/mockData";
 import Btn from "../Btn";
 import { useRouter } from "next/router";
+
 const ListBody = ({ category }: CategoryProps) => {
   const router = useRouter();
   const listStyle =
@@ -16,11 +17,9 @@ const ListBody = ({ category }: CategoryProps) => {
     <>
       <ListBodyContainer>
         <ListBodyHeader>
-          <div>{CategoryKorean[category]}</div>
+          <div>{ConvertKorean[category]}</div>
           <div>
-            <Btn />
-
-            <button
+            <Btn
               onClick={() =>
                 router.push(
                   {
@@ -32,7 +31,7 @@ const ListBody = ({ category }: CategoryProps) => {
               }
             >
               작성하기
-            </button>
+            </Btn>
           </div>
         </ListBodyHeader>
         <ListTable
@@ -52,8 +51,10 @@ export default ListBody;
 const ListBodyContainer = styled.div`
   width: 100%;
 `;
+
 const ListBodyHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  
   width: 100%;
 `;

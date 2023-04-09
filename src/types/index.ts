@@ -2,7 +2,7 @@ export interface IdProps extends CategoryProps {
   id: number;
 }
 
-export const categoryList = [
+export const categoryList: Category[] = [
   "hansotbab",
   "eoullim",
   "study",
@@ -10,6 +10,15 @@ export const categoryList = [
   "contest",
   "departmentEvent",
   "etc",
+];
+
+export const messageList: Message[] = ["openchat", "phonenumber", "etc"];
+
+export const situationList: Situation[] = [
+  "recruiting",
+  "recruitmentCompleted",
+  "promotion",
+  "activity",
 ];
 
 export interface CategoryProps {
@@ -25,15 +34,31 @@ export type Category =
   | "departmentEvent"
   | "etc";
 
-export type Situation = "모집중" | "모집완료" | "홍보" | "활동";
+export type Message = "openchat" | "phonenumber" | "etc";
 
-export const CategoryKorean = {
+export type Situation =
+  | "recruiting"
+  | "recruitmentCompleted"
+  | "promotion"
+  | "activity";
+
+type ConvertKoreanObj = {
+  [key in Category | Message | Situation]: string;
+};
+
+export const ConvertKorean: ConvertKoreanObj = {
   hansotbab: "한솥밥",
   eoullim: "어울림",
   study: "스터디",
   club: "동아리",
   contest: "대회",
   departmentEvent: "학부활동",
+  openchat: "오픈채팅",
+  phonenumber: "전화번호",
+  recruiting: "모집 중",
+  recruitmentCompleted: "모집 완료",
+  promotion: "홍보",
+  activity: "활동",
   etc: "기타",
 };
 

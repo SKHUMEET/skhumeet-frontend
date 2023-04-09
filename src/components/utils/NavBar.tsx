@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
-import { CategoryKorean, Category } from "@/types";
+import { ConvertKorean, Category } from "@/types";
 import ToggleUser from "@/components/utils/ToggleUser";
 
 const NavBar = () => {
@@ -32,9 +32,9 @@ const NavBar = () => {
     <Nav>
       <NavWrapper>
         <TopWrapper>
-          <LogoWraper>
+          <LogoWrapper>
             <Logo onClick={() => router.push("/")}>로고</Logo>
-          </LogoWraper>
+          </LogoWrapper>
           <NavUser>
             <ToggleUser />
           </NavUser>
@@ -46,7 +46,7 @@ const NavBar = () => {
               href={`/${el}`}
               key={el}
             >
-              {CategoryKorean[el]}
+              {ConvertKorean[el]}
             </LinkWrapper>
           ))}
         </SidebarModal>
@@ -56,6 +56,7 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
 const Nav = styled.nav`
   top: 0;
   width: 100%;
@@ -66,6 +67,7 @@ const Nav = styled.nav`
   position: sticky;
   background: ${({ theme }) => theme.color.background};
 `;
+
 const NavWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -77,20 +79,25 @@ const NavWrapper = styled.div`
 const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+
+  height: 7vh;
   top: 0;
   width: 100%;
-  position: fixed;
   height: 7vh;
+
+  position: fixed;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     border-bottom: 2px solid ${({ theme }) => theme.color.main};
   }
 `;
-const LogoWraper = styled.div`
+
+const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+
 const Logo = styled.a`
   font-weight: bold;
   font-size: 1.5rem;
@@ -107,9 +114,9 @@ const NavUser = styled.div`
   position: relative;
   width: 15%;
   height: 100%;
-  /* background: red; */
   text-align: end;
 `;
+
 const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
   font-weight: 600;

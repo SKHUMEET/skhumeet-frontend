@@ -6,7 +6,12 @@ export const GlobalStyle = createGlobalStyle`
     margin:0;
     box-sizing:border-box
 }
+
 body{
     background: ${({ theme }) => theme.color.background};
     color:${({ theme }) => theme.color.text}
-}`;
+}
+
+::selection {
+    background-color: ${({ theme }) => theme.color.main};
+  }`;
