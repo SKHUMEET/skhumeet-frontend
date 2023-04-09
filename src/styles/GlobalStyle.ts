@@ -1,7 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
 *{
+    font-family: 'Noto Sans KR', sans-serif;
     padding:0;
     margin:0;
     box-sizing:border-box

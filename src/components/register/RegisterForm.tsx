@@ -37,20 +37,21 @@ const RegisterForm = ({ category: defaultCategory }: CategoryProps) => {
         <DropDown list={messageList} onChange={onChangeCategory} />
         <DropDown list={situationList} onChange={onChangeCategory} />
         <br />
-        <input type="date" />
+          마감일
+        <DateInput type="date" />
       </RegisterHeader>
       <RegisterBody>
         <FormContainer>
-          <input type="text" placeholder="제목을 입력해 주세요" />
-          <input type="text" placeholder="내용을 입력해 주세요" />
+          <TitleInput type="text" placeholder="제목을 입력해 주세요" />
+          <ContentInput placeholder="내용을 입력해 주세요" />
         </FormContainer>
       </RegisterBody>
       <BtnContainer>
-          <Link href="/">
-            <CancelBtn>취소</CancelBtn>
-          </Link>
-          <Btn onClick={() => SubmitEvent}>작성하기</Btn>
-        </BtnContainer>
+        <Link href="/">
+          <CancelBtn>취소</CancelBtn>
+        </Link>
+        <Btn onClick={() => SubmitEvent}>작성하기</Btn>
+      </BtnContainer>
     </RegisterFormContainer>
   );
 };
@@ -59,7 +60,9 @@ export default RegisterForm;
 
 const RegisterFormContainer = styled.div``;
 
-const RegisterHeader = styled.div``;
+const RegisterHeader = styled.div`
+  margin: 1rem 0;
+`;
 
 const RegisterBody = styled.div`
   display: flex;
@@ -69,30 +72,66 @@ const RegisterBody = styled.div`
 `;
 
 const FormContainer = styled.form`
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 
-  width: 60vw;
+  width: 40vw;
 
   padding: 5px;
   border-top: 2px solid ${({ theme }) => theme.color.main};
   border-bottom: 2px solid ${({ theme }) => theme.color.main};
+
+  > input,
+  textarea {
+    width: 100%;
+    margin: 5px 0;
+  }
+`;
+
+const DateInput = styled.input`
+  margin-left: 10px;
+`
+
+const TitleInput = styled.input`
+  height: 2rem;
+  padding-bottom: 5px;
+
+  border: none;
+  border-bottom: 1px solid ${({ theme }) => theme.color.main};
+
+  font-size: 1rem;
+  outline: none;
+
+  :focus {
+    border-bottom: 2px solid ${({ theme }) => theme.color.main};
+  }
+`;
+
+const ContentInput = styled.textarea`
+  height: 50vh;
+
+  border: none;
+  text-align: left;
+
+  outline: none;
 `;
 
 const BtnContainer = styled.div`
+  width: 34.6%;
   float: right;
   padding: 0 5px;
-`
+`;
 
 const CancelBtn = styled.button`
   width: 3rem;
   margin-top: 1rem;
+  margin-right: 5px;
   padding: 2px 3px;
 
   background-color: #999999;
-  
+
   color: white;
   border: 1px solid #999999;
   border-radius: 3px;
