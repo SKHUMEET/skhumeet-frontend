@@ -6,9 +6,9 @@ import axios, {
   AxiosResponse,
 } from "axios";
 
-const config: AxiosRequestConfig = { baseURL: "" };
+// const config: AxiosRequestConfig = { baseURL: "" };
 
-export const instance = axios.create(config);
+export const instance = axios.create();
 
 // Request interceptor
 const interceptorRequestFulfilled = (config: AxiosRequestConfig) => {
@@ -16,20 +16,29 @@ const interceptorRequestFulfilled = (config: AxiosRequestConfig) => {
     typeof window !== "undefined"
       ? localStorage.getItem(storageConstants.accessToken)
       : "";
-  return {
-    ...config,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    } as AxiosRequestHeaders,
-  };
+  if (TOKEN) {
+    return {
+      ...config,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${TOKEN}`,
+      } as AxiosRequestHeaders,
+    };
+  } else {
+    return {
+      ...config,
+      headers: {
+        "Content-Type": "application/json",
+      } as AxiosRequestHeaders,
+    };
+  }
 };
 
 instance.interceptors.request.use(interceptorRequestFulfilled);
 
 // Response interceptor
 const responseInterceptorFulfilled = (res: AxiosResponse) => {
-  if (200 <= res.status && res.status < 300) return res.data;
+  if (200 <= res.status && res.status < 300) return res;
 
   return Promise.reject(...res.data);
 };
@@ -44,6 +53,7 @@ const responseInterceptorRejected = (error: AxiosError) => {
   // window.location.replace("/");
   // }
   // return new Error(error.response?.data?.message ?? error);
+  return error;
 };
 
 instance.interceptors.response.use(

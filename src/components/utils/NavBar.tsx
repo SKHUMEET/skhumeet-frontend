@@ -60,7 +60,7 @@ export default NavBar;
 const Nav = styled.nav`
   top: 0;
   align-items: center;
-  
+
   position: sticky;
   width: 100%;
   height: 7vh;
@@ -84,13 +84,9 @@ const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
-  height: 7vh;
   top: 0;
-  /* 100으로 하면 오른쪽이 잘림 */
   width: 100%;
   height: 7vh;
-
-  position: fixed;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     border-bottom: 2px solid ${({ theme }) => theme.color.main};

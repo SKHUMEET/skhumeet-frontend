@@ -1,9 +1,5 @@
 import { User } from "@/types";
 import { storageConstants } from "@/types";
-export function getStoredUser(): User | null {
-  const storedUser = localStorage.getItem(storageConstants.user);
-  return storedUser ? JSON.parse(storedUser) : null;
-}
 
 export function setStoredUser(user: User): void {
   localStorage.setItem(storageConstants.user, JSON.stringify(user));
