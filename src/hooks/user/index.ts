@@ -19,15 +19,21 @@ interface UseAuth {
 export const useAuth = (): UseAuth => {
   const router = useRouter();
   const findMemeberById = async (id: string): Promise<any> => {
-    await post("/api/member/login", {
+    const res = await post("/api/member/login", {
       loginId: id,
     }).then((res: any) => {
-      setAccessToken(res.tokens.accessToken);
-      setRefreshToken(res.tokens.refreshToken);
-      setStoredUser(res.data);
-      alert(`${res.data.name}님 환영합니다`);
-      router.push("/");
+      console.log("authindex res", res);
+      console.log(res.status);
+      if (res.status === 200) {
+        setAccessToken(res.data.tokens.accessToken);
+        setRefreshToken(res.data.tokens.refreshToken);
+        setStoredUser(res.data.data);
+        alert(`${res.data.data.name}님 환영합니다`);
+        location.href = "/";
+      }
+      return res;
     });
+    return res;
   };
   const signup = async (
     memberNumber: string,
@@ -44,11 +50,11 @@ export const useAuth = (): UseAuth => {
       profileImage,
     }).then((res: any) => {
       console.log(res);
-      setAccessToken(res.tokens.accessToken);
-      setRefreshToken(res.tokens.refreshToken);
-      setStoredUser(res.data);
-      alert(`${res.data.name}님 환영합니다`);
-      router.push("/");
+      setAccessToken(res.data.tokens.accessToken);
+      setRefreshToken(res.data.tokens.refreshToken);
+      setStoredUser(res.data.data);
+      alert(`${res.data.data.name}님 환영합니다`);
+      location.href = "/";
     });
   };
   return {

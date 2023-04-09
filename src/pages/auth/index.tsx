@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Router from "next/router";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
@@ -42,7 +41,7 @@ const Auth = () => {
     };
 
     const getToken = async () => {
-      naverLogin.getLoginStatus((status: boolean) => {
+      naverLogin.getLoginStatus(async (status: boolean) => {
         console.log(status);
         console.log(naverLogin.user);
 
@@ -52,7 +51,11 @@ const Auth = () => {
           const nickname = naverLogin.user.getNickName() as string;
           const profile_image = naverLogin.user.getProfileImage() as string;
 
-          findMemeberById(id).catch(() => setIsProfileRegister(true));
+          await findMemeberById(id).then((res) => {
+            console.log(res);
+            res.status === 404 && setIsProfileRegister(true);
+          });
+
           setForm({ ...form, id, name, nickname, profile_image });
         }
       });
