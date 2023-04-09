@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
 import { CategoryKorean, Category } from "@/types";
+import ToggleUser from "@/components/utils/ToggleUser";
 
 const NavBar = () => {
   const category: Category[] = [
@@ -34,6 +35,9 @@ const NavBar = () => {
           <LogoWraper>
             <Logo onClick={() => router.push("/")}>로고</Logo>
           </LogoWraper>
+          <NavUser>
+            <ToggleUser />
+          </NavUser>
         </TopWrapper>
         <SidebarModal handleToggle={toggleMenu} isOpen={isOpen}>
           {category.map((el: Category) => (
@@ -98,6 +102,14 @@ const Logo = styled.a`
   }
 `;
 
+const NavUser = styled.div`
+  display: flex;
+  position: relative;
+  width: 15%;
+  height: 100%;
+  /* background: red; */
+  text-align: end;
+`;
 const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
   font-weight: 600;
