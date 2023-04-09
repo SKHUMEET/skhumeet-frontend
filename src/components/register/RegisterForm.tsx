@@ -92,6 +92,8 @@ const FormContainer = styled.form`
 
 const DateInput = styled.input`
   margin-left: 10px;
+
+  outline: none;
 `
 
 const TitleInput = styled.input`

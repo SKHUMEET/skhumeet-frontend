@@ -45,8 +45,7 @@ export const Category = styled.span`
   margin-bottom: 3px;
 
   background-color: #68bd3081;
-  color: black;
-  border-radius: 1rem;
+  border-radius: 5px;
 
   font-size: 11px;
   text-align: center;

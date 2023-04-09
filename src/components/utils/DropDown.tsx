@@ -22,5 +22,10 @@ const DropDown = ({ list, onChange, defaultItem }: DropDownProps) => {
 
 export default DropDown;
 
-const DropDownSelect = styled.select``;
+const DropDownSelect = styled.select`
+margin-right: 1rem;
+margin-bottom: 1rem;
+outline: none;
+`;
+
 const DropDownOption = styled.option``;

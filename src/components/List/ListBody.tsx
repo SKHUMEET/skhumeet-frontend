@@ -17,7 +17,7 @@ const ListBody = ({ category }: CategoryProps) => {
     <>
       <ListBodyContainer>
         <ListBodyHeader>
-          <div>{ConvertKorean[category]}</div>
+          <CategoryWrapper>{ConvertKorean[category]}</CategoryWrapper>
           <div>
             <Btn
               onClick={() =>
@@ -58,3 +58,9 @@ const ListBodyHeader = styled.div`
   
   width: 100%;
 `;
+
+const CategoryWrapper = styled.div`
+  margin-top: 1rem;
+
+  font-weight: 600;
+`
