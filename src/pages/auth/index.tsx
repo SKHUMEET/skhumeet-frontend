@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Router from "next/router";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
-import { useAuth } from "@/hooks/member";
+import { useAuth } from "@/hooks/user";
+import { Modal } from "@/components/modal";
+
 export interface LoginUserProfileProps {
-  token: string;
   id: string;
   name: string;
   nickname: string;
@@ -13,19 +14,22 @@ export interface LoginUserProfileProps {
 
 export let naverLogin: any;
 const Auth = () => {
-  const { findMemeberById, signup } = useAuth();
+  const { findMemeberById } = useAuth();
   const [isProfileRegister, setIsProfileRegister] = useState(false);
-
-  const [loginForm, setLoginForm] = useState<LoginUserProfileProps>();
-
-  React.useEffect(() => {
+  const [form, setForm] = useState({
+    id: "",
+    name: "",
+    nickname: "",
+    profile_image: "",
+  });
+  useEffect(() => {
     const naver = (window as any).naver;
 
     // new URL(document.referrer).searchParams.get("redirect_uri")
     const login = () => {
       naverLogin = new naver.LoginWithNaverId({
         clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID, // ClientID
-        callbackUrl: "http://localhost:8080/auth", // Callback URL
+        callbackUrl: "http://localhost:3000/auth", // Callback URL
         isPopup: false, // 팝업 형태로 인증 여부
         loginButton: {
           color: "green", // 색상
@@ -38,50 +42,50 @@ const Auth = () => {
     };
 
     const getToken = async () => {
-      const hash = Router.asPath.split("#")[1]; // 네이버 로그인을 통해 전달받은 hash 값
-      if (hash) {
-        const token = hash.split("=")[1].split("&")[0]; // token값 확인
-        naverLogin.getLoginStatus((status: any) => {
-          if (status) {
-            // 로그인 상태 값이 있을 경우
-            console.log("statue", status);
-            console.log(naverLogin.user);
+      naverLogin.getLoginStatus((status: boolean) => {
+        console.log(status);
+        console.log(naverLogin.user);
 
-            // if (
-            //   naverLogin.user.getId() &&
-            //   naverLogin.user.getName() &&
-            //   naverLogin.user.getNickName() &&
-            //   naverLogin.user.getProfileImage()
-            // ) {
-            //   const id = naverLogin.user.getId() as string;
-            //   const name = naverLogin.user.getName() as string;
-            //   const nickname = naverLogin.user.getNickName() as string;
-            //   const profile_image = naverLogin.user.getProfileImage() as string;
+        if (status && naverLogin.user) {
+          const id = naverLogin.user.getId() as string;
+          const name = naverLogin.user.getName() as string;
+          const nickname = naverLogin.user.getNickName() as string;
+          const profile_image = naverLogin.user.getProfileImage() as string;
 
-            // console.log("profileRegister", id, name, nickname, profile_image);
-            //   setLoginForm({
-            //     token,
-            //     id,
-            //     name,
-            //     nickname,
-            //     profile_image,
-            //   });
-            // }
+          findMemeberById(id).catch(() => setIsProfileRegister(true));
+          setForm({ ...form, id, name, nickname, profile_image });
+        }
+      });
+      // const hash = Router.asPath.split("#")[1]; // 네이버 로그인을 통해 전달받은 hash 값
+      // if (hash) {
+      //   const token = hash.split("=")[1].split("&")[0]; // token값 확인
+      //   naverLogin.getLoginStatus((status: boolean) => {
+      //     if (status) {
+      //       Router.push(
+      //         {
+      //           pathname: "/auth/profileRegister",
+      //           query: {
+      //             token: token,
+      //           },
+      //         },
+      //         "/auth/profileRegister"
+      //       );
 
-            // setIsProfileRegister(true);
-            //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
-            Router.push(
-              {
-                pathname: "/auth/profileRegister",
-                query: {
-                  token: token,
-                },
-              },
-              "/auth/profileRegister"
-            );
-          }
-        });
-      }
+      //       // if (
+      //       //   naverLogin.user.getId() &&
+      //       //   naverLogin.user.getName() &&
+      //       //   naverLogin.user.getNickName() &&
+      //       //   naverLogin.user.getProfileImage()
+      //       // ) {
+      //       //   const id = naverLogin.user.getId() as string;
+      //       //   const name = naverLogin.user.getName() as string;
+      //       //   const nickname = naverLogin.user.getNickName() as string;
+      //       //   const profile_image = naverLogin.user.getProfileImage() as string;
+
+      //       //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
+      //     }
+      //   });
+      // }
     };
 
     login();
@@ -99,16 +103,15 @@ const Auth = () => {
             <Button.NaverButton id="naverIdLogin" />
           </Button.ButtonList>
         </Button.Container>
-        {isProfileRegister && loginForm && (
-          <ProfileRegisterForm
-            token={loginForm.token}
-            id={loginForm.id}
-            name={loginForm.name}
-            nickname={loginForm.nickname}
-            profile_image={loginForm.profile_image}
-          />
-        )}
       </Wrapper>
+      <Modal show={isProfileRegister} onClose={() => {}}>
+        <ProfileRegisterForm
+          id={form.id}
+          name={form.name}
+          nickname={form.nickname}
+          profile_image={form.profile_image}
+        />
+      </Modal>
     </>
   );
 };

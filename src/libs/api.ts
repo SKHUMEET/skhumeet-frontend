@@ -1,3 +1,4 @@
+import { storageConstants } from "@/types";
 import axios, {
   AxiosError,
   AxiosRequestConfig,
@@ -12,7 +13,9 @@ export const instance = axios.create(config);
 // Request interceptor
 const interceptorRequestFulfilled = (config: AxiosRequestConfig) => {
   let TOKEN =
-    typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
+    typeof window !== "undefined"
+      ? localStorage.getItem(storageConstants.accessToken)
+      : "";
   return {
     ...config,
     headers: {
