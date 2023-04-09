@@ -3,9 +3,12 @@ import { CategoryProps, CategoryKorean } from "@/types";
 
 import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
+
 import { Mockdata } from "@/mockData";
 import Btn from "../Btn";
+import { useRouter } from "next/router";
 const ListBody = ({ category }: CategoryProps) => {
+  const router = useRouter();
   const listStyle =
     category === "departmentEvent" || category === "club" ? "card" : "list";
 
@@ -16,6 +19,20 @@ const ListBody = ({ category }: CategoryProps) => {
           <div>{CategoryKorean[category]}</div>
           <div>
             <Btn />
+
+            <button
+              onClick={() =>
+                router.push(
+                  {
+                    pathname: "/register",
+                    query: { category: category },
+                  },
+                  "register"
+                )
+              }
+            >
+              작성하기
+            </button>
           </div>
         </ListBodyHeader>
         <ListTable
