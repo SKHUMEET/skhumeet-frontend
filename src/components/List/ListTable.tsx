@@ -3,12 +3,14 @@ import { useRouter } from "next/router";
 import ListItem from "@/components/List/ListItem";
 import ListCardItem from "@/components/List/ListCardItem";
 import { Category } from "@/types";
+
 interface ListProps {
   category: Category;
   list: any[];
   page: number;
   itemStyle?: "list" | "card";
 }
+
 export default function ListTable({
   category,
   list,
@@ -22,23 +24,25 @@ export default function ListTable({
 
   return (
     <ListContainer>
-      {list.map((el, idx) => (
-        <ListWrapper
-          key={(el.id, el.title, el.nickname, el.modifiedDate)}
-          onClick={() => handleClickListItem(el.id)}
-          itemStyle={itemStyle}
-        >
-          {itemStyle === "list" ? (
-            <ListItem
-            //  북마크,댓글개수,제목,현황,마감일,작성자
-            />
-          ) : (
-            <ListCardItem
-            // 북마크,이미지,댓글개수,제목,현황,마감일,작성자, 이미지 없으면 글
-            />
-          )}
-        </ListWrapper>
-      ))}
+      <ListContainer2 itemStyle={itemStyle}>
+        {list.map((el, idx) => (
+          <ListWrapper
+            key={(el.id, el.title, el.nickname, el.modifiedDate)}
+            onClick={() => handleClickListItem(el.id)}
+            itemStyle={itemStyle}
+          >
+            {itemStyle === "list" ? (
+              <ListItem
+              //  북마크,댓글개수,제목,현황,마감일,작성자
+              />
+            ) : (
+              <ListCardItem
+              // 북마크,이미지,댓글개수,제목,현황,마감일,작성자, 이미지 없으면 글
+              />
+            )}
+          </ListWrapper>
+        ))}
+      </ListContainer2>
     </ListContainer>
   );
 }
@@ -52,20 +56,31 @@ export const ListContainer = styled.div`
   width: 100%;
 `;
 
-export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
-  display: grid;
+const ListContainer2 = styled.div<{ itemStyle: "list" | "card" }>`
   ${(props) =>
     props.itemStyle === "list"
-      ? css`
-          grid-template-columns: 0.5fr 2fr 0.8fr 0.8fr;
-        `
+      ? css``
       : css`
-          grid-template-rows: repeat(auto, 3fr);
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
         `};
 
   width: 100%;
+`;
+
+export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
+  ${(props) =>
+    props.itemStyle === "list"
+      ? css`
+          width: 100%;
+          border-bottom: 1px solid #d3d3d3;
+        `
+      : css`
+          /* grid-template-rows: repeat(3fr); */
+        `};
+
   padding-left: 10px;
-  padding-top: 20px;
+  padding-top: 10px;
 
   border: none;
 
@@ -77,8 +92,6 @@ export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
   text-overflow: ellipsis;
 
   cursor: default;
-
-  border-bottom: 1px solid #d3d3d3;
 
   :hover {
     color: ${({ theme }) => theme.color.main};

@@ -11,7 +11,8 @@ export default function Btn() {
 
 const SubmitBtn = styled.button`
   width: 5rem;
-  padding: 5px;
+  margin-top: 1rem;
+  padding: 2px 5px;
 
   background-color: ${({ theme }) => theme.color.main};
   color: white;

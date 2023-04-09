@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
 
 import { Mockdata } from "@/mockData";
+import Btn from "../Btn";
 import { useRouter } from "next/router";
 const ListBody = ({ category }: CategoryProps) => {
   const router = useRouter();
@@ -17,6 +18,8 @@ const ListBody = ({ category }: CategoryProps) => {
         <ListBodyHeader>
           <div>{CategoryKorean[category]}</div>
           <div>
+            <Btn />
+
             <button
               onClick={() =>
                 router.push(
