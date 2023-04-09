@@ -53,7 +53,7 @@ export const ListContainer = styled.div`
 `;
 
 export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
-  display: grid;
+  /* display: grid;
   ${(props) =>
     props.itemStyle === "list"
       ? css`
@@ -61,7 +61,7 @@ export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
         `
       : css`
           grid-template-rows: repeat(auto, 3fr);
-        `};
+        `}; */
 
   width: 100%;
   padding-left: 10px;
