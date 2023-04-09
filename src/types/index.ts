@@ -2,6 +2,16 @@ export interface IdProps extends CategoryProps {
   id: number;
 }
 
+export const categoryList = [
+  "hansotbab",
+  "eoullim",
+  "study",
+  "club",
+  "contest",
+  "departmentEvent",
+  "etc",
+];
+
 export interface CategoryProps {
   category: Category;
 }
@@ -25,4 +35,18 @@ export const CategoryKorean = {
   contest: "대회",
   departmentEvent: "학부활동",
   etc: "기타",
+};
+
+export interface User {
+  memberNumber: string;
+  loginId: string;
+  name: string;
+  nickname: string;
+  profileImage: string;
+}
+
+export const storageConstants = {
+  accessToken: "ACCESS_TOKEN",
+  refreshToken: "REFRESH_TOKEN",
+  user: "skhumeet_user",
 };
