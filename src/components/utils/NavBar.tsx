@@ -82,7 +82,8 @@ const TopWrapper = styled.div`
 
   height: 7vh;
   top: 0;
-  width: 100%;
+  /* 100으로 하면 오른쪽이 잘림 */
+  width: 61.5%;
   height: 7vh;
 
   position: fixed;
