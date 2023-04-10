@@ -21,7 +21,7 @@ const Auth = () => {
     nickname: "",
     profile_image: "",
   });
-  
+
   useEffect(() => {
     const naver = (window as any).naver;
 
@@ -53,49 +53,59 @@ const Auth = () => {
           const profile_image = naverLogin.user.getProfileImage() as string;
 
           await findMemeberById(id).then((res) => {
-            console.log(res);
-            res.status === 404 && setIsProfileRegister(true);
+            console.log("res", res);
+            res.response &&
+              res.response.status === 404 &&
+              setIsProfileRegister(true);
           });
 
           setForm({ ...form, id, name, nickname, profile_image });
         }
       });
-      // const hash = Router.asPath.split("#")[1]; // 네이버 로그인을 통해 전달받은 hash 값
-      // if (hash) {
-      //   const token = hash.split("=")[1].split("&")[0]; // token값 확인
-      //   naverLogin.getLoginStatus((status: boolean) => {
-      //     if (status) {
-      //       Router.push(
-      //         {
-      //           pathname: "/auth/profileRegister",
-      //           query: {
-      //             token: token,
-      //           },
-      //         },
-      //         "/auth/profileRegister"
-      //       );
 
-      //       // if (
-      //       //   naverLogin.user.getId() &&
-      //       //   naverLogin.user.getName() &&
-      //       //   naverLogin.user.getNickName() &&
-      //       //   naverLogin.user.getProfileImage()
-      //       // ) {
-      //       //   const id = naverLogin.user.getId() as string;
-      //       //   const name = naverLogin.user.getName() as string;
-      //       //   const nickname = naverLogin.user.getNickName() as string;
-      //       //   const profile_image = naverLogin.user.getProfileImage() as string;
-
-      //       //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
-      //     }
-      //   });
-      // }
+      //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
     };
 
     login();
     getToken();
   }, []);
 
+  const kakaoLogin = async () => {
+    const kakao = (window as any).Kakao;
+    // 카카오 초기화
+    kakao.init(process.env.NEXT_PUBLIC_KAKAO);
+
+    // 카카오 로그인 구현
+    kakao.Auth.login({
+      success: () => {
+        kakao.API.request({
+          url: "/v2/user/me", // 사용자 정보 가져오기
+          success: async (res: any) => {
+            // 로그인 성공할 경우 정보 확인 후 /kakao 페이지로 push
+            console.log(res);
+            await findMemeberById(res.id).then((res) => {
+              console.log("res", res);
+              res.response &&
+                res.response.status === 404 &&
+                setIsProfileRegister(true);
+            });
+            setForm({
+              ...form,
+              id: res.id,
+              nickname: res.properties.nickname,
+              profile_image: res.properties.profile_image,
+            });
+          },
+          fail: (error: any) => {
+            console.log(error);
+          },
+        });
+      },
+      fail: (error: any) => {
+        console.log(error);
+      },
+    });
+  };
   return (
     <>
       <Wrapper>
@@ -105,6 +115,9 @@ const Auth = () => {
         <Button.Container>
           <Button.ButtonList>
             <Button.NaverButton id="naverIdLogin" />
+            <Button.KakaoButton onClick={kakaoLogin}>
+              <Button.ButtonText>Kakao</Button.ButtonText>
+            </Button.KakaoButton>
           </Button.ButtonList>
         </Button.Container>
       </Wrapper>
@@ -132,7 +145,7 @@ const Wrapper = styled.div`
   max-width: 100%;
   max-height: 100%;
   margin: auto;
-  
+
   left: 0;
   right: 0;
   top: 0;
@@ -160,4 +173,24 @@ const Button = {
   `,
 
   NaverButton: styled.div``,
+  KakaoButton: styled.button`
+    background-color: #fef01b;
+
+    width: 360px;
+    height: 40px;
+
+    margin: 6px 0;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+  `,
+  ButtonText: styled.h4`
+    margin: 0;
+    padding: 0;
+
+    font-size: 18px;
+    color: #ffffff;
+  `,
 };
