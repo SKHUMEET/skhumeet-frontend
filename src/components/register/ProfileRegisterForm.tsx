@@ -5,19 +5,24 @@ import { useAuth } from "@/hooks/user";
 
 const ProfileRegisterForm = ({
   id,
-  name,
+  name = "새로운 유저",
   nickname,
   profile_image,
 }: LoginUserProfileProps) => {
   const { signup } = useAuth();
-  const [studentId, setStudentId] = useState<string>();
+  const [nameForm, setNameForm] = useState<string>(name);
+  const [studentIdForm, setStudentIdForm] = useState<string>();
+  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    setNameForm(e.target.value);
+  };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStudentId(e.target.value);
+    setStudentIdForm(e.target.value);
   };
   const handleSubmit = () => {
-    console.log(id, name, nickname, profile_image, studentId);
+    console.log(id, nameForm, nickname, profile_image, studentIdForm);
 
-    studentId && signup(studentId, id, name, nickname, profile_image);
+    studentIdForm &&
+      signup(studentIdForm, id, nameForm, nickname, profile_image);
 
     // axios.post
   };
@@ -25,16 +30,29 @@ const ProfileRegisterForm = ({
     <Container>
       <Wrapper>
         <div>
-          <h3>{name}님 SKHUMEET에 오신 걸 환영합니다!</h3>
-          <h3>성공회대 학생임을 인증하기 위해 학번을 입력해주세요!</h3>
+          <h3>SKHUMEET에 오신 걸 환영합니다!</h3>
+          <h3>
+            성공회대 학생(교수)임을 인증하기 위해 이름과 학번(사번)을
+            입력해주세요!
+          </h3>
         </div>
         <div style={{ width: "100%" }}>
-          <span style={{ fontWeight: "bold" }}>학번 </span>
-          <Input
-            value={studentId}
-            onChange={handleChange}
-            // placeholder="학번을 입력해주세요"
-          />
+          <div>
+            <span style={{ fontWeight: "bold" }}>이름 </span>
+            <Input
+              value={nameForm}
+              onChange={handleChangeName}
+              // placeholder="학번을 입력해주세요"
+            />
+          </div>
+          <div>
+            <span style={{ fontWeight: "bold" }}>학번 </span>
+            <Input
+              value={studentIdForm}
+              onChange={handleChange}
+              // placeholder="학번을 입력해주세요"
+            />
+          </div>
         </div>
         <button onClick={handleSubmit}>입력</button>
       </Wrapper>
