@@ -22,6 +22,7 @@ export default function Btn({
 const SubmitBtn = styled.button<{ color?: string }>`
   width: 5rem;
   margin-top: 1rem;
+  margin-left: 5px;
   padding: 2px 5px;
 
   background-color: ${({ theme, color }) => color ?? theme.color.main};
@@ -34,6 +35,6 @@ const SubmitBtn = styled.button<{ color?: string }>`
 
   :hover {
     background-color: white;
-    color: ${({ theme }) => theme.color.main};
+    color: ${({ theme, color }) => color ?? theme.color.main};
   }
 `;

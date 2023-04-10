@@ -13,6 +13,7 @@ import Btn from "../utils/Btn";
 import { Category } from "@/types";
 import firebaseImageUpload from "@/hooks/firebase/imageUpload";
 import TextEditor from "../TextEditor";
+
 interface RegisterFormProps {
   category: Category;
   kind: "register" | "edit";
