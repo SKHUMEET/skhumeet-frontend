@@ -33,7 +33,9 @@ const NavBar = () => {
       <NavWrapper>
         <TopWrapper>
           <LogoWrapper>
-            <Logo onClick={() => router.push("/")}>로고</Logo>
+            <Logo onClick={() => router.push("/")}>
+              <LogoImg src="/LogoTest2.svg" />
+            </Logo>
           </LogoWrapper>
           <NavUser>
             <ToggleUser />
@@ -89,7 +91,8 @@ const TopWrapper = styled.div`
   height: 7vh;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
-    border-bottom: 2px solid ${({ theme }) => theme.color.main};
+    /* border-bottom: 2px solid ${({ theme }) => theme.color.main}; */
+    box-shadow: 0px 7px 2px -5px ${({ theme }) => theme.color.hover};
   }
 `;
 
@@ -100,16 +103,17 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo = styled.a`
-  height: 100%;
-
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: none;
 
   :hover {
-    color: ${({ theme }) => theme.color.hover};
-    box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main};
+    /* box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main}; */
   }
+`;
+
+const LogoImg = styled.img`
+  width: 30px;
 `;
 
 const NavUser = styled.div`
@@ -124,8 +128,6 @@ const NavUser = styled.div`
 
 const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
-
-  margin: 5px;
 
   font-weight: 600;
   font-size: 18px;

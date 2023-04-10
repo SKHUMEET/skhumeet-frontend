@@ -44,10 +44,10 @@ const ToggleUser = () => {
         <ImageButton onClick={() => setIsOpen(!isOpen)}>
           <Image
             src={userImage as string}
-            width="50"
-            height="50"
+            width="35"
+            height="35"
             alt=""
-            style={{ borderRadius: "30px" }}
+            style={{ borderRadius: "30px"}}
           />
         </ImageButton>
       )}
@@ -79,6 +79,8 @@ const ToggleContainer = styled.div`
 `;
 
 const ImageButton = styled.div`
+  align-items: center;
+  
   width: 100%;
   height: 100%;
   position: relative;
@@ -92,15 +94,22 @@ const ToggleDropDown = {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #fff;
+    width: 10rem;
     padding: 8px;
+
+    background-color: #fff;
     border: 1px solid #ccc;
+
+    cursor: default;
   `,
 
   Item: styled.div`
+    margin: 10px 0;
+
     :hover {
       background-color: ${({ theme }) => theme.color.hover};
     }
