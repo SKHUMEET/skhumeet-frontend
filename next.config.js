@@ -12,7 +12,13 @@ const nextConfig = {
       },
     ],
 
-    domains: ["localhost", "*", "phinf.pstatic.net", "storage.googleapis.com"],
+    domains: [
+      "localhost",
+      "*",
+      "phinf.pstatic.net",
+      "storage.googleapis.com",
+      "k.kakaocdn.net",
+    ],
   },
 
   async rewrites() {
