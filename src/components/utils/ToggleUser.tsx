@@ -47,7 +47,7 @@ const ToggleUser = () => {
             width="35"
             height="35"
             alt=""
-            style={{ borderRadius: "30px"}}
+            style={{ borderRadius: "30px" }}
           />
         </ImageButton>
       )}
@@ -79,8 +79,10 @@ const ToggleContainer = styled.div`
 `;
 
 const ImageButton = styled.div`
+  display: flex;
+  justify-content: right;
   align-items: center;
-  
+
   width: 100%;
   height: 100%;
   position: relative;

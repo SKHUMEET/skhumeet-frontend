@@ -99,9 +99,11 @@ const HomeContainer = styled.div`
 
 const Banner = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 50vh;
+  margin-top: 3rem;
 
   background-color: ${({ theme }) => theme.color.main};
+  border-radius: 1rem;
 `;
 
 const ListGridWrapper = styled.div`

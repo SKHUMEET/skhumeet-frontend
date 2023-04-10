@@ -34,7 +34,7 @@ const NavBar = () => {
         <TopWrapper>
           <LogoWrapper>
             <Logo onClick={() => router.push("/")}>
-              <LogoImg src="/LogoTest2.svg" />
+              <LogoImg src="/Logooo.svg" />
             </Logo>
           </LogoWrapper>
           <NavUser>
@@ -80,19 +80,23 @@ const NavWrapper = styled.div`
 
   width: 100%;
   height: 100%;
+  padding-top: 1rem;
 `;
 
 const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   top: 0;
   width: 100%;
-  height: 7vh;
+  height: 10vh;
+
+  background-color: white;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     /* border-bottom: 2px solid ${({ theme }) => theme.color.main}; */
-    box-shadow: 0px 7px 2px -5px ${({ theme }) => theme.color.hover};
+    box-shadow: 0px 7px 2px -7px ${({ theme }) => theme.color.hover};
   }
 `;
 
@@ -100,6 +104,8 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: white;
 `;
 
 const Logo = styled.a`
@@ -113,7 +119,7 @@ const Logo = styled.a`
 `;
 
 const LogoImg = styled.img`
-  width: 30px;
+  width: 80px;
 `;
 
 const NavUser = styled.div`
