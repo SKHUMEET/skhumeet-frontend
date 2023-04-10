@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
-
 export interface LoginUserProfileProps {
   id: string;
   name: string;
@@ -42,32 +41,36 @@ const Auth = () => {
     };
 
     const getToken = async () => {
-      naverLogin.getLoginStatus(async (status: boolean) => {
-        console.log(status);
-        console.log(naverLogin.user);
-
-        if (status && naverLogin.user) {
-          const id = naverLogin.user.getId() as string;
-          const name = naverLogin.user.getName() as string;
-          const nickname = naverLogin.user.getNickName() as string;
-          const profile_image = naverLogin.user.getProfileImage() as string;
-
-          await findMemeberById(id).then((res) => {
-            console.log("res", res);
-            res.response &&
-              res.response.status === 404 &&
-              setIsProfileRegister(true);
+      try {
+        await new Promise((resolve) => {
+          naverLogin.getLoginStatus((status: boolean) => {
+            resolve(status);
           });
+        });
 
-          setForm({ ...form, id, name, nickname, profile_image });
+        const id = naverLogin.user?.getId() as string;
+        const name = naverLogin.user?.getName() as string;
+        const nickname = naverLogin.user?.getNickName() as string;
+        const profile_image = naverLogin.user?.getProfileImage() as string;
+
+        const res = await findMemeberById(id);
+        if (res.response?.status === 404) {
+          setIsProfileRegister(true);
         }
-      });
 
+        setForm({ ...form, id, name, nickname, profile_image });
+      } catch (err) {
+        console.error(err);
+      }
       //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
     };
 
-    login();
-    getToken();
+    const initNaverLogin = async () => {
+      login();
+      await getToken();
+    };
+
+    initNaverLogin();
   }, []);
 
   const kakaoLogin = async () => {
@@ -110,14 +113,15 @@ const Auth = () => {
     <>
       <Wrapper>
         <Header.Container>
-          <Header.Title>로그인할 방법을 선택해주세요.</Header.Title>
+          <Header.Title>SKHUMEET에 오신 걸 환영합니다!</Header.Title>
         </Header.Container>
         <Button.Container>
           <Button.ButtonList>
             <Button.NaverButton id="naverIdLogin" />
-            <Button.KakaoButton onClick={kakaoLogin}>
-              <Button.ButtonText>Kakao</Button.ButtonText>
-            </Button.KakaoButton>
+            <Button.KakaoButton
+              src="/kakao_login_medium_narrow.png"
+              onClick={kakaoLogin}
+            />
           </Button.ButtonList>
         </Button.Container>
       </Wrapper>
@@ -173,17 +177,7 @@ const Button = {
   `,
 
   NaverButton: styled.div``,
-  KakaoButton: styled.button`
-    background-color: #fef01b;
-
-    width: 360px;
-    height: 40px;
-
-    margin: 6px 0;
-
-    border: none;
-    border-radius: 6px;
-
+  KakaoButton: styled.img`
     cursor: pointer;
   `,
   ButtonText: styled.h4`
