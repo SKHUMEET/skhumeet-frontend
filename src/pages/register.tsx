@@ -5,10 +5,12 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React from "react";
 
 const register = ({ category }: CategoryProps) => {
+  const registerStyle =
+    category === "departmentEvent" || category === "club" ? "grid" : "list";
   return (
     <>
       <Seo title="작성" />
-      <RegisterForm category={category} />
+      <RegisterForm category={category} kind="register" type={registerStyle} />
     </>
   );
 };
