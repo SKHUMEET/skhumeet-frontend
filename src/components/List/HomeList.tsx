@@ -42,7 +42,8 @@ const HomeListContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 100%;
+  width: 95%;
+  margin: 10px;
   padding: 20px;
 
   border-radius: 5px;
