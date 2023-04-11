@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect, useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
@@ -13,6 +13,7 @@ export interface LoginUserProfileProps {
 
 export let naverLogin: any;
 const Auth = () => {
+  const theme = useContext(ThemeContext);
   const { findMemeberById } = useAuth();
   const [isProfileRegister, setIsProfileRegister] = useState(false);
   const [form, setForm] = useState({
@@ -55,6 +56,9 @@ const Auth = () => {
         const profile_image = naverLogin.user?.getProfileImage() as string;
 
         const res = await findMemeberById(id);
+        if (res.status === 200) {
+          setTimeout(() => window.location.replace("/"), 500);
+        }
         if (res.response?.status === 404) {
           setIsProfileRegister(true);
         }
@@ -89,6 +93,8 @@ const Auth = () => {
             console.log(res);
             await findMemeberById(res.id).then((res) => {
               console.log("res", res);
+              res.status === 200 &&
+                setTimeout(() => window.location.replace("/"), 500);
               res.response &&
                 res.response.status === 404 &&
                 setIsProfileRegister(true);
@@ -134,7 +140,11 @@ const Auth = () => {
           </Mention>
         </Container>
       </Wrapper>
-      <Modal show={isProfileRegister} onClose={() => {}}>
+      <Modal
+        show={isProfileRegister}
+        onClose={() => {}}
+        backdropColor={theme.color.background}
+      >
         <ProfileRegisterForm
           id={form.id}
           name={form.name}

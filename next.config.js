@@ -17,6 +17,7 @@ const nextConfig = {
       "*",
       "phinf.pstatic.net",
       "storage.googleapis.com",
+      "firebasestorage.googleapis.com",
       "k.kakaocdn.net",
     ],
   },

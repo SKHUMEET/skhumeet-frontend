@@ -1,37 +1,43 @@
-import React from "react";
-import styled from "styled-components";
-import { Category } from "./ListItem";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
+import { MAIN, ConvertKorean, Category } from "@/types";
+import { useRouter } from "next/router";
 
 interface HomeList {
-  category: string;
-  items: {
-    title: string;
-    isRecruiting?: boolean;
-  }[];
+  category: Category;
+  items: MAIN[];
 }
 
 const HomeList = ({ category, items }: HomeList) => {
+  const router = useRouter();
   return (
     <HomeListContainer>
-      <HomeListTitle>{category}</HomeListTitle>
-      {items.slice(0, 5).map((item, idx) => {
-        return (
-          <HomeListItem key={idx}>
-            <span>{item.title}</span>
-            {typeof item.isRecruiting !== "undefined" && item.isRecruiting ? (
+      <HomeListTitle onClick={() => router.push(`/${category}`)}>
+        {ConvertKorean[category]}
+      </HomeListTitle>
+      {items.length ? (
+        items.slice(0, 5).map((item, idx) => {
+          return (
+            <HomeListItem
+              key={idx}
+              onClick={() => router.push(`/${category}/${item.id}`)}
+            >
+              <span>{item.title}</span>
+              {/* {typeof item.isRecruiting !== "undefined" && item.isRecruiting ? (
               <div>
-                <Category style={{ backgroundColor: "#69b030" }}>
-                  모집 중
-                </Category>
+                <Category color={theme.color.main}>모집 중</Category>
               </div>
             ) : (
               <div>
-                <Category>모집 완료</Category>
+                <Category color={theme.color.light}>모집 완료</Category>
               </div>
-            )}
-          </HomeListItem>
-        );
-      })}
+            )} */}
+            </HomeListItem>
+          );
+        })
+      ) : (
+        <>아직 데이터가 없습니다.</>
+      )}
     </HomeListContainer>
   );
 };
@@ -42,10 +48,11 @@ const HomeListContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 95%;
-  margin: 10px;
+  /* width: 95%; */
+  /* margin: 10px; */
   padding: 20px;
 
+  height: 200px;
   border-radius: 5px;
   box-shadow: 2px 3px 5px #b9b9b9;
 `;

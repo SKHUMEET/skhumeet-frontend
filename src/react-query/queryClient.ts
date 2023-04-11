@@ -1,4 +1,4 @@
-import { QueryClient } from "react-query";
+import { QueryClient } from "@tanstack/react-query";
 
 function queryErrorHandler(error: unknown): void {
   // error is type unknown because in js, anything can be an error (e.g. throw(5))
@@ -16,6 +16,8 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       onError: queryErrorHandler,
+
+      // 밑에있는 옵션을 매번 사용하기는 권하지 않음
       staleTime: 600000, // 10min
       cacheTime: 900000, // 15min(don't make sense for staleTime to exceed cachetime)
       refetchOnMount: false,

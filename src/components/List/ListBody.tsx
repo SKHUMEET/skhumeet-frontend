@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CategoryProps, ConvertKorean } from "@/types";
 
 import styled from "styled-components";
@@ -7,12 +7,21 @@ import ListTable from "@/components/List/ListTable";
 import { Mockdata } from "@/mockData";
 import Btn from "../utils/Btn";
 import { useRouter } from "next/router";
+import Pagination from "../Pagination";
+import { useMainCategory } from "@/hooks/main";
 
 const ListBody = ({ category }: CategoryProps) => {
   const router = useRouter();
   const listStyle =
     category === "departmentEvent" || category === "club" ? "card" : "list";
+  const { data, page, setPage } = useMainCategory(category);
+  // const [page, setPage] = useState<number>(1);
+  console.log(data);
+  const [totalPage, setTotalPage] = useState<number>(0);
 
+  useEffect(() => {
+    setTotalPage(data.totalPages);
+  }, [data]);
   return (
     <>
       <ListBodyContainer>
@@ -36,11 +45,17 @@ const ListBody = ({ category }: CategoryProps) => {
         </ListBodyHeader>
         <ListTable
           category={category}
-          list={Mockdata}
+          list={data.content ?? []}
           page={1}
           itemStyle={listStyle}
         />
-        {/* pagination */}
+        {totalPage > 1 && (
+          <Pagination
+            totalPages={totalPage}
+            currentPage={page}
+            onPageChange={setPage}
+          ></Pagination>
+        )}
       </ListBodyContainer>
     </>
   );

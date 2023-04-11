@@ -6,13 +6,14 @@ import Btn from "../utils/Btn";
 
 const ProfileRegisterForm = ({
   id,
-  name = "새로운 유저",
+  name = "",
   nickname,
   profile_image,
 }: LoginUserProfileProps) => {
+  console.log(id, name, nickname, profile_image);
   const { signup } = useAuth();
   const [nameForm, setNameForm] = useState<string>(name);
-  const [studentIdForm, setStudentIdForm] = useState<string>();
+  const [studentIdForm, setStudentIdForm] = useState<string>("");
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setNameForm(e.target.value);
   };
@@ -23,7 +24,13 @@ const ProfileRegisterForm = ({
     console.log(id, nameForm, nickname, profile_image, studentIdForm);
 
     studentIdForm &&
-      signup(studentIdForm, id, nameForm, nickname, profile_image);
+      signup(studentIdForm, id, nameForm, nickname, profile_image).then(
+        (res) => {
+          if (res.status === 200) {
+            setTimeout(() => window.location.replace("/"), 500);
+          }
+        }
+      );
 
     // axios.post
   };

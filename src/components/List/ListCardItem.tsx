@@ -3,12 +3,16 @@ import styled from "styled-components";
 import { Category, Time, Title } from "./ListItem";
 import { BsBookmark } from "react-icons/bs";
 import { FaRegCommentAlt } from "react-icons/fa";
+import { MAIN } from "@/types";
+import { useRouter } from "next/router";
 
-const ListCardItem = () => {
+const ListCardItem = ({ item }: { item: MAIN }) => {
   return (
     <Container>
       <TitleWrapper>
-        <Time>마감일: 2023-04-12 | 이은지</Time>
+        <Time>
+          마감일: {item.endDate.toString()} | {item.nickname}
+        </Time>
         <BsBookmark />
       </TitleWrapper>
       <Title>ListCardItem</Title>

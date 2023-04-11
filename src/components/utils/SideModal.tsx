@@ -116,7 +116,7 @@ const Sidebar = styled.div<SidebarProps>`
     width: 10vw;
     top: 10vh;
     z-index: 1;
-    left: 80vw;
+    left: 83vw;
     align-content: flex-start;
     align-items: center;
     transform: translateX(0);
@@ -159,7 +159,7 @@ const Overlay = styled.div<SidebarProps>`
   /* 전체화면일 때 */
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     width: 10vw;
-    left: 80vw;
+    left: 83vw;
     height: 80%;
     top: 10vh;
     margin-left: 10px;
