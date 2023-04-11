@@ -5,15 +5,21 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { get } from "@/libs/api";
 import { User, storageConstants } from "@/types";
+
 const ToggleUser = () => {
   const router = useRouter();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [userImage, setUserImage] = useState<string>();
+
   const handleClick = (link: string) => {
     router.push(`/${link}`);
     setIsOpen(false);
   };
+
   console.log(userImage);
+
   const handleLogout = async () => {
     localStorage.clear();
     const res = await get("/oauth2.0/token", {
@@ -30,6 +36,7 @@ const ToggleUser = () => {
       router.push("/auth"); // 로그인 페이지로 이동
     }
   };
+
   useEffect(() => {
     setIsOpen(false);
     const storedUser: User | null =
@@ -38,14 +45,15 @@ const ToggleUser = () => {
       null;
     setUserImage(storedUser?.profileImage);
   }, []);
+
   return (
     <ToggleContainer>
       {userImage && (
         <ImageButton onClick={() => setIsOpen(!isOpen)}>
           <Image
             src={userImage as string}
-            width="50"
-            height="50"
+            width="35"
+            height="35"
             alt=""
             style={{ borderRadius: "30px" }}
           />
@@ -79,9 +87,13 @@ const ToggleContainer = styled.div`
 `;
 
 const ImageButton = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   object-fit: contain;
 
   overflow: hidden;
@@ -92,15 +104,22 @@ const ToggleDropDown = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: absolute;
     top: 100%;
     right: 0;
-    background-color: #fff;
+
+    position: absolute;
+    width: 10rem;
     padding: 8px;
+
+    background-color: #fff;
     border: 1px solid #ccc;
+
+    cursor: default;
   `,
 
   Item: styled.div`
+    margin: 10px 0;
+
     :hover {
       background-color: ${({ theme }) => theme.color.hover};
     }

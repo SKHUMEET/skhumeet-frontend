@@ -31,7 +31,10 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  margin-right: 1rem;
   padding-bottom: 10px;
+  padding-right: 1rem;
+  padding-left: 1rem;
 
   border-bottom: 1px solid #d3d3d3;
 `;
