@@ -9,10 +9,11 @@ import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import DropDown from "../utils/DropDown";
 import Link from "next/link";
-import Btn from "../Btn";
+import Btn from "../utils/Btn";
 import { Category } from "@/types";
 import firebaseImageUpload from "@/hooks/firebase/imageUpload";
 import TextEditor from "../TextEditor";
+
 interface RegisterFormProps {
   category: Category;
   kind: "register" | "edit";
@@ -114,7 +115,9 @@ const RegisterForm = ({
       </RegisterBody>
       <BtnContainer>
         <Link href="/">
-          <CancelBtn>취소</CancelBtn>
+          <Btn onClick={() => {}} color="#999999">
+            취소
+          </Btn>
         </Link>
         <Btn onClick={() => SubmitEvent}>작성하기</Btn>
       </BtnContainer>
@@ -143,9 +146,9 @@ const FormContainer = styled.form`
   justify-content: center;
   align-items: center;
 
-  /* width: 40vw; */
-
+  width: 100%;
   padding: 5px;
+
   border-top: 2px solid ${({ theme }) => theme.color.main};
   border-bottom: 2px solid ${({ theme }) => theme.color.main};
 
@@ -189,27 +192,5 @@ const ContentInput = styled.div`
 `;
 
 const BtnContainer = styled.div`
-  width: 34.6%;
   float: right;
-  padding: 0 5px;
-`;
-
-const CancelBtn = styled.button`
-  width: 3rem;
-  margin-top: 1rem;
-  margin-right: 5px;
-  padding: 2px 3px;
-
-  background-color: #999999;
-
-  color: white;
-  border: 1px solid #999999;
-  border-radius: 3px;
-
-  text-align: center;
-
-  :hover {
-    background-color: white;
-    color: #999999;
-  }
 `;

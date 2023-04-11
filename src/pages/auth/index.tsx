@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
+
 export interface LoginUserProfileProps {
   id: string;
   name: string;
@@ -112,18 +113,26 @@ const Auth = () => {
   return (
     <>
       <Wrapper>
-        <Header.Container>
-          <Header.Title>SKHUMEET에 오신 걸 환영합니다!</Header.Title>
-        </Header.Container>
-        <Button.Container>
-          <Button.ButtonList>
-            <Button.NaverButton id="naverIdLogin" />
-            <Button.KakaoButton
-              src="/kakao_login_medium_narrow.png"
-              onClick={kakaoLogin}
-            />
-          </Button.ButtonList>
-        </Button.Container>
+        <Container>
+          <Header.Container>
+            <LogoImg src="/Logooo.svg" alt="" />
+            <Header.Title>함께 SKHUMEET 하려면?</Header.Title>
+          </Header.Container>
+          <Button.Container>
+            <Button.ButtonList>
+              <Button.NaverButton id="naverIdLogin" />
+              <Button.KakaoButton
+                src="/kakao_login_medium_narrow.png"
+                onClick={kakaoLogin}
+              />
+            </Button.ButtonList>
+          </Button.Container>
+          <Mention>
+            * 네이버는 개발 모드라 처음 가입한 아이디로만 로그인 되기 때문에(타
+            아이디로 로그인 불가능) <mark>카카오</mark>로 로그인 하는 것을
+            추천합니다!
+          </Mention>
+        </Container>
       </Wrapper>
       <Modal show={isProfileRegister} onClose={() => {}}>
         <ProfileRegisterForm
@@ -159,13 +168,31 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.background};
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+
+  padding: 2rem 0;
+
+  border: 2px solid ${({ theme }) => theme.color.main};
+`;
+
 const Header = {
   Container: styled.div`
+    margin-bottom: 2rem;
+
     text-align: center;
   `,
 
   Title: styled.h2``,
 };
+
+const LogoImg = styled.img`
+  width: 15vw;
+  margin-bottom: 2rem;
+`;
 
 const Button = {
   Container: styled.div``,
@@ -188,3 +215,10 @@ const Button = {
     color: #ffffff;
   `,
 };
+
+const Mention = styled.p`
+  margin-top: 2rem;
+
+  font-size: 5px;
+  text-align: center;
+`;

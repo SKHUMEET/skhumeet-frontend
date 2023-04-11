@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
 
 import { Mockdata } from "@/mockData";
-import Btn from "../Btn";
+import Btn from "../utils/Btn";
 import { useRouter } from "next/router";
 
 const ListBody = ({ category }: CategoryProps) => {
@@ -55,12 +55,13 @@ const ListBodyContainer = styled.div`
 const ListBodyHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  
+
   width: 100%;
+  margin-top: 1rem;
 `;
 
 const CategoryWrapper = styled.div`
   margin-top: 1rem;
 
   font-weight: 600;
-`
+`;

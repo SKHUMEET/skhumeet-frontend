@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
@@ -33,7 +32,9 @@ const NavBar = () => {
       <NavWrapper>
         <TopWrapper>
           <LogoWrapper>
-            <Logo onClick={() => router.push("/")}>로고</Logo>
+            <Logo onClick={() => router.push("/")}>
+              <LogoImg src="/Logooo.svg" />
+            </Logo>
           </LogoWrapper>
           <NavUser>
             <ToggleUser />
@@ -78,18 +79,23 @@ const NavWrapper = styled.div`
 
   width: 100%;
   height: 100%;
+  padding-top: 1rem;
 `;
 
 const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
-  top: 0;
+  /* top: 0; */
   width: 100%;
-  height: 7vh;
+  height: 10vh;
+
+  background-color: white;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
-    border-bottom: 2px solid ${({ theme }) => theme.color.main};
+    /* border-bottom: 2px solid ${({ theme }) => theme.color.main}; */
+    box-shadow: 0px 7px 2px -7px ${({ theme }) => theme.color.hover};
   }
 `;
 
@@ -97,19 +103,22 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: white;
 `;
 
 const Logo = styled.a`
-  height: 100%;
-
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: none;
 
   :hover {
-    color: ${({ theme }) => theme.color.hover};
-    box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main};
+    /* box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main}; */
   }
+`;
+
+const LogoImg = styled.img`
+  width: 80px;
 `;
 
 const NavUser = styled.div`
@@ -124,8 +133,6 @@ const NavUser = styled.div`
 
 const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
-
-  margin: 5px;
 
   font-weight: 600;
   font-size: 18px;
