@@ -1,5 +1,4 @@
 import HomeList from "@/components/List/HomeList";
-import Pagination from "@/components/Pagination";
 import Seo from "@/components/utils/Seo";
 import { useState } from "react";
 import styled from "styled-components";
@@ -81,11 +80,6 @@ export default function Home() {
           <HomeList category={el.category} items={el.items} key={el.category} />
         ))}
       </ListGridWrapper>
-      <Pagination
-        totalPages={totalPage}
-        currentPage={page}
-        onPageChange={setPage}
-      ></Pagination>
     </HomeContainer>
   );
 }

@@ -16,21 +16,33 @@ export default function SidebarModal({
   handleToggle,
 }: Props) {
   return (
-    <>
+    <Container>
       <HamburgerIcon isOpen={isOpen} onClick={handleToggle} />
       <Sidebar isOpen={isOpen}>{children}</Sidebar>
       <Overlay isOpen={isOpen} onClick={handleToggle}></Overlay>
-    </>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    height: 8vh;
+    background-color: white;
+    margin-top: 0.7rem;
+    padding-left: 1rem;
+  }
+`;
+
 const HamburgerIcon = styled.div<SidebarProps>`
-  width: 30px;
-  margin-right: 10px;
-  height: 7vh;
   display: flex;
   align-items: center;
+
+  width: 30px;
+  height: 7vh;
+  margin-right: 10px;
+
   cursor: pointer;
+
   &::before,
   ::after {
     content: "";
@@ -69,29 +81,35 @@ const HamburgerIcon = styled.div<SidebarProps>`
 `;
 
 const Sidebar = styled.div<SidebarProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
   position: fixed;
   top: 6vh;
   right: 10vw;
   width: 30vw;
   height: 80%;
   padding: 1rem;
+
   background-color: transparent;
   color: ${({ theme }) => theme.color.text};
+
   transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(350%)")};
   transition: transform 0.3s ease-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   z-index: ${({ isOpen }) => (isOpen ? "3" : "-1")};
   transition: 0.5s ease-in-out;
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     right: 0vw;
     width: 40vw;
   }
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
     width: 100vw;
   }
+
   /* 전체화면일 때 */
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     margin-left: 10px;
@@ -108,9 +126,10 @@ const Sidebar = styled.div<SidebarProps>`
 `;
 
 const Overlay = styled.div<SidebarProps>`
+  position: fixed;
+
   z-index: ${({ isOpen }) => (isOpen ? "2" : "-1")};
   transition: 0.5s;
-  position: fixed;
   ${({ isOpen }) =>
     isOpen &&
     css`
@@ -118,11 +137,14 @@ const Overlay = styled.div<SidebarProps>`
       top: 0;
       right: 10vw;
       width: 30vw;
-      cursor: pointer;
+
       background: ${({ theme }) => theme.color.background};
       box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);
       border-left: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
+
+      cursor: pointer;
+
       backdrop-filter: blur(25px);
       transition: 0.5s;
     `}
@@ -141,6 +163,7 @@ const Overlay = styled.div<SidebarProps>`
     height: 80%;
     top: 10vh;
     margin-left: 10px;
+
     background: ${({ theme }) => theme.color.background};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-left: 1px solid rgba(255, 255, 255, 0.2);

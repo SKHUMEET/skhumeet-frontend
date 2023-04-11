@@ -147,8 +147,8 @@ const FormContainer = styled.form`
   align-items: center;
 
   width: 100%;
-
   padding: 5px;
+
   border-top: 2px solid ${({ theme }) => theme.color.main};
   border-bottom: 2px solid ${({ theme }) => theme.color.main};
 
@@ -193,24 +193,4 @@ const ContentInput = styled.div`
 
 const BtnContainer = styled.div`
   float: right;
-`;
-
-const CancelBtn = styled.button`
-  width: 3rem;
-  margin-top: 1rem;
-  margin-right: 5px;
-  padding: 2px 3px;
-
-  background-color: #999999;
-
-  color: white;
-  border: 1px solid #999999;
-  border-radius: 3px;
-
-  text-align: center;
-
-  :hover {
-    background-color: white;
-    color: #999999;
-  }
 `;

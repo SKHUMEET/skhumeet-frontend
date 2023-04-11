@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useLayoutEffect } from "react";
-import ListTable from '../components/List/ListTable';
-import Pagination from './Pagination';
+import ListTable from "../components/List/ListTable";
+import Pagination from "./Pagination";
 import styled from "styled-components";
 
 type kind = "내가 쓴 글" | "좋아요 누른 글";
@@ -20,10 +20,10 @@ export const User_post = ({ kind }: { kind: kind }) => {
   useLayoutEffect(() => {
     switch (kind) {
       case "내가 쓴 글":
-        setUrl(`/api/main/post/member?page=`);
+        setUrl(`/main/post/member?page=`);
         break;
       case "좋아요 누른 글":
-        setUrl(`/api/study/member?page=`);
+        setUrl(`/main/like/member?page=`);
         break;
       default:
         setUrl("");
@@ -59,7 +59,7 @@ export const User_post = ({ kind }: { kind: kind }) => {
             <ListTable list={list} page={page} category={"hansotbab"} />
           )}
           {kind === "좋아요 누른 글" && (
-            <ListTable list={list} page={page} category={"hansotbab"}  />
+            <ListTable list={list} page={page} category={"hansotbab"} />
           )}
           <Pagination
             totalPages={totalPage}

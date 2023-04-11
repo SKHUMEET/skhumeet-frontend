@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import SidebarModal from "./SideModal";
@@ -88,7 +87,7 @@ const TopWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  top: 0;
+  /* top: 0; */
   width: 100%;
   height: 10vh;
 

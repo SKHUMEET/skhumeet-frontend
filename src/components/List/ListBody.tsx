@@ -55,12 +55,13 @@ const ListBodyContainer = styled.div`
 const ListBodyHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  
+
   width: 100%;
+  margin-top: 1rem;
 `;
 
 const CategoryWrapper = styled.div`
   margin-top: 1rem;
 
   font-weight: 600;
-`
+`;

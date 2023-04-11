@@ -5,15 +5,21 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { get } from "@/libs/api";
 import { User, storageConstants } from "@/types";
+
 const ToggleUser = () => {
   const router = useRouter();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [userImage, setUserImage] = useState<string>();
+
   const handleClick = (link: string) => {
     router.push(`/${link}`);
     setIsOpen(false);
   };
+
   console.log(userImage);
+
   const handleLogout = async () => {
     localStorage.clear();
     const res = await get("/oauth2.0/token", {
@@ -30,6 +36,7 @@ const ToggleUser = () => {
       router.push("/auth"); // 로그인 페이지로 이동
     }
   };
+
   useEffect(() => {
     setIsOpen(false);
     const storedUser: User | null =
@@ -38,6 +45,7 @@ const ToggleUser = () => {
       null;
     setUserImage(storedUser?.profileImage);
   }, []);
+
   return (
     <ToggleContainer>
       {userImage && (
@@ -83,9 +91,9 @@ const ImageButton = styled.div`
   justify-content: right;
   align-items: center;
 
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   object-fit: contain;
 
   overflow: hidden;
@@ -96,10 +104,10 @@ const ToggleDropDown = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    position: absolute;
     top: 100%;
     right: 0;
+
+    position: absolute;
     width: 10rem;
     padding: 8px;
 

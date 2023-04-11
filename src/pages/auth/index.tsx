@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
+
 export interface LoginUserProfileProps {
   id: string;
   name: string;
