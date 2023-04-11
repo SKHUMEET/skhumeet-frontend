@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { LoginUserProfileProps } from "@/pages/auth";
 import styled from "styled-components";
 import { useAuth } from "@/hooks/user";
+import Btn from "../utils/Btn";
 
 const ProfileRegisterForm = ({
   id,
@@ -30,31 +31,35 @@ const ProfileRegisterForm = ({
     <Container>
       <Wrapper>
         <div>
-          <h3>SKHUMEET에 오신 걸 환영합니다!</h3>
-          <h3>
-            성공회대 학생(교수)임을 인증하기 위해 이름과 학번(사번)을
-            입력해주세요!
+          <h3 style={{ marginBottom: "10px" }}>
+            SKHUMEET에 오신 것을 환영합니다!
           </h3>
+          <h4>
+            <H4Wrapper>
+              성공회대 학생(교수)임을 <mark>인증</mark>하기 위해{" "}
+            </H4Wrapper>
+            <mark>이름과 학번(사번)</mark>을 입력해주세요!
+          </h4>
         </div>
         <div style={{ width: "100%" }}>
           <div>
-            <span style={{ fontWeight: "bold" }}>이름 </span>
+            <InputSpan>이름 </InputSpan>
             <Input
               value={nameForm}
               onChange={handleChangeName}
               // placeholder="학번을 입력해주세요"
             />
           </div>
-          <div>
-            <span style={{ fontWeight: "bold" }}>학번 </span>
+          <StudentNumContainer>
+            <InputSpan>학번 </InputSpan>
             <Input
               value={studentIdForm}
               onChange={handleChange}
               // placeholder="학번을 입력해주세요"
             />
-          </div>
+          </StudentNumContainer>
         </div>
-        <button onClick={handleSubmit}>입력</button>
+        <Btn onClick={handleSubmit}>입력</Btn>
       </Wrapper>
     </Container>
   );
@@ -63,34 +68,85 @@ const ProfileRegisterForm = ({
 export default ProfileRegisterForm;
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+  height: 100%;
 `;
+
 const Wrapper = styled.div`
-  width: 50%;
-  height: 50%;
-  background-color: ${({ theme }) => theme.color.background};
-  border: 3px solid ${({ theme }) => theme.color.main};
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
+  width: 50%;
+  height: 63%;
+
+  background-color: ${({ theme }) => theme.color.background};
+  /* border: 3px solid ${({ theme }) => theme.color.main}; */
+  border-radius: 20px;
+
   text-align: center;
+
+  cursor: default;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    width: 73%;
+    height: 30%;
+  }
+
+  > div > h3 {
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+      font-size: 80%;
+    }
+  }
+
+  > div > h4 {
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+      font-size: 60%;
+    }
+  }
+`;
+
+const H4Wrapper = styled.div`
+  display: inline-block;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    display: block;
+  }
 `;
 
 const Input = styled.input`
-  height: 40px;
-  width: 60%;
-  border: 1px solid ${({ theme }) => theme.color.main};
-  border-radius: 5px;
+  width: 50%;
+  height: 35px;
   margin-left: 10px;
+
+  border: 1px solid ${({ theme }) => theme.color.main};
+  border-radius: 3px;
+
   outline: none;
+
   :focus {
-    border: 3px solid ${({ theme }) => theme.color.main};
+    border: 2px solid ${({ theme }) => theme.color.main};
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    height: 20px;
+  }
+`;
+
+const StudentNumContainer = styled.div`
+  margin-top: 1rem;
+`;
+
+const InputSpan = styled.span`
+  font-weight: bold;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    font-size: 80%;
   }
 `;
