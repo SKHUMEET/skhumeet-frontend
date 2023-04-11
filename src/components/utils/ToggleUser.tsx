@@ -18,8 +18,6 @@ const ToggleUser = () => {
     setIsOpen(false);
   };
 
-  console.log(userImage);
-
   const handleLogout = async () => {
     localStorage.clear();
     const res = await get("/oauth2.0/token", {

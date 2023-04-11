@@ -77,11 +77,16 @@ export const storageConstants = {
 };
 
 export interface MAIN {
+  id: number;
+  nickname: string;
   title: string;
   category: string;
   contact: string;
   endDate: Date | string;
+  createDate: Date | string;
   view: number;
   context: string;
   images: string[];
 }
+
+export type MAINREQUEST = Omit<MAIN, "id" | "createDate" | "nickname">;

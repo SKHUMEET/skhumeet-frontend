@@ -1,84 +1,57 @@
 import HomeList from "@/components/List/HomeList";
+import customAlert from "@/components/modal/CustomModalAlert";
 import Seo from "@/components/utils/Seo";
-import { useState } from "react";
+import { useMainCategory } from "@/hooks/main";
 import styled from "styled-components";
-
-const mock_data = [
-  {
-    category: "한솥밥",
-    items: [
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: false },
-      { title: "모집 | 000모집" },
-      { title: "모집 | 000모집", isRecruiting: true },
-    ],
-  },
-  {
-    category: "한솥밥",
-    items: [
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: false },
-      { title: "모집 | 000모집" },
-      { title: "모집 | 000모집", isRecruiting: true },
-    ],
-  },
-  {
-    category: "한솥밥",
-    items: [
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: false },
-      { title: "모집 | 000모집" },
-      { title: "모집 | 000모집", isRecruiting: true },
-    ],
-  },
-  {
-    category: "한솥밥",
-    items: [
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: false },
-      { title: "모집 | 000모집" },
-      { title: "모집 | 000모집", isRecruiting: true },
-    ],
-  },
-  {
-    category: "한솥밥",
-    items: [
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: false },
-      { title: "모집 | 000모집" },
-      { title: "모집 | 000모집", isRecruiting: true },
-    ],
-  },
-  {
-    category: "한솥밥",
-    items: [
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: true },
-      { title: "모집 | 000모집", isRecruiting: false },
-      { title: "모집 | 000모집" },
-      { title: "모집 | 000모집", isRecruiting: true },
-    ],
-  },
-];
-
 export default function Home() {
-  const [page, setPage] = useState<number>(1);
+  const hansotbab = useMainCategory("hansotbab").data;
 
-  const [totalPage, setTotalPage] = useState<number>(0);
+  // const content: MAIN[] = hansotbab.content as MAIN[];
+
+  const eoullim = useMainCategory("eoullim").data;
+
+  const study = useMainCategory("study").data;
+  const club = useMainCategory("club").data;
+  const contest = useMainCategory("contest").data;
+  // const departmentEvent = useMainCategory("departmentEvent", 1);
+  // const etc = useMainCategory("etc", 1);
 
   return (
     <HomeContainer>
       <Seo />
-      <Banner />
+      <Banner onClick={() => customAlert("확인")} />
       <ListGridWrapper>
-        {mock_data.map((el) => (
-          <HomeList category={el.category} items={el.items} key={el.category} />
-        ))}
+        {hansotbab && (
+          <HomeList
+            category={"hansotbab"}
+            items={hansotbab.content ?? []}
+            key={"hansotbab"}
+          />
+        )}
+        {eoullim && (
+          <HomeList
+            category={"eoullim"}
+            items={eoullim.content ?? []}
+            key={"eoullim"}
+          />
+        )}
+        {study && (
+          <HomeList
+            category={"study"}
+            items={study.content ?? []}
+            key={"study"}
+          />
+        )}
+        {club && (
+          <HomeList category={"club"} items={club.content ?? []} key={"club"} />
+        )}
+        {contest && (
+          <HomeList
+            category={"contest"}
+            items={contest.content ?? []}
+            key={"contest"}
+          />
+        )}
       </ListGridWrapper>
     </HomeContainer>
   );
@@ -91,19 +64,19 @@ const HomeContainer = styled.div`
   width: 100%;
 `;
 
-const Banner = styled.div`
+const Banner = styled.div<{ color?: string }>`
   width: 100%;
-  height: 50vh;
-  margin-top: 3rem;
+  height: 30vh;
 
-  background-color: ${({ theme }) => theme.color.main};
-  border-radius: 1rem;
+  background-color: ${({ theme, color }) => color ?? theme.color.main};
 `;
 
 const ListGridWrapper = styled.div`
+  margin: 1rem 0;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 
   @media screen and (max-width: ${(props) => props.theme.breakpoints.small}) {
     grid-template-columns: 1fr;

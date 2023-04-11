@@ -2,18 +2,23 @@ import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { BsBookmark } from "react-icons/bs";
 import { FaRegCommentAlt } from "react-icons/fa";
+import { MAIN } from "@/types";
+import { useRouter } from "next/router";
 
 //  북마크,댓글개수,제목,현황,마감일, 작성자
-const ListItem = () => {
+const ListItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
+
   return (
     <Container>
       <TitleWrapper>
         <BsBookmark style={{ marginRight: "5px" }} />
         <div>
           <Category color={theme.color.light}>모집 완료</Category>
-          <Title>ListItem</Title>
-          <Time>작성일: 2023-04-09 | 이은지</Time>
+          <Title>{item.title}</Title>
+          <Time>
+            마감일: {item.endDate.toLocaleString()} | {item.nickname}
+          </Time>
         </div>
       </TitleWrapper>
       <CommentWrapper>
@@ -45,12 +50,12 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 
-export const Category = styled.span<{ color: string }>`
+export const Category = styled.span<{ color?: string }>`
   width: fit-content;
   padding: 2px 5px;
   margin-bottom: 3px;
 
-  background-color: ${({ color }) => color};
+  background-color: ${({ color, theme }) => color ?? theme.color.main};
   border-radius: 5px;
 
   font-size: 11px;

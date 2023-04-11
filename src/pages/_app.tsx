@@ -12,7 +12,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Head from "next/head";
 import { storageConstants } from "@/types";
 import { useRouter } from "next/router";
-storageConstants;
+import { queryClient } from "@/react-query/queryClient";
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -29,8 +30,6 @@ export default function App({ Component, pageProps }: AppProps) {
       }
     }
   }, [isLoggedIn]);
-
-  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>

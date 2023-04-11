@@ -78,7 +78,7 @@ const responseInterceptorRejected = async (error: AxiosError) => {
   // console.log(error.response);
   // alert(errorMsg);
   // if (window.confirm(errorMsg) === true) {
-  // window.location.replace("/");
+  //  setTimeout(() => window.location.replace("/"), 500);
   // }
   // return new Error(error.response?.data?.message ?? error);
   return error;
