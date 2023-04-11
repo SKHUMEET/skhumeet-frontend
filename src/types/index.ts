@@ -75,3 +75,13 @@ export const storageConstants = {
   refreshToken: "REFRESH_TOKEN",
   user: "skhumeet_user",
 };
+
+export interface MAIN {
+  title: string;
+  category: string;
+  contact: string;
+  endDate: Date | string;
+  view: number;
+  context: string;
+  images: string[];
+}

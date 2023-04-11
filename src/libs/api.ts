@@ -43,8 +43,36 @@ const responseInterceptorFulfilled = (res: AxiosResponse) => {
   return Promise.reject(...res.data);
 };
 
-const responseInterceptorRejected = (error: AxiosError) => {
+const responseInterceptorRejected = async (error: AxiosError) => {
   console.log("error", error);
+  const config: AxiosRequestConfig = {};
+  if (error.status === 403) {
+    const originalRequest = config;
+    const refreshToken = localStorage.getItem(storageConstants.refreshToken);
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: `/login`,
+        data: { refreshToken },
+      });
+
+      console.log("403 error data", data);
+      const newAccessToken = data.data.accessToken;
+      const newRefreshToken = data.data.refreshToken;
+
+      originalRequest.headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + newAccessToken,
+      };
+
+      localStorage.setItem(storageConstants.accessToken, newAccessToken);
+      localStorage.setItem(storageConstants.refreshToken, newRefreshToken);
+
+      return await axios(originalRequest);
+    } catch (err) {
+      new Error("error");
+    }
+  }
   // const errorStatus = error.response?.status;
   // const errorUrl = error.response?.config.url;
   // console.log(error.response);

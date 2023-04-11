@@ -11,8 +11,9 @@ import DropDown from "../utils/DropDown";
 import Link from "next/link";
 import Btn from "../Btn";
 import { Category } from "@/types";
-import firebaseImageUpload from "@/hooks/firebase/imageUpload";
 import TextEditor from "../TextEditor";
+import imageUpload from "@/hooks/firebase/imageUpload";
+import { postMain } from "@/hooks/main";
 interface RegisterFormProps {
   category: Category;
   kind: "register" | "edit";
@@ -25,41 +26,65 @@ const RegisterForm = ({
   type = "list",
 }: RegisterFormProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [category, setCategory] = useState<Category>(defaultCategory);
   const [registerType, setRegisterType] = useState(type);
+
+  const initForm = {
+    title: "",
+    category: defaultCategory,
+    contact: "email",
+    endDate: new Date().toISOString(),
+    view: 1,
+    context: "",
+    images: [],
+  };
+  const [form, setForm] = useState(initForm);
+
+  const { title, category, contact, endDate, view, context, images } = form;
+
   const editSituationList: Partial<Situation>[] = [
     "recruiting",
     "recruitmentCompleted",
   ];
   const [situation, setSituation] = useState<Situation>("recruiting");
-  const [thumbImage, setThumbImage] = useState<string>();
-  const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCategory(e.target.value as Category);
+
+  const handleChangeDropDown = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
-  const onChangeMessage = (e: ChangeEvent<HTMLSelectElement>) => {
-    // setMessage(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
-
-  const onChangeSituation = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSituation(e.target.value as Situation);
-  };
-
   const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      await firebaseImageUpload(e.target.files).then((res) => {
-        if (!thumbImage) setThumbImage(res);
+      await imageUpload(e.target.files).then((res) => {
+        setForm({ ...form, images: { ...images, ...res } });
         console.log(res);
         if (res) {
           console.log("완료후", res);
           const imgElement = document.createElement("img");
           imgElement.setAttribute("src", res);
-          imgElement.setAttribute("width", "100");
-          imgElement.setAttribute("height", "100");
+          imgElement.setAttribute("width", "200");
+          imgElement.setAttribute("height", "200");
           contentRef.current?.appendChild(imgElement);
         }
       });
     }
+  };
+
+  const handleSubmit = async () => {
+    setForm({ ...form, context: contentRef.current?.innerHTML ?? "" });
+    console.log(form);
+    postMain({
+      title,
+      category,
+      contact,
+      endDate,
+      view,
+      context,
+      images,
+    }).then((res) => console.log(res));
   };
 
   useEffect(() => {
@@ -72,33 +97,60 @@ const RegisterForm = ({
     <RegisterFormContainer>
       <RegisterHeader>
         <DropDown
+          name="category"
           list={categoryList}
-          onChange={onChangeCategory}
+          onChange={handleChangeDropDown}
           defaultItem={defaultCategory}
         />
-        <DropDown list={messageList} onChange={onChangeCategory} />
         {kind === "register" && registerType === "list" && (
           <span>{ConvertKorean[situation]}</span>
         )}
         {kind === "edit" && registerType === "list" && (
-          <DropDown list={editSituationList} onChange={onChangeSituation} />
+          <DropDown
+            name="situation"
+            list={editSituationList}
+            onChange={handleChangeDropDown}
+          />
         )}
         {kind === "register" && registerType === "grid" && (
           <DropDown
+            name="situation"
             list={["recruiting", "promotion", "activity"]}
-            onChange={onChangeSituation}
+            onChange={handleChangeDropDown}
           />
         )}
         {kind === "edit" && registerType === "grid" && (
-          <DropDown list={originSituationList} onChange={onChangeSituation} />
+          <DropDown
+            name="situation"
+            list={originSituationList}
+            onChange={handleChangeDropDown}
+          />
         )}
         <br />
         마감일
-        <DateInput type="date" />
+        <DateInput
+          name="endDate"
+          value={endDate}
+          type="date"
+          onChange={handleChange}
+        />
+        <br />
+        <TitleInput
+          name="contact"
+          value={contact}
+          onChange={handleChange}
+          placeholder="오픈채팅 링크 or 전화번호"
+        ></TitleInput>
       </RegisterHeader>
       <RegisterBody>
         <FormContainer>
-          <TitleInput type="text" placeholder="제목을 입력해 주세요" />
+          <TitleInput
+            name="title"
+            value={title}
+            type="text"
+            placeholder="제목을 입력해 주세요"
+            onChange={handleChange}
+          />
 
           {registerType === "list" ? (
             <ContentInput ref={contentRef} contentEditable={true} />
@@ -116,7 +168,7 @@ const RegisterForm = ({
         <Link href="/">
           <CancelBtn>취소</CancelBtn>
         </Link>
-        <Btn onClick={() => SubmitEvent}>작성하기</Btn>
+        <Btn onClick={handleSubmit}>작성하기</Btn>
       </BtnContainer>
     </RegisterFormContainer>
   );

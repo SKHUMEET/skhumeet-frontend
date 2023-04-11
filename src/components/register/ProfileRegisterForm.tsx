@@ -5,13 +5,14 @@ import { useAuth } from "@/hooks/user";
 
 const ProfileRegisterForm = ({
   id,
-  name = "새로운 유저",
+  name = "",
   nickname,
   profile_image,
 }: LoginUserProfileProps) => {
+  console.log(id, name, nickname, profile_image);
   const { signup } = useAuth();
   const [nameForm, setNameForm] = useState<string>(name);
-  const [studentIdForm, setStudentIdForm] = useState<string>();
+  const [studentIdForm, setStudentIdForm] = useState<string>("");
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setNameForm(e.target.value);
   };

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
-import Btn from "../Btn";
-import { Modal } from ".";
 
 const AlertModal = {
   Container: styled.div<{ showModal: boolean }>`
@@ -41,7 +39,7 @@ const AlertModal = {
     width: 100%;
     height: 5rem;
     position: relative;
-    ::before {
+    /* ::before {
       content: "";
       top: 0;
       border-radius: 8px 8px 0 0;
@@ -49,7 +47,7 @@ const AlertModal = {
       width: 100%;
       height: 1rem;
       background-color: red;
-    }
+    } */
   `,
 
   Message: styled.div`
@@ -58,21 +56,21 @@ const AlertModal = {
   `,
 };
 
-interface ICustomAlertProps {
+interface CustomAlertProps {
   message: string;
   onConfirm: () => void;
 }
 
-const CustomAlert = ({ message, onConfirm }: ICustomAlertProps) => {
+const CustomAlert = ({ message, onConfirm }: CustomAlertProps) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleConfirm = () => {
     setShowModal(false);
-    setTimeout(() => onConfirm(), 100);
+    setTimeout(() => onConfirm(), 1);
   };
 
   useEffect(() => {
-    setTimeout(() => setShowModal(true), 100);
+    setTimeout(() => setShowModal(true), 1);
   }, []);
   return (
     <>

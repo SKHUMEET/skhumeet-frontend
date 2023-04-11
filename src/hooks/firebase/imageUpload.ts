@@ -1,46 +1,28 @@
 import customAlert from "@/components/modal/CustomModalAlert";
-import { firestorage } from "@/hooks/firebase";
+import { post } from "@/libs/api";
+import { storageConstants } from "@/types";
+import axios from "axios";
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { v4 as uuidv4 } from "uuid"; //firebase image upload용 id
-
-const firebaseImageUpload = (files: FileList): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const storageRef = ref(firestorage, uuidv4());
-      const uploadTask = uploadBytesResumable(storageRef, files[0]);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          progress === 100 && customAlert("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
-        (error) => {
-          // Handle unsuccessful uploads
-          reject(error);
-        },
-        async () => {
-          // Handle successful completion of the upload task here
-          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log(
-            `File uploaded successfully, download URL: ${downloadUrl}`
-          );
-          resolve(downloadUrl);
-        }
-      );
-    } catch (error) {
-      reject(error);
-    }
+const imageUpload = async (files: FileList) => {
+  const TOKEN = localStorage.getItem(storageConstants.accessToken);
+  const formData = new FormData();
+  Array.from(files).forEach((el) => {
+    formData.append("images", el);
   });
+  const data = await axios
+    .post(`/api/image/new?path=main`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        withCredentials: true,
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    })
+    .then((res: any) => {
+      return res.data.imagePath;
+    })
+    .catch((el) => console.log("el", el));
+
+  return data;
 };
-export default firebaseImageUpload;
+
+export default imageUpload;
