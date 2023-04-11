@@ -56,6 +56,9 @@ const Auth = () => {
         const profile_image = naverLogin.user?.getProfileImage() as string;
 
         const res = await findMemeberById(id);
+        if (res.status === 200) {
+          setTimeout(() => window.location.replace("/"), 500);
+        }
         if (res.response?.status === 404) {
           setIsProfileRegister(true);
         }
@@ -90,6 +93,8 @@ const Auth = () => {
             console.log(res);
             await findMemeberById(res.id).then((res) => {
               console.log("res", res);
+              res.status === 200 &&
+                setTimeout(() => window.location.replace("/"), 500);
               res.response &&
                 res.response.status === 404 &&
                 setIsProfileRegister(true);

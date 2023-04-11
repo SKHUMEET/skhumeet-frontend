@@ -26,18 +26,18 @@ const AlertModal = {
   `,
 
   Content: styled.div`
-    margin: 20px;
+    margin-top: 20px;
     background-color: white;
     border-radius: 8px;
-    padding: 24px;
+    padding: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     max-width: 400px;
     width: 100%;
-    height: 5rem;
+    height: 7rem;
     position: relative;
     /* ::before {
       content: "";
@@ -52,9 +52,13 @@ const AlertModal = {
 
   Message: styled.div`
     font-size: 1.2rem;
-    margin-bottom: 16px;
   `,
 };
+
+const LogoImg = styled.img`
+  width: 15vw;
+  object-fit: contain;
+`;
 
 interface CustomAlertProps {
   message: string;
@@ -76,8 +80,11 @@ const CustomAlert = ({ message, onConfirm }: CustomAlertProps) => {
     <>
       <AlertModal.Container showModal={showModal}>
         <AlertModal.Content>
-          <AlertModal.Message>{message}</AlertModal.Message>
-          <button onClick={handleConfirm}>확인</button>
+          <LogoImg src="/Logooo.svg" alt="" height="50%" />
+          <AlertModal.Message onClick={handleConfirm}>
+            {message}
+          </AlertModal.Message>
+          {/* <button >확인</button> */}
         </AlertModal.Content>
       </AlertModal.Container>
     </>

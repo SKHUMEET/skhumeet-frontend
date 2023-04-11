@@ -24,7 +24,13 @@ const ProfileRegisterForm = ({
     console.log(id, nameForm, nickname, profile_image, studentIdForm);
 
     studentIdForm &&
-      signup(studentIdForm, id, nameForm, nickname, profile_image);
+      signup(studentIdForm, id, nameForm, nickname, profile_image).then(
+        (res) => {
+          if (res.status === 200) {
+            setTimeout(() => window.location.replace("/"), 500);
+          }
+        }
+      );
 
     // axios.post
   };

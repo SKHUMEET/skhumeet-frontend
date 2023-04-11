@@ -29,7 +29,6 @@ export const useAuth = (): UseAuth => {
         setRefreshToken(res.data.tokens.refreshToken);
         setStoredUser(res.data.data);
         customAlert(`${res.data.data.name}님 환영합니다`);
-        location.href = "/";
       }
       return res;
     });
@@ -50,11 +49,14 @@ export const useAuth = (): UseAuth => {
       profileImage,
     }).then((res: any) => {
       console.log(res);
-      setAccessToken(res.data.tokens.accessToken);
-      setRefreshToken(res.data.tokens.refreshToken);
-      setStoredUser(res.data.data);
-      customAlert(`${res.data.data.name}님 환영합니다`);
-      location.href = "/";
+      if (res.response?.status === 400) {
+        customAlert(res.response.data);
+      } else {
+        setAccessToken(res.data.tokens.accessToken);
+        setRefreshToken(res.data.tokens.refreshToken);
+        setStoredUser(res.data.data);
+        customAlert(`${res.data.data.name}님 환영합니다`);
+      }
     });
   };
   return {
