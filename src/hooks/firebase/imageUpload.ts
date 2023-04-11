@@ -1,3 +1,4 @@
+import customAlert from "@/components/modal/CustomModalAlert";
 import { firestorage } from "@/hooks/firebase";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -14,7 +15,7 @@ const firebaseImageUpload = (files: FileList): Promise<string> => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          progress === 100 && alert("Upload is " + progress + "% done");
+          progress === 100 && customAlert("Upload is " + progress + "% done");
           switch (snapshot.state) {
             case "paused":
               console.log("Upload is paused");

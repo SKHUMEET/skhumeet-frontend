@@ -5,6 +5,7 @@ import {
   setRefreshToken,
   setStoredUser,
 } from "../user-storage";
+import customAlert from "@/components/modal/CustomModalAlert";
 interface UseAuth {
   findMemeberById: (id: string) => Promise<any>;
   signup: (
@@ -17,7 +18,6 @@ interface UseAuth {
 }
 
 export const useAuth = (): UseAuth => {
-  const router = useRouter();
   const findMemeberById = async (id: string): Promise<any> => {
     const res = await post("/api/member/login", {
       loginId: id,
@@ -28,7 +28,7 @@ export const useAuth = (): UseAuth => {
         setAccessToken(res.data.tokens.accessToken);
         setRefreshToken(res.data.tokens.refreshToken);
         setStoredUser(res.data.data);
-        alert(`${res.data.data.name}님 환영합니다`);
+        customAlert(`${res.data.data.name}님 환영합니다`);
         location.href = "/";
       }
       return res;
@@ -53,7 +53,7 @@ export const useAuth = (): UseAuth => {
       setAccessToken(res.data.tokens.accessToken);
       setRefreshToken(res.data.tokens.refreshToken);
       setStoredUser(res.data.data);
-      alert(`${res.data.data.name}님 환영합니다`);
+      customAlert(`${res.data.data.name}님 환영합니다`);
       location.href = "/";
     });
   };

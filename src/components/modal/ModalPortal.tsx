@@ -1,11 +1,11 @@
 import { useMemo, useEffect, ReactNode } from "react";
 import { createPortal } from "react-dom";
 // https://ko.reactjs.org/docs/portals.html
-interface IModalPortalProps {
+interface ModalPortalProps {
   children: ReactNode;
 }
 
-export const ModalPortalWrap = ({ children }: IModalPortalProps) => {
+export const ModalPortalWrap = ({ children }: ModalPortalProps) => {
   const subDiv = useMemo(() => document.createElement("div"), []);
   useEffect(() => {
     subDiv.id = "modal-portal-wrapper";

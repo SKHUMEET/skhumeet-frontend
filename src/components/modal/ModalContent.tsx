@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-interface IModalContentProps {
+interface ModalContentProps {
   title: ReactNode;
   children: ReactNode;
   onClose: () => void;
@@ -12,7 +12,7 @@ export const ModalContent = ({
   title,
   children,
   onClose,
-}: IModalContentProps) => {
+}: ModalContentProps) => {
   return (
     <Wrapper>
       <CloseButton>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect, useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
@@ -12,6 +12,7 @@ export interface LoginUserProfileProps {
 
 export let naverLogin: any;
 const Auth = () => {
+  const theme = useContext(ThemeContext);
   const { findMemeberById } = useAuth();
   const [isProfileRegister, setIsProfileRegister] = useState(false);
   const [form, setForm] = useState({
@@ -125,7 +126,11 @@ const Auth = () => {
           </Button.ButtonList>
         </Button.Container>
       </Wrapper>
-      <Modal show={isProfileRegister} onClose={() => {}}>
+      <Modal
+        show={isProfileRegister}
+        onClose={() => {}}
+        backdropColor={theme.color.background}
+      >
         <ProfileRegisterForm
           id={form.id}
           name={form.name}
