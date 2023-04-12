@@ -3,13 +3,13 @@ import customAlert from "@/components/modal/CustomModalAlert";
 import Seo from "@/components/utils/Seo";
 import { useMainCategory } from "@/hooks/main";
 import styled from "styled-components";
+
 export default function Home() {
   const hansotbab = useMainCategory("hansotbab").data;
 
   // const content: MAIN[] = hansotbab.content as MAIN[];
 
   const eoullim = useMainCategory("eoullim").data;
-
   const study = useMainCategory("study").data;
   const club = useMainCategory("club").data;
   const contest = useMainCategory("contest").data;
