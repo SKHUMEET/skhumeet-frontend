@@ -47,6 +47,7 @@ const HamburgerIcon = styled.div<SidebarProps>`
   right: 0;
   cursor: pointer;
   position: fixed;
+
   &::before,
   ::after {
     content: "";
@@ -82,6 +83,10 @@ const HamburgerIcon = styled.div<SidebarProps>`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     display: none;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    right: 10%;
   }
 `;
 
