@@ -25,27 +25,32 @@ export default function SidebarModal({
 }
 
 const Container = styled.div`
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
-    height: 8vh;
-    background-color: white;
-    margin-top: 0.7rem;
+  /* @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+   // height: 8vh;
+    //background-color: white;
+    //margin-top: 0.7rem;
     padding-left: 1rem;
-  }
+  } */
+  position: relative;
 `;
 
 const HamburgerIcon = styled.div<SidebarProps>`
   display: flex;
   align-items: center;
-
+  justify-content: center;
   width: 30px;
   height: 7vh;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 
+  padding-top: 10px;
+  top: 0;
+  right: 0;
   cursor: pointer;
-
+  position: fixed;
   &::before,
   ::after {
     content: "";
+
     position: absolute;
     width: 30px;
     height: 2px;
@@ -98,7 +103,7 @@ const Sidebar = styled.div<SidebarProps>`
 
   transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(350%)")};
   transition: transform 0.3s ease-out;
-  z-index: ${({ isOpen }) => (isOpen ? "3" : "-1")};
+  z-index: ${({ isOpen }) => (isOpen ? 3 : -1)};
   transition: 0.5s ease-in-out;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
@@ -138,7 +143,7 @@ const Overlay = styled.div<SidebarProps>`
       right: 10vw;
       width: 30vw;
 
-      background: ${({ theme }) => theme.color.background};
+      /* background: ${({ theme }) => theme.color.background}; */
       box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);
       border-left: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
