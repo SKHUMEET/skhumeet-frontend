@@ -4,7 +4,6 @@ import { Category, Time, Title } from "./ListItem";
 import { BsBookmark } from "react-icons/bs";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { MAIN } from "@/types";
-import { useRouter } from "next/router";
 
 const ListCardItem = ({ item }: { item: MAIN }) => {
   return (

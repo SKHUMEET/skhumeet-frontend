@@ -3,7 +3,6 @@ import styled, { ThemeContext } from "styled-components";
 import { BsBookmark } from "react-icons/bs";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { MAIN } from "@/types";
-import { useRouter } from "next/router";
 
 //  북마크,댓글개수,제목,현황,마감일, 작성자
 const ListItem = ({ item }: { item: MAIN }) => {

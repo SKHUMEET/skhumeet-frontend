@@ -1,10 +1,10 @@
 import { get } from "@/libs/api";
-import { Category, IdProps, MAIN, User, storageConstants } from "@/types";
+import { Category, MAIN, User, storageConstants } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import Seo from "@/components/utils/Seo";
+
 const Detail = ({ data }: { data: MAIN }) => {
   const [userId, setUserId] = useState<string>();
   useEffect(() => {
@@ -14,25 +14,32 @@ const Detail = ({ data }: { data: MAIN }) => {
       null;
     setUserId(storedUser?.memberNumber);
   }, []);
+
   return (
     <>
       <Seo />
-      <div>{data.memberNumber === userId && <button>수정하기</button>}</div>
-      <div>{data.category}</div>
-      <div>{data.contact}</div>
-      <div>{data.context}</div>
-      <div>{data.createDate.toString()}</div>
-      <div>{data.endDate.toString()}</div>
-      <div>{data.images}</div>
-      <div>{data.member}</div>
-      <div>{data.memberNumber}</div>
-      <div>{data.title}</div>
-      <div>{data.view}</div>
+
+      <Container>
+        <div>{data.memberNumber === userId && <button>수정하기</button>}</div>
+        {/* <button onClick={handleAButton}>custom alert</button> */}
+
+        <div>
+          작성자: {data.member} | 마감일: {data.endDate.toString()} | 작성일:
+          {data.createDate.toString()}
+          {data.createDate.toString()}
+        </div>
+        <div>조회수: {data.view}</div>
+        <div>연락 방법: {data.contact}</div>
+        <div dangerouslySetInnerHTML={{ __html: data.context }} />
+
+        <div>{data.title}</div>
+      </Container>
     </>
   );
 };
 
 export default Detail;
+
 export const getServerSideProps: GetServerSideProps<{ data: MAIN }> = async (
   context: GetServerSidePropsContext
 ) => {
@@ -54,20 +61,6 @@ export const getServerSideProps: GetServerSideProps<{ data: MAIN }> = async (
   };
 };
 
-const Modal = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  width: 40vw;
-  height: 40vh;
-  margin: 0 auto;
-
-  background-color: white;
-  border: 1px solid #999999;
-`;
-
-const AlertBtn = styled.button`
-  width: 50%;
+const Container = styled.div`
+  margin-top: 1rem;
 `;

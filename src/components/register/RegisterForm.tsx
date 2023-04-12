@@ -69,6 +69,7 @@ const RegisterForm = ({
     console.log(name, value);
     setForm({ ...form, [name]: value });
   };
+
   const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       await imageUpload(e.target.files).then((res) => {
@@ -118,7 +119,9 @@ const RegisterForm = ({
           defaultItem={defaultCategory}
         />
         {kind === "register" && registerType === "list" && (
-          <span>{ConvertKorean[status]}</span>
+          <span style={{ fontSize: "small", fontWeight: "bold" }}>
+            상태: {ConvertKorean[status]}
+          </span>
         )}
         {kind === "edit" && registerType === "list" && (
           <DropDown
@@ -144,20 +147,24 @@ const RegisterForm = ({
           />
         )}
         <br />
-        마감일
-        <DateInput
-          name="endDate"
-          value={endDate}
-          type="date"
-          onChange={handleChange}
-        />
-        <br />
-        <TitleInput
-          name="contact"
-          value={contact}
-          onChange={handleChange}
-          placeholder="오픈채팅 링크 or 전화번호"
-        ></TitleInput>
+        <DateContainer>
+          마감일:
+          <DateInput
+            name="endDate"
+            value={endDate}
+            type="date"
+            onChange={handleChange}
+          />
+        </DateContainer>
+        <DateContainer>
+          연락 방법:
+          <ContactInput
+            name="contact"
+            value={contact}
+            onChange={handleChange}
+            placeholder="오픈채팅 링크 or 전화번호"
+          />
+        </DateContainer>
       </RegisterHeader>
       <RegisterBody>
         <FormContainer>
@@ -168,7 +175,6 @@ const RegisterForm = ({
             placeholder="제목을 입력해 주세요"
             onChange={handleChange}
           />
-
           {registerType === "list" ? (
             <ContentInput ref={contentRef} contentEditable={true} />
           ) : (
@@ -195,7 +201,9 @@ const RegisterForm = ({
 
 export default RegisterForm;
 
-const RegisterFormContainer = styled.div``;
+const RegisterFormContainer = styled.div`
+  margin-top: 4vh;
+`;
 
 const RegisterHeader = styled.div`
   margin: 1rem 0;
@@ -227,7 +235,18 @@ const FormContainer = styled.form`
   }
 `;
 
+const DateContainer = styled.div`
+  font-size: small;
+`;
+
 const DateInput = styled.input`
+  margin-left: 10px;
+
+  outline: none;
+`;
+
+const ContactInput = styled.input`
+  margin-top: 5px;
   margin-left: 10px;
 
   outline: none;
@@ -244,7 +263,7 @@ const TitleInput = styled.input`
   outline: none;
 
   :focus {
-    border-bottom: 2px solid ${({ theme }) => theme.color.main};
+    border-bottom: 1.5px solid ${({ theme }) => theme.color.main};
   }
 `;
 
@@ -257,6 +276,12 @@ const ContentInput = styled.div`
   text-align: left;
 
   outline: none;
+
+  :focus-visible {
+    border: 1px dashed ${({ theme }) => theme.color.main};
+    border-radius: 3px;
+    outline: none;
+  }
 `;
 
 const BtnContainer = styled.div`
