@@ -95,7 +95,7 @@ const PaginationButton = styled.button<{ isActive?: boolean }>`
 
   background-color: ${({ isActive, theme }) =>
     isActive ? theme.color.main : "white"};
-  color: ${({ isActive }) => (isActive ? "#fff" : "#69b030")};
+  color: ${({ isActive, theme }) => (isActive ? "#fff" : theme.color.main)};
   border: none;
 
   cursor: ${({ isActive }) => (isActive ? "default" : "pointer")};

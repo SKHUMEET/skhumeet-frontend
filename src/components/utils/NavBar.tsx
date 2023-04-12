@@ -13,7 +13,7 @@ const NavBar = () => {
     "study",
     "club",
     "contest",
-    "departmentEvent",
+    "department_event",
     "etc",
   ];
 
@@ -64,7 +64,7 @@ const Nav = styled.nav`
 
   position: sticky;
   width: 100%;
-  height: 7vh;
+  height: 10vh;
 
   background: ${({ theme }) => theme.color.background};
 
@@ -79,7 +79,6 @@ const NavWrapper = styled.div`
 
   width: 100%;
   height: 100%;
-  padding-top: 1rem;
 `;
 
 const TopWrapper = styled.div`
@@ -87,11 +86,12 @@ const TopWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  /* top: 0; */
-  width: 100%;
-  height: 10vh;
-
+  top: 0;
+  width: calc(100%);
+  padding-right: 40px;
   background-color: white;
+  width: 100%;
+  height: 100%;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     /* border-bottom: 2px solid ${({ theme }) => theme.color.main}; */

@@ -4,7 +4,7 @@ export const queryKeys = {
   study: "study",
   club: "club",
   contest: "contest",
-  departmentEvent: "departmentEvent",
+  department_event: "department_event",
   etc: "etc",
   member: "member",
 };

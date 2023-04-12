@@ -12,9 +12,8 @@ import { useMainCategory } from "@/hooks/main";
 const ListBody = ({ category }: CategoryProps) => {
   const router = useRouter();
   const listStyle =
-    category === "departmentEvent" || category === "club" ? "card" : "list";
+    category === "department_event" || category === "club" ? "card" : "list";
   const { data, page, setPage } = useMainCategory(category);
-  // const [page, setPage] = useState<number>(1);
   console.log(data);
   const [totalPage, setTotalPage] = useState<number>(0);
 
@@ -45,7 +44,6 @@ const ListBody = ({ category }: CategoryProps) => {
         <ListTable
           category={category}
           list={data.content ?? []}
-          // page={1}
           itemStyle={listStyle}
         />
         {totalPage > 1 && (

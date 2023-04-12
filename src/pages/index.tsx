@@ -13,8 +13,8 @@ export default function Home() {
   const study = useMainCategory("study").data;
   const club = useMainCategory("club").data;
   const contest = useMainCategory("contest").data;
-  // const departmentEvent = useMainCategory("departmentEvent", 1);
-  // const etc = useMainCategory("etc", 1);
+  const department_event = useMainCategory("department_event").data;
+  const etc = useMainCategory("etc").data;
 
   return (
     <HomeContainer>
@@ -51,6 +51,16 @@ export default function Home() {
             items={contest.content ?? []}
             key={"contest"}
           />
+        )}
+        {department_event && (
+          <HomeList
+            category={"department_event"}
+            items={department_event.content ?? []}
+            key={"department_event"}
+          />
+        )}
+        {etc && (
+          <HomeList category={"etc"} items={etc.content ?? []} key={"etc"} />
         )}
       </ListGridWrapper>
     </HomeContainer>

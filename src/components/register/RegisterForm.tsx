@@ -1,8 +1,10 @@
 import {
   ConvertKorean,
-  Situation,
+  MAIN,
+  MAINREQUEST,
+  Status,
   categoryList,
-  situationList as originSituationList,
+  statusList as originStatusList,
 } from "@/types";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -12,41 +14,50 @@ import Btn from "../utils/Btn";
 import { Category } from "@/types";
 import TextEditor from "../TextEditor";
 import imageUpload from "@/hooks/firebase/imageUpload";
-import { postMain } from "@/hooks/main";
+import { usePostMainCategory } from "@/hooks/main";
+import customAlert from "../modal/CustomModalAlert";
+import { useRouter } from "next/router";
 
 interface RegisterFormProps {
   category: Category;
   kind: "register" | "edit";
   type?: "list" | "grid";
+  isEdit?: boolean;
+  data?: MAIN;
 }
 
 const RegisterForm = ({
   category: defaultCategory,
   kind,
   type = "list",
+  isEdit,
+  data,
 }: RegisterFormProps) => {
+  const postMain = usePostMainCategory();
+  const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const [registerType, setRegisterType] = useState(type);
 
   const initForm = {
-    title: "",
-    category: defaultCategory,
-    contact: "email",
-    endDate: new Date().toISOString(),
-    view: 1,
-    context: "",
-    images: [],
+    title: data?.title ?? "",
+    category: data?.category ?? defaultCategory,
+    contact: data?.contact ?? "",
+    status: data?.status ?? originStatusList[0],
+    endDate:
+      data?.endDate.split("T")[0] ?? new Date().toISOString().split("T")[0],
+    view: data?.view ?? 1,
+    context: data?.context ?? "",
+    images: data?.images ?? [],
   };
 
-  const [form, setForm] = useState(initForm);
+  const [form, setForm] = useState<MAINREQUEST>(initForm);
 
-  const { title, category, contact, endDate, view, context, images } = form;
+  const { title, category, contact, status, endDate, view, context, images } =
+    form;
 
-  const editSituationList: Partial<Situation>[] = [
-    "recruiting",
-    "recruitmentCompleted",
-  ];
-  const [situation, setSituation] = useState<Situation>("recruiting");
+  const editStatusList: Partial<Status>[] = originStatusList.filter((el) =>
+    el.startsWith("recruiting")
+  );
 
   const handleChangeDropDown = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -55,16 +66,16 @@ const RegisterForm = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
   const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       await imageUpload(e.target.files).then((res) => {
-        setForm({ ...form, images: { ...images, ...res } });
-        console.log(res);
+        setForm({ ...form, images: [...images, ...res] });
         if (res) {
-          console.log("완료 후", res);
+          customAlert("이미지 업로드 완료");
           const imgElement = document.createElement("img");
           imgElement.setAttribute("src", res);
           imgElement.setAttribute("width", "200");
@@ -77,21 +88,24 @@ const RegisterForm = ({
 
   const handleSubmit = async () => {
     setForm({ ...form, context: contentRef.current?.innerHTML ?? "" });
-    console.log(form);
+
     postMain({
       title,
       category,
       contact,
+      status,
       endDate,
       view,
       context,
       images,
-    }).then((res) => console.log(res));
+    });
+
+    router.push(`/${category}`);
   };
 
   useEffect(() => {
     const registerStyle =
-      category === "departmentEvent" || category === "club" ? "grid" : "list";
+      category === "department_event" || category === "club" ? "grid" : "list";
     setRegisterType(registerStyle);
   }, [category]);
 
@@ -106,27 +120,29 @@ const RegisterForm = ({
         />
         {kind === "register" && registerType === "list" && (
           <span style={{ fontSize: "small", fontWeight: "bold" }}>
-            상태: {ConvertKorean[situation]}
+            상태: {ConvertKorean[status]}
           </span>
         )}
         {kind === "edit" && registerType === "list" && (
           <DropDown
-            name="situation"
-            list={editSituationList}
+            name="status"
+            list={editStatusList}
             onChange={handleChangeDropDown}
           />
         )}
         {kind === "register" && registerType === "grid" && (
           <DropDown
-            name="situation"
-            list={["recruiting", "promotion", "activity"]}
+            name="status"
+            list={originStatusList.filter(
+              (el) => el !== "recruitment_deadline"
+            )}
             onChange={handleChangeDropDown}
           />
         )}
         {kind === "edit" && registerType === "grid" && (
           <DropDown
-            name="situation"
-            list={originSituationList}
+            name="status"
+            list={originStatusList}
             onChange={handleChangeDropDown}
           />
         )}
