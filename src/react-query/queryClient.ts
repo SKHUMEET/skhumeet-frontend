@@ -1,3 +1,4 @@
+import customAlert from "@/components/modal/CustomModalAlert";
 import { QueryClient } from "@tanstack/react-query";
 
 function queryErrorHandler(error: unknown): void {
@@ -7,7 +8,7 @@ function queryErrorHandler(error: unknown): void {
     error instanceof Error ? error.message : "error connecting to server";
 
   // prevent duplicate toasts
-  alert("react-query-error");
+  customAlert("react-query-error");
 }
 
 // to satisfy typescript until this file has uncommented contents

@@ -26,7 +26,7 @@ const ProfileRegisterForm = ({
     studentIdForm &&
       signup(studentIdForm, id, nameForm, nickname, profile_image).then(
         (res) => {
-          if (res.status === 200) {
+          if (res?.status && res.status === 200) {
             setTimeout(() => window.location.replace("/"), 500);
           }
         }

@@ -16,19 +16,6 @@ const Detail = ({ data }: { data: MAIN }) => {
     setShowAlert(false);
   };
 
-  useEffect(() => {
-    const getDate = async () => {
-      const data = await axios
-        .get(`/api/main/post?id=${"17"}`)
-        .then((res: any) => {
-          console.log(res);
-          return res.data;
-        });
-      console.log("Data", data);
-    };
-
-    getDate();
-  });
   return (
     <>
       <Seo />

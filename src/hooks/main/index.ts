@@ -8,6 +8,8 @@ import { get, post } from "@/libs/api";
 import { Category, MAIN, MAINREQUEST } from "@/types";
 import { queryKeys } from "@/react-query/constants";
 import { useEffect, useState } from "react";
+import customAlert from "@/components/modal/CustomModalAlert";
+
 const commonOptions = {
   staleTime: 0,
   cacheTime: 300000, // 5 minutes
@@ -48,22 +50,46 @@ export const usePrefetchMainCategory = (category: Category, page: number) => {
     commonOptions
   );
 };
-export const postMain = async ({
+
+const postMain = async ({
   title,
   category,
-  contact,
+  contact = "email",
+  status,
   endDate,
   view,
   context,
   images,
 }: MAINREQUEST) => {
-  await post("/api/main/new", {
+  const res = await post("/api/main/new", {
     title,
     category,
     contact,
-    endDate,
+    status,
+    endDate: new Date(endDate),
     view,
     context,
     images,
+  }).then((res: any) => {
+    console.log("72", res);
+    console.log("73", res.data);
+    return res.data;
   });
+  return res;
+};
+
+export const usePostMainCategory = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    (mainRequest: MAINREQUEST) => postMain(mainRequest),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        // console.log(data?.data.category);
+        // const category = data?.data?.category as Category;
+        // queryClient.invalidateQueries([queryKeys[category]]);
+      },
+    }
+  );
+  return mutate;
 };

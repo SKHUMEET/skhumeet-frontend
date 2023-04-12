@@ -43,16 +43,16 @@ const responseInterceptorFulfilled = (res: AxiosResponse) => {
   return Promise.reject(...res.data);
 };
 
-const responseInterceptorRejected = async (error: AxiosError) => {
-  console.log("error", error);
+const responseInterceptorRejected = async (error: any) => {
+  console.log("47error", error);
   const config: AxiosRequestConfig = {};
-  if (error.status === 403) {
+  if (error.response.status === 403 || error.response.status === 500) {
     const originalRequest = config;
     const refreshToken = localStorage.getItem(storageConstants.refreshToken);
     try {
       const { data } = await axios({
         method: "post",
-        url: `/login`,
+        url: `/api/member/reissue`,
         data: { refreshToken },
       });
 
@@ -73,14 +73,14 @@ const responseInterceptorRejected = async (error: AxiosError) => {
       new Error("error");
     }
   }
-  // const errorStatus = error.response?.status;
-  // const errorUrl = error.response?.config.url;
-  // console.log(error.response);
-  // alert(errorMsg);
-  // if (window.confirm(errorMsg) === true) {
-  //  setTimeout(() => window.location.replace("/"), 500);
-  // }
-  // return new Error(error.response?.data?.message ?? error);
+  // // const errorStatus = error.response?.status;
+  // // const errorUrl = error.response?.config.url;
+  // // console.log(error.response);
+  // // alert(errorMsg);
+  // // if (window.confirm(errorMsg) === true) {
+  // //  setTimeout(() => window.location.replace("/"), 500);
+  // // }
+  // // return new Error(error.response?.data?.message ?? error);
   return error;
 };
 

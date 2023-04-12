@@ -82,6 +82,7 @@ const TextEditor = ({
           accept="image/*"
           onChange={handleFileUpload}
           hidden
+          multiple
         />
       </ToolbarContainer>
       <EditorContainer>

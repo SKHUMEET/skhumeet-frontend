@@ -46,7 +46,6 @@ const ListBody = ({ category }: CategoryProps) => {
         <ListTable
           category={category}
           list={data.content ?? []}
-          page={1}
           itemStyle={listStyle}
         />
         {totalPage > 1 && (

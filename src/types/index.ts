@@ -8,15 +8,13 @@ export const categoryList: Category[] = [
   "study",
   "club",
   "contest",
-  "departmentEvent",
+  "department_event",
   "etc",
 ];
 
-export const messageList: Message[] = ["openchat", "phonenumber", "etc"];
-
-export const situationList: Situation[] = [
+export const statusList: Status[] = [
   "recruiting",
-  "recruitmentCompleted",
+  "recruitment_deadline",
   "promotion",
   "activity",
 ];
@@ -31,19 +29,17 @@ export type Category =
   | "study"
   | "club"
   | "contest"
-  | "departmentEvent"
+  | "department_event"
   | "etc";
 
-export type Message = "openchat" | "phonenumber" | "etc";
-
-export type Situation =
+export type Status =
   | "recruiting"
-  | "recruitmentCompleted"
+  | "recruitment_deadline"
   | "promotion"
   | "activity";
 
 type ConvertKoreanObj = {
-  [key in Category | Message | Situation]: string;
+  [key in Category | Status]: string;
 };
 
 export const ConvertKorean: ConvertKoreanObj = {
@@ -52,11 +48,9 @@ export const ConvertKorean: ConvertKoreanObj = {
   study: "스터디",
   club: "동아리",
   contest: "대회",
-  departmentEvent: "학부활동",
-  openchat: "오픈채팅",
-  phonenumber: "전화번호",
+  department_event: "학부활동",
   recruiting: "모집 중",
-  recruitmentCompleted: "모집 완료",
+  recruitment_deadline: "모집 완료",
   promotion: "홍보",
   activity: "활동",
   etc: "기타",
@@ -80,10 +74,11 @@ export interface MAIN {
   id: number;
   nickname: string;
   title: string;
-  category: string;
+  category: Category;
   contact: string;
-  endDate: Date | string;
-  createDate: Date | string;
+  status: Status;
+  endDate: string;
+  createDate: string;
   view: number;
   context: string;
   images: string[];
