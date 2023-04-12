@@ -4,6 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Seo from "@/components/utils/Seo";
 const Detail = ({ data }: { data: MAIN }) => {
   const [showAlert, setShowAlert] = useState(false);
 
@@ -30,6 +31,7 @@ const Detail = ({ data }: { data: MAIN }) => {
   });
   return (
     <>
+      <Seo />
       <button onClick={handleAButton}>custom alert</button>
       <div>{data.category}</div>
       <div>{data.contact}</div>

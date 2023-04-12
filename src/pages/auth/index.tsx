@@ -3,6 +3,7 @@ import styled, { ThemeContext } from "styled-components";
 import ProfileRegisterForm from "@/components/register/ProfileRegisterForm";
 import { useAuth } from "@/hooks/user";
 import { Modal } from "@/components/modal";
+import Seo from "@/components/utils/Seo";
 
 export interface LoginUserProfileProps {
   id: string;
@@ -118,6 +119,7 @@ const Auth = () => {
   };
   return (
     <>
+      <Seo title="함께하기" />
       <Wrapper>
         <Container>
           <Header.Container>
