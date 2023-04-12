@@ -1,40 +1,33 @@
 import { get } from "@/libs/api";
-import { Category, IdProps, MAIN } from "@/types";
+import { Category, IdProps, MAIN, User, storageConstants } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Seo from "@/components/utils/Seo";
 const Detail = ({ data }: { data: MAIN }) => {
-  const [showAlert, setShowAlert] = useState(false);
-
-  const handleAButton = () => {
-    setShowAlert(true);
-  };
-
-  const handleAlertButton = () => {
-    setShowAlert(false);
-  };
-
+  const [userId, setUserId] = useState<string>();
+  useEffect(() => {
+    const storedUser: User | null =
+      (typeof window !== "undefined" &&
+        JSON.parse(localStorage.getItem(storageConstants.user) ?? "{}")) ??
+      null;
+    setUserId(storedUser?.memberNumber);
+  }, []);
   return (
     <>
       <Seo />
-      <button onClick={handleAButton}>custom alert</button>
+      <div>{data.memberNumber === userId && <button>수정하기</button>}</div>
       <div>{data.category}</div>
       <div>{data.contact}</div>
       <div>{data.context}</div>
       <div>{data.createDate.toString()}</div>
       <div>{data.endDate.toString()}</div>
       <div>{data.images}</div>
-      <div>{data.nickname}</div>
+      <div>{data.member}</div>
+      <div>{data.memberNumber}</div>
       <div>{data.title}</div>
       <div>{data.view}</div>
-      {showAlert && (
-        <Modal>
-          <p>글 작성 됐어요!</p>
-          <AlertBtn onClick={handleAlertButton}>닫기</AlertBtn>
-        </Modal>
-      )}
     </>
   );
 };

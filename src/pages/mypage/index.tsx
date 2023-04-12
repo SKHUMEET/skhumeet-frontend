@@ -1,13 +1,22 @@
 import Seo from "@/components/utils/Seo";
-import React from "react";
-
-const index = () => {
+import React, { useEffect, useState } from "react";
+import MyPageRegisterForm from "@/components/register/MyPageRegisterForm";
+import { User, storageConstants } from "@/types";
+const MyPage = () => {
+  const [user, setUser] = useState<User | null>();
+  useEffect(() => {
+    const storedUser: User | null =
+      (typeof window !== "undefined" &&
+        JSON.parse(localStorage.getItem(storageConstants.user) ?? "{}")) ??
+      null;
+    setUser(storedUser);
+  }, []);
   return (
     <>
       <Seo title="MYPAGE" />
-      <div>index</div>
+      <MyPageRegisterForm user={user} />
     </>
   );
 };
 
-export default index;
+export default MyPage;

@@ -1,11 +1,11 @@
-import { Category, ConvertKorean, Message, Status } from "@/types";
+import { Category, ConvertKorean, Status } from "@/types";
 import React, { ChangeEvent } from "react";
 import styled from "styled-components";
 
 interface DropDownProps {
   name: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-  list: Category[] | Message[] | Status[];
+  list: Category[] | Status[];
 
   defaultItem?: string;
 }
@@ -17,7 +17,7 @@ const DropDown = ({ name, list, onChange, defaultItem }: DropDownProps) => {
       onChange={onChange}
       defaultValue={defaultItem ?? list[0]}
     >
-      {list.map((el: Category | Message | Status) => (
+      {list.map((el: Category | Status) => (
         <DropDownOption value={el} key={el}>
           {ConvertKorean[el]}
         </DropDownOption>

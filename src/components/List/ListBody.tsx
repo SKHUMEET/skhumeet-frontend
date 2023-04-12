@@ -4,7 +4,6 @@ import { CategoryProps, ConvertKorean } from "@/types";
 import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
 
-import { Mockdata } from "@/mockData";
 import Btn from "../utils/Btn";
 import { useRouter } from "next/router";
 import Pagination from "../Pagination";
@@ -13,9 +12,8 @@ import { useMainCategory } from "@/hooks/main";
 const ListBody = ({ category }: CategoryProps) => {
   const router = useRouter();
   const listStyle =
-    category === "departmentEvent" || category === "club" ? "card" : "list";
+    category === "department_event" || category === "club" ? "card" : "list";
   const { data, page, setPage } = useMainCategory(category);
-  // const [page, setPage] = useState<number>(1);
   console.log(data);
   const [totalPage, setTotalPage] = useState<number>(0);
 

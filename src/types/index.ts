@@ -72,7 +72,8 @@ export const storageConstants = {
 
 export interface MAIN {
   id: number;
-  nickname: string;
+  member: string;
+  memberNumber: string;
   title: string;
   category: Category;
   contact: string;
@@ -84,4 +85,7 @@ export interface MAIN {
   images: string[];
 }
 
-export type MAINREQUEST = Omit<MAIN, "id" | "createDate" | "nickname">;
+export type MAINREQUEST = Omit<
+  MAIN,
+  "id" | "createDate" | "member" | "memberNumber"
+>;

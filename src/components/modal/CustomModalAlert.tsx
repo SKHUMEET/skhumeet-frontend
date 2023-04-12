@@ -39,15 +39,6 @@ const AlertModal = {
     width: 100%;
     height: 7rem;
     position: relative;
-    /* ::before {
-      content: "";
-      top: 0;
-      border-radius: 8px 8px 0 0;
-      position: absolute;
-      width: 100%;
-      height: 1rem;
-      background-color: red;
-    } */
   `,
 
   Message: styled.div`
@@ -95,7 +86,6 @@ const customAlert = (message: string) => {
   const handleConfirm = () => {
     const modalRoot = document.getElementById("modal-alert-portal-wrapper");
     if (modalRoot) modalRoot.remove();
-    console.log("모달이 확인되었습니다.");
   };
   if (typeof window !== "undefined") {
     const subDiv = document.createElement("div");

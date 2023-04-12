@@ -7,15 +7,16 @@ import {
 import { get, post } from "@/libs/api";
 import { Category, MAIN, MAINREQUEST } from "@/types";
 import { queryKeys } from "@/react-query/constants";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import customAlert from "@/components/modal/CustomModalAlert";
+import { useRouter } from "next/router";
 
 const commonOptions = {
   staleTime: 0,
   cacheTime: 300000, // 5 minutes
 };
 const getMainCategory = async (category: Category, page: number) => {
-  const res = await get(`/api/main/category/${category}?page=${page}`).then(
+  const res = await get(`/api/post/category/${category}?page=${page}`).then(
     (r: any) => r.data
   );
 
@@ -24,7 +25,6 @@ const getMainCategory = async (category: Category, page: number) => {
 
 export const useMainCategory = (category: Category) => {
   const [page, setPage] = useState<number>(1);
-
   const queryClient = useQueryClient();
   useEffect(() => {
     // assume increment of one month
@@ -61,7 +61,7 @@ const postMain = async ({
   context,
   images,
 }: MAINREQUEST) => {
-  const res = await post("/api/main/new", {
+  const res = await post("/api/post/new", {
     title,
     category,
     contact,
@@ -85,9 +85,16 @@ export const usePostMainCategory = () => {
     {
       onSuccess: (data) => {
         console.log(data);
-        // console.log(data?.data.category);
-        // const category = data?.data?.category as Category;
-        // queryClient.invalidateQueries([queryKeys[category]]);
+        console.log(data?.category);
+        const category = data?.category.toLowerCase() as Category;
+
+        console.log(category);
+        queryClient.invalidateQueries([queryKeys[category]]);
+
+        customAlert("글이 작성되었습니다.");
+      },
+      onError: () => {
+        customAlert("오류발생");
       },
     }
   );

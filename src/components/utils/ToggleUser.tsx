@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import Image from "next/image";
-import { get } from "@/libs/api";
+import { get, post } from "@/libs/api";
 import { User, storageConstants } from "@/types";
 
 const ToggleUser = () => {
@@ -13,8 +13,15 @@ const ToggleUser = () => {
 
   const [userImage, setUserImage] = useState<string>();
 
-  const handleClick = (link: string) => {
-    router.push(`/${link}`);
+  const handleClick = (link: string, query?: string) => {
+    if (query) {
+      router.push({
+        pathname: `/${link}/${query}`,
+      });
+    } else {
+      router.push(`/${link}`);
+    }
+
     setIsOpen(false);
   };
 
@@ -30,6 +37,12 @@ const ToggleUser = () => {
       },
     });
 
+    // await post("/api/member/logout",{},{
+    //   headers:{
+    //     AccessToken:
+    //     RefreshToken:
+    //   }
+    // })
     if (res) {
       router.push("/auth"); // 로그인 페이지로 이동
     }
@@ -59,12 +72,12 @@ const ToggleUser = () => {
       )}
       {isOpen && (
         <ToggleDropDown.Content>
-          <ToggleDropDown.Item onClick={() => handleClick("/")}>
+          <ToggleDropDown.Item onClick={() => handleClick("/mypage", "post")}>
             작성한 글 보기
           </ToggleDropDown.Item>
-          <ToggleDropDown.Item onClick={() => handleClick("/")}>
+          {/* <ToggleDropDown.Item onClick={() => handleClick("/mypage", "like")}>
             북마크 한 글 보기
-          </ToggleDropDown.Item>
+          </ToggleDropDown.Item> */}
           <ToggleDropDown.Item onClick={() => handleClick("/mypage")}>
             마이페이지
           </ToggleDropDown.Item>

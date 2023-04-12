@@ -1,5 +1,6 @@
 import {
   ConvertKorean,
+  MAIN,
   MAINREQUEST,
   Status,
   categoryList,
@@ -15,31 +16,38 @@ import TextEditor from "../TextEditor";
 import imageUpload from "@/hooks/firebase/imageUpload";
 import { usePostMainCategory } from "@/hooks/main";
 import customAlert from "../modal/CustomModalAlert";
+import { useRouter } from "next/router";
 
 interface RegisterFormProps {
   category: Category;
   kind: "register" | "edit";
   type?: "list" | "grid";
+  isEdit?: boolean;
+  data?: MAIN;
 }
 
 const RegisterForm = ({
   category: defaultCategory,
   kind,
   type = "list",
+  isEdit,
+  data,
 }: RegisterFormProps) => {
   const postMain = usePostMainCategory();
+  const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const [registerType, setRegisterType] = useState(type);
 
   const initForm = {
-    title: "",
-    category: defaultCategory,
-    contact: "",
-    status: originStatusList[0],
-    endDate: new Date().toISOString().split("T")[0],
-    view: 1,
-    context: "",
-    images: [],
+    title: data?.title ?? "",
+    category: data?.category ?? defaultCategory,
+    contact: data?.contact ?? "",
+    status: data?.status ?? originStatusList[0],
+    endDate:
+      data?.endDate.split("T")[0] ?? new Date().toISOString().split("T")[0],
+    view: data?.view ?? 1,
+    context: data?.context ?? "",
+    images: data?.images ?? [],
   };
 
   const [form, setForm] = useState<MAINREQUEST>(initForm);
@@ -90,6 +98,8 @@ const RegisterForm = ({
       context,
       images,
     });
+
+    router.push(`/${category}`);
   };
 
   useEffect(() => {
