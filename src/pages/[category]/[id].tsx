@@ -1,9 +1,10 @@
 import { get } from "@/libs/api";
-import { Category, IdProps, MAIN } from "@/types";
+import { Category, MAIN } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+
 const Detail = ({ data }: { data: MAIN }) => {
   const [showAlert, setShowAlert] = useState(false);
 
@@ -28,29 +29,33 @@ const Detail = ({ data }: { data: MAIN }) => {
 
     getDate();
   });
+
   return (
-    <>
-      <button onClick={handleAButton}>custom alert</button>
+    <Container>
+      {/* <button onClick={handleAButton}>custom alert</button> */}
       <div>{data.category}</div>
-      <div>{data.contact}</div>
-      <div>{data.context}</div>
-      <div>{data.createDate.toString()}</div>
-      <div>{data.endDate.toString()}</div>
       <div>{data.images}</div>
-      <div>{data.nickname}</div>
+      <div>
+        작성자: {data.nickname} | 마감일: {data.endDate.toString()} | 작성일:{" "}
+        {data.createDate.toString()}
+      </div>
+      <div>조회수: {data.view}</div>
+      <div>연락 방법: {data.contact}</div>
+      <div>{data.context}</div>
+
       <div>{data.title}</div>
-      <div>{data.view}</div>
       {showAlert && (
         <Modal>
           <p>글 작성 됐어요!</p>
           <AlertBtn onClick={handleAlertButton}>닫기</AlertBtn>
         </Modal>
       )}
-    </>
+    </Container>
   );
 };
 
 export default Detail;
+
 export const getServerSideProps: GetServerSideProps<{ data: MAIN }> = async (
   context: GetServerSidePropsContext
 ) => {
@@ -71,6 +76,10 @@ export const getServerSideProps: GetServerSideProps<{ data: MAIN }> = async (
     },
   };
 };
+
+const Container = styled.div`
+  margin-top: 1rem;
+`;
 
 const Modal = styled.div`
   display: flex;

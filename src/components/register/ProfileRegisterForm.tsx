@@ -110,11 +110,20 @@ const Wrapper = styled.div`
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
       font-size: 80%;
     }
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+      font-size: 120%;
+    }
   }
 
   > div > h4 {
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
       font-size: 60%;
+    }
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+      margin-bottom: 2rem;
+      font-size: 100%;
     }
   }
 `;
@@ -131,6 +140,7 @@ const Input = styled.input`
   width: 50%;
   height: 35px;
   margin-left: 10px;
+  padding: 0 5px;
 
   border: 1px solid ${({ theme }) => theme.color.main};
   border-radius: 3px;
@@ -143,6 +153,10 @@ const Input = styled.input`
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
     height: 20px;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    height: 25px;
   }
 `;
 

@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import ListItem from "@/components/List/ListItem";
 import ListCardItem from "@/components/List/ListCardItem";
 import { Category } from "@/types";
-import Pagination from "../Pagination";
-import { useEffect, useState } from "react";
 
 export interface ListProps {
   category: Category;
