@@ -4,7 +4,6 @@ import { CategoryProps, ConvertKorean } from "@/types";
 import styled from "styled-components";
 import ListTable from "@/components/List/ListTable";
 
-import { Mockdata } from "@/mockData";
 import Btn from "../utils/Btn";
 import { useRouter } from "next/router";
 import Pagination from "../Pagination";

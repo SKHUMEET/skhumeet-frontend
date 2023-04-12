@@ -1,5 +1,5 @@
 import { get } from "@/libs/api";
-import { Category, IdProps, MAIN } from "@/types";
+import { Category, MAIN } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -29,6 +29,7 @@ const Detail = ({ data }: { data: MAIN }) => {
 
     getDate();
   });
+
   return (
     <Container>
       {/* <button onClick={handleAButton}>custom alert</button> */}
