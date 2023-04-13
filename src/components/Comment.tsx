@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
-interface UserInfo {
-  email: string;
-  nickname: string;
-  firebaseAuth: boolean;
-}
+import { User } from "@/types";
+import { get, post } from "@/libs/api";
+import customAlert from "./modal/CustomModalAlert";
 
 export interface Comment {
   author: string;
@@ -17,49 +14,30 @@ export interface Comment {
   writer: string;
 }
 
-const Comment = ({ boardPostId }: { boardPostId: number }) => {
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-
-  useEffect(() => {
-    Object.keys(window.localStorage).includes("userInfo") &&
-      setUserInfo(
-        JSON.parse((localStorage.getItem("userInfo") as string) || "{}")
-      );
-    console.log(userInfo);
-  }, []);
-
+const Comment = ({ postId }: { postId: number }) => {
   const [newComment, setNewComment] = useState<string>("");
 
   const [list, setList] = useState<Comment[]>();
 
   useEffect(() => {
-    axios.get(`/api/comment/${boardPostId}/page/1`).then((res) => {
-      setList(res.data);
-    });
+    const getComment = async () => {
+      await get(`/api/comment/${postId}/page/1`).then((res: any) => {
+        setList(res.data);
+      });
+    };
+    getComment();
   }, []);
 
   const handleSubmitComment = () => {
-    const TOKEN = localStorage.getItem("accessToken");
-
     if (newComment.length === 0) {
-      alert("Please share your think!");
-
+      customAlert("댓글을 작성해주세요");
       return;
     }
 
-    axios.post(
-      `/api/comment/new`,
-      {
-        boardPostId: boardPostId,
-        context: newComment,
-      },
-      {
-        headers: {
-          withCredentials: true,
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      }
-    );
+    post(`/api/comment/new`, {
+      postId,
+      context: newComment,
+    });
   };
 
   return (
@@ -84,18 +62,17 @@ const Comment = ({ boardPostId }: { boardPostId: number }) => {
           ))}
         </>
       ) : (
-        <Notion>No comments</Notion>
+        <Notion>댓글없음</Notion>
       )}
-      {userInfo ? (
-        <CommentForm onSubmit={handleSubmitComment}>
-          <CommentInput
-            placeholder="Write comment"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <Btn>Registration</Btn>
-        </CommentForm>
-      ) : null}
+
+      {/* <CommentForm onSubmit={handleSubmitComment}> */}
+      <CommentInput
+        placeholder="Write comment"
+        value={newComment}
+        onChange={(e) => setNewComment(e.target.value)}
+      />
+      <Btn onClick={handleSubmitComment}>저장하기</Btn>
+      {/* </CommentForm> */}
     </>
   );
 };

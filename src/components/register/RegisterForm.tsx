@@ -14,7 +14,7 @@ import Btn from "../utils/Btn";
 import { Category } from "@/types";
 import TextEditor from "../TextEditor";
 import imageUpload from "@/hooks/firebase/imageUpload";
-import { usePostMainCategory } from "@/hooks/main";
+import { usePatchMainCategory, usePostMainCategory } from "@/hooks/main";
 import customAlert from "../modal/CustomModalAlert";
 import { useRouter } from "next/router";
 
@@ -22,7 +22,6 @@ interface RegisterFormProps {
   category: Category;
   kind: "register" | "edit";
   type?: "list" | "grid";
-  isEdit?: boolean;
   data?: MAIN;
 }
 
@@ -30,10 +29,10 @@ const RegisterForm = ({
   category: defaultCategory,
   kind,
   type = "list",
-  isEdit,
   data,
 }: RegisterFormProps) => {
   const postMain = usePostMainCategory();
+  const patchMain = usePatchMainCategory();
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const [registerType, setRegisterType] = useState(type);
@@ -64,9 +63,10 @@ const RegisterForm = ({
     setForm({ ...form, [name]: value });
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
@@ -86,37 +86,56 @@ const RegisterForm = ({
     }
   };
 
-  const handleSubmit = async () => {
-    setForm({ ...form, context: contentRef.current?.innerHTML ?? "" });
+  const handleSubmit = () => {
+    if (kind === "register") {
+      postMain({
+        title,
+        category,
+        contact,
+        status,
+        endDate,
+        view,
+        context,
+        images,
+      });
+    } else {
+      patchMain({
+        title,
+        category,
+        contact,
+        status,
+        endDate,
+        context,
+        images,
+        id: data?.id!,
+      });
+    }
+    router.push(`/${category.toLowerCase()}`);
+  };
 
-    postMain({
-      title,
-      category,
-      contact,
-      status,
-      endDate,
-      view,
-      context,
-      images,
-    });
-
-    router.push(`/${category}`);
+  const handleContextChange = (content: string) => {
+    console.log("99", content);
+    setForm({ ...form, context: content });
   };
 
   useEffect(() => {
     const registerStyle =
-      category === "department_event" || category === "club" ? "grid" : "list";
+      category.toLowerCase() === "department_event" ||
+      category.toLowerCase() === "club"
+        ? "grid"
+        : "list";
     setRegisterType(registerStyle);
   }, [category]);
 
   return (
     <RegisterFormContainer>
       <RegisterHeader>
+        {kind === "edit" && <div>수정하기</div>}
         <DropDown
           name="category"
           list={categoryList}
           onChange={handleChangeDropDown}
-          defaultItem={defaultCategory}
+          defaultItem={category.toLowerCase()}
         />
         {kind === "register" && registerType === "list" && (
           <span style={{ fontSize: "small", fontWeight: "bold" }}>
@@ -176,12 +195,18 @@ const RegisterForm = ({
             onChange={handleChange}
           />
           {registerType === "list" ? (
-            <ContentInput ref={contentRef} contentEditable={true} />
+            <ContentInput
+              name="context"
+              value={context}
+              onChange={handleChange}
+            />
           ) : (
             <>
               <TextEditor
                 editorRef={contentRef}
                 handleFileUpload={handleFileUpload}
+                handleContextChange={handleContextChange}
+                context={context}
               />
             </>
           )}
@@ -193,7 +218,9 @@ const RegisterForm = ({
             취소
           </Btn>
         </Link>
-        <Btn onClick={handleSubmit}>작성하기</Btn>
+        <Btn onClick={handleSubmit}>
+          {kind === "register" ? "작성하기" : "수정하기"}
+        </Btn>
       </BtnContainer>
     </RegisterFormContainer>
   );
@@ -203,6 +230,12 @@ export default RegisterForm;
 
 const RegisterFormContainer = styled.div`
   margin-top: 4vh;
+  background-color: ${({ theme }) => theme.color.background};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
 `;
 
 const RegisterHeader = styled.div`
@@ -267,7 +300,9 @@ const TitleInput = styled.input`
   }
 `;
 
-const ContentInput = styled.div`
+const ContentInput = styled.textarea`
+  display: flex;
+  justify-content: flex-start;
   width: 100%;
   height: 50vh;
 

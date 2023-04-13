@@ -45,28 +45,47 @@ const responseInterceptorFulfilled = (res: AxiosResponse) => {
 
 const responseInterceptorRejected = async (error: any) => {
   console.log("47error", error);
+
   const config: AxiosRequestConfig = {};
-  if (error.response.status === 403 || error.response.status === 500) {
+  if (error.response.status === 403) {
     const originalRequest = config;
-    const refreshToken = localStorage.getItem(storageConstants.refreshToken);
+
     try {
-      const { data } = await axios({
-        method: "post",
-        url: `/api/member/reissue`,
-        data: { refreshToken },
-      });
+      const refreshToken = window.localStorage.getItem(
+        storageConstants.refreshToken
+      );
+      let token = localStorage.getItem(storageConstants.accessToken);
+      console.log("refreshToken", refreshToken, "token", token);
+      const data = await axios
+        .post(
+          `/api/member/reissue`,
+          {},
+          {
+            headers: {
+              withCredentials: true,
+              RefreshToken: refreshToken,
+            },
+          }
+        )
+        .then((res: any) => {
+          console.log("71", res);
+          return res.data;
+        });
 
       console.log("403 error data", data);
-      const newAccessToken = data.data.accessToken;
-      const newRefreshToken = data.data.refreshToken;
 
-      originalRequest.headers = {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + newAccessToken,
-      };
+      // const newAccessToken = data.tokens.accessToken;
+      // const newRefreshToken = data.tokens.refreshToken;
 
-      localStorage.setItem(storageConstants.accessToken, newAccessToken);
-      localStorage.setItem(storageConstants.refreshToken, newRefreshToken);
+      // console.log(newAccessToken, newRefreshToken);
+
+      // originalRequest.headers = {
+      //   "Content-Type": "application/json",
+      //   Authorization: "Bearer " + newAccessToken,
+      // };
+
+      // localStorage.setItem(storageConstants.accessToken, newAccessToken);
+      // localStorage.setItem(storageConstants.refreshToken, newRefreshToken);
 
       return await axios(originalRequest);
     } catch (err) {
@@ -81,12 +100,73 @@ const responseInterceptorRejected = async (error: any) => {
   // //  setTimeout(() => window.location.replace("/"), 500);
   // // }
   // // return new Error(error.response?.data?.message ?? error);
-  return error;
+  return Promise.reject(error);
 };
 
+// instance.interceptors.response.use(
+//   responseInterceptorFulfilled,
+//   responseInterceptorRejected
+// );
+
 instance.interceptors.response.use(
-  responseInterceptorFulfilled,
-  responseInterceptorRejected
+  (res) => {
+    if (200 <= res.status && res.status < 300) return res;
+
+    return Promise.reject(...res.data);
+  },
+  async (error) => {
+    const {
+      config,
+      response: { status },
+    } = error;
+
+    const originalRequest = config;
+
+    if (status === 403) {
+      try {
+        const accessToken =
+          typeof window !== "undefined"
+            ? localStorage.getItem(storageConstants.accessToken)
+            : "";
+        const refreshToken =
+          typeof window !== "undefined"
+            ? localStorage.getItem(storageConstants.refreshToken)
+            : "";
+        console.log("tokens", accessToken, refreshToken);
+        const data = await axios
+          .post(
+            `/api/member/reissue`,
+            {},
+            {
+              headers: {
+                withCredentials: true,
+                RefreshToken: refreshToken,
+              },
+            }
+          )
+          .then((res: any) => {
+            console.log("71", res);
+            return res.data;
+          });
+        console.log("token", data.tokens);
+        const newAccessToken = data.tokens.accessToken;
+        const newRefreshToken = data.tokens.refreshToken;
+
+        originalRequest.headers = {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + newAccessToken,
+        };
+
+        localStorage.setItem(storageConstants.accessToken, newAccessToken);
+        localStorage.setItem(storageConstants.refreshToken, newRefreshToken);
+
+        return await axios(originalRequest);
+      } catch (err) {
+        new Error(error);
+      }
+    }
+    return Promise.reject(error);
+  }
 );
 
 export function get<T>(...args: Parameters<typeof instance.get>) {

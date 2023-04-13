@@ -58,7 +58,7 @@ const Auth = () => {
 
         const res = await findMemeberById(id);
         if (res.status === 200) {
-          setTimeout(() => window.location.replace("/"), 500);
+          window.location.replace("/");
         }
         if (res.response?.status === 404) {
           setIsProfileRegister(true);

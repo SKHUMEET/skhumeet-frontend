@@ -4,12 +4,13 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { get, post } from "@/libs/api";
+import { get, instance, post } from "@/libs/api";
 import { Category, MAIN, MAINREQUEST } from "@/types";
 import { queryKeys } from "@/react-query/constants";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import customAlert from "@/components/modal/CustomModalAlert";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const commonOptions = {
   staleTime: 0,
@@ -17,7 +18,10 @@ const commonOptions = {
 };
 const getMainCategory = async (category: Category, page: number) => {
   const res = await get(`/api/post/category/${category}?page=${page}`).then(
-    (r: any) => r.data
+    (r: any) => {
+      console.log(r);
+      return r.data;
+    }
   );
 
   return res;
@@ -78,6 +82,37 @@ const postMain = async ({
   return res;
 };
 
+const patchMain = async ({
+  title,
+  category,
+  contact = "email",
+  status,
+  endDate,
+  context,
+  images,
+  id,
+}: Omit<MAINREQUEST, "view"> & { id: number }) => {
+  const res = await instance
+    .patch(`/api/post?id=${id}`, {
+      title,
+      category,
+      contact,
+      status,
+      endDate: new Date(endDate),
+      context,
+      images,
+    })
+    .then((res: any) => {
+      console.log("102", res);
+      console.log("103", res.data);
+      return res.data;
+    })
+    .catch((err: any) => {
+      console.log("110", err);
+      return err;
+    });
+  return res;
+};
 export const usePostMainCategory = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
@@ -98,5 +133,54 @@ export const usePostMainCategory = () => {
       },
     }
   );
+  return mutate;
+};
+
+export const usePatchMainCategory = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    (mainRequest: Omit<MAINREQUEST, "view"> & { id: number }) =>
+      patchMain(mainRequest),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        console.log(data?.category);
+        const category = data?.category.toLowerCase() as Category;
+
+        console.log(category);
+        queryClient.invalidateQueries([queryKeys[category]]);
+
+        customAlert("글이 수정되었습니다.");
+      },
+      onError: () => {
+        customAlert("오류발생");
+      },
+    }
+  );
+  return mutate;
+};
+
+export const getPostById = async (id: number) => {
+  const res = await get(`/api/post?id=${id}`).then((r: any) => r.data);
+
+  console.log(res);
+  return res;
+};
+
+export const deletePostById = async (id: number) => {
+  await instance.delete(`/api/post?id=${id}`).then((res) => console.log(res));
+};
+
+export const useDeleteMainCategory = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation((id: number) => deletePostById(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      customAlert("글이 삭제되었습니다.");
+    },
+    onError: () => {
+      customAlert("오류발생");
+    },
+  });
   return mutate;
 };
