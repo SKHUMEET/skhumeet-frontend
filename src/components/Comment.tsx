@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { User } from "@/types";
 import { get, post } from "@/libs/api";
 import customAlert from "./modal/CustomModalAlert";
+import Btn from "./utils/Btn";
 
 export interface Comment {
   author: string;
@@ -47,11 +48,12 @@ const Comment = ({ postId }: { postId: number }) => {
           {list.map((el) => (
             <Container
               style={{ marginBottom: "1rem" }}
-              key={(el.id, el.writer, el.context)}
+              key={(el.id, el.writer, el.context, el.modifiedDate)}
             >
               <CommentItem key={el.id}>
                 <Writer>{el.writer}</Writer>
                 <span>{el.context} </span>
+                <WriteDate>{el.modifiedDate} </WriteDate>
               </CommentItem>
               {/* <TimeContainer style={{ paddingLeft: "0" }}>
                 <DateP style={{ color: "#8e8e8e", marginBottom: "5px" }}>
@@ -66,12 +68,14 @@ const Comment = ({ postId }: { postId: number }) => {
       )}
 
       {/* <CommentForm onSubmit={handleSubmitComment}> */}
-      <CommentInput
-        placeholder="Write comment"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-      />
-      <Btn onClick={handleSubmitComment}>저장하기</Btn>
+      <CommentContainer>
+        <CommentInput
+          placeholder="Write comment"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <Btn onClick={handleSubmitComment}>저장하기</Btn>
+      </CommentContainer>
       {/* </CommentForm> */}
     </>
   );
@@ -91,6 +95,7 @@ const Container = styled.div`
 
 const CommentItem = styled.div`
   width: 55vw;
+  padding: 1rem;
 
   color: black;
 `;
@@ -108,6 +113,12 @@ const CommentForm = styled.form`
 
   width: 55vw;
   margin-bottom: 2rem;
+`;
+
+const CommentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CommentInput = styled.textarea`
@@ -134,23 +145,29 @@ const DateP = styled.p`
   text-align: left;
 `;
 
-const Btn = styled.button`
-  display: flex;
-  align-items: center;
+// const Btn = styled.button`
+//   display: flex;
+//   align-items: center;
 
-  width: fit-content;
-  margin: 0 5px;
-  padding: 2px 3px;
+//   width: fit-content;
+//   margin: 0 5px;
+//   padding: 2px 3px;
 
-  background-color: white;
-  border: black;
-  border-radius: 10px;
+//   background-color: white;
+//   border: black;
+//   border-radius: 10px;
 
-  cursor: pointer;
+//   cursor: pointer;
 
-  transition: 0.2s;
+//   transition: 0.2s;
 
-  &:hover {
-    transform: translateY(-2px);
-  }
+//   &:hover {
+//     transform: translateY(-2px);
+//   }
+// `;
+
+const WriteDate = styled.p`
+  color: ${({ theme }) => theme.color.hover};
+
+  font-size: small;
 `;
