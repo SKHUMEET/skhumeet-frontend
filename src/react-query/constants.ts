@@ -7,4 +7,5 @@ export const queryKeys = {
   department_event: "department_event",
   etc: "etc",
   member: "member",
+  detail: "detail",
 };

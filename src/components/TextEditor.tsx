@@ -1,38 +1,42 @@
-import { useState, useRef, useCallback, RefObject, ChangeEvent } from "react";
+import {
+  useState,
+  useRef,
+  useCallback,
+  RefObject,
+  ChangeEvent,
+  useEffect,
+} from "react";
 import styled from "styled-components";
 import { BiImageAdd } from "react-icons/bi";
 
 const TextEditor = ({
   editorRef,
   handleFileUpload,
+  handleContextChange,
+  context,
 }: {
   editorRef: RefObject<HTMLDivElement>;
   handleFileUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleContextChange: (content: string) => void;
+  context: string;
 }) => {
+  const [textContext, setTextContext] = useState("");
   const applyFormat = useCallback((tag: string, type?: string) => {
     document.execCommand(tag, false, type);
   }, []);
-
-  // const formatBlock = (tag: string) => {
-  //   const range = document.getSelection()?.getRangeAt(0);
-  //   if (!range) return;
-
-  //   const newElement = document.createElement(tag);
-  //   newElement.innerHTML = range.toString();
-
-  //   range.deleteContents();
-  //   range.insertNode(newElement);
-
-  //   const newRange = document.createRange();
-  //   newRange.selectNode(newElement);
-  //   newRange.collapse(false);
-
-  //   const sel = window.getSelection();
-  //   if (sel) {
-  //     sel.removeAllRanges();
-  //     sel.addRange(newRange);
-  //   }
-  // };
+  const handleChange = () => {
+    if (editorRef.current) {
+      const value = editorRef.current.innerText;
+      console.log("content", value);
+      setTextContext(value);
+      handleContextChange(value);
+    }
+  };
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.innerHTML = context ?? "";
+    }
+  }, []);
 
   return (
     <>
@@ -90,7 +94,16 @@ const TextEditor = ({
           ref={editorRef}
           contentEditable={true}
           suppressContentEditableWarning={true}
+          onInput={handleChange}
+          // dangerouslySetInnerHTML={{ __html: context }}
         />
+        {/* <div
+          ref={editorRef}
+          contentEditable={true}
+          suppressContentEditableWarning={true}
+          onInput={handleChange}
+          dangerouslySetInnerHTML={{ __html: textContext }}
+        /> */}
       </EditorContainer>
     </>
   );
