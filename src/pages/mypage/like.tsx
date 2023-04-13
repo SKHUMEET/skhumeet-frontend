@@ -12,8 +12,6 @@ const Like = () => {
   const { data, page, setPage } = useMemberLikePost();
   const [totalPages, setTotalPages] = useState(0);
   console.log("13", data);
-  // console.log(data.data.content);
-  // console.log("list={", data.content.post);
   useEffect(() => {
     setTotalPages(data.totalPages);
   }, [data]);

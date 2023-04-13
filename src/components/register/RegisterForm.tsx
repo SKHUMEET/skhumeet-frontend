@@ -40,7 +40,7 @@ const RegisterForm = ({
 
   const initForm = {
     title: data?.title ?? "",
-    category: data?.category ?? defaultCategory,
+    category: data?.category ?? defaultCategory ?? "hansotbab",
     contact: data?.contact ?? "",
     status: data?.status ?? originStatusList[0],
     endDate:
@@ -57,7 +57,7 @@ const RegisterForm = ({
     form;
 
   const editStatusList: Partial<Status>[] = originStatusList.filter((el) =>
-    el.startsWith("recruiting")
+    el.startsWith("recruit")
   );
 
   const handleChangeDropDown = (e: ChangeEvent<HTMLSelectElement>) => {

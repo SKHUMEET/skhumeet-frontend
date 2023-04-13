@@ -26,27 +26,18 @@ export default function Home() {
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end",
+          justifyContent: "center",
           marginTop: "1rem",
           alignItems: "center",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-end",
-          }}
-        >
-          지금 바로 함께
-        </div>
-        <Btn
+        <RegisterButton
           onClick={() => {
             router.push("/register");
           }}
         >
-          작성하기
-        </Btn>
+          스쿠밋과 함께하러가기
+        </RegisterButton>
       </div>
       <ListGridWrapper>
         {hansotbab && (
@@ -117,4 +108,9 @@ const ListGridWrapper = styled.div`
   @media screen and (max-width: ${(props) => props.theme.breakpoints.small}) {
     grid-template-columns: 1fr;
   }
+`;
+
+const RegisterButton = styled(Btn)`
+  width: 10rem;
+  height: 2rem;
 `;

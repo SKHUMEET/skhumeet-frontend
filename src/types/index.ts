@@ -53,7 +53,7 @@ export const ConvertKorean: ConvertKoreanObj = {
   recruitment_deadline: "모집 완료",
   promotion: "홍보",
   activity: "활동",
-  etc: "기타",
+  etc: "자유",
 };
 
 export interface User {

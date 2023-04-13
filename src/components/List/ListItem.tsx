@@ -23,7 +23,7 @@ const ListItem = ({ item }: { item: MAIN }) => {
           status={item.status.toLowerCase() as Status}
         />
         <ViewContainer>
-          <GrView size={14} style={{ marginLeft: "1rem" }} />
+          <ViewIcon />
           <span style={{ marginLeft: "5px" }}>{item.view}</span>
         </ViewContainer>
       </CommentWrapper>
@@ -42,6 +42,12 @@ const Container = styled.div`
   padding-bottom: 10px;
 
   border-bottom: 1px solid #d3d3d3;
+
+  transition: 0.2s;
+
+  :hover {
+    transform: translateY(-3px);
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -71,10 +77,6 @@ export const Title = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  :hover {
-    color: ${({ theme }) => theme.color.main};
-  }
 `;
 
 export const Time = styled.span`
@@ -90,6 +92,12 @@ const CommentWrapper = styled.div`
 const ViewContainer = styled.div`
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.color.hover};
+`;
 
-  opacity: 0.3;
+const ViewIcon = styled(GrView)`
+  margin-left: 1rem;
+  > path {
+    stroke: ${({ theme }) => theme.color.hover};
+  }
 `;
