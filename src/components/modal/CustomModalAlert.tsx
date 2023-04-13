@@ -75,7 +75,7 @@ const AlertModal = {
 
   Content: styled.div`
     margin-top: 20px;
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.background};
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);

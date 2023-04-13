@@ -83,6 +83,7 @@ const CommentInput = styled.textarea`
   border-bottom: 1px solid black;
 
   outline: none;
+  resize: none;
 `;
 
 const Notion = styled.p`

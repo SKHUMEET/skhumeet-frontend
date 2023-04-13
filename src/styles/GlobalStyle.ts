@@ -11,12 +11,18 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans KR', sans-serif;
     padding:0;
     margin:0;
-    box-sizing:border-box
+    box-sizing:border-box;
+    
+
 }
 
 body{
-    background: ${({ theme }) => theme.color.background};
+    background: ${({ theme }) => theme.color.background} !important;
     color:${({ theme }) => theme.color.text};
+}
+
+nav{
+  background: ${({ theme }) => theme.color.background}
 }
 
 ::selection {

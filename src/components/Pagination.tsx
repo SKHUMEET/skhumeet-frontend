@@ -97,7 +97,7 @@ const PaginationButton = styled.button<{ isActive?: boolean }>`
   }
 
   &:disabled {
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.background};
     color: gray;
   }
 `;

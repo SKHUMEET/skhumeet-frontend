@@ -40,7 +40,7 @@ const SliderWrapper = styled.div`
   margin: 1rem 0;
 
   .slick-dots li button:before {
-    color: white;
+    color: ${({ theme }) => theme.color.background};
   }
 `;
 

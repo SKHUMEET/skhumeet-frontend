@@ -21,6 +21,8 @@ export default Layout;
 const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 
   background-color: ${({ theme }) => theme.color.background};
 `;

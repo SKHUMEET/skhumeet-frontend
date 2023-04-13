@@ -68,8 +68,8 @@ const Nav = styled.nav`
 
   background: ${({ theme }) => theme.color.background};
 
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
 `;
 
 const NavWrapper = styled.div`
@@ -88,7 +88,7 @@ const TopWrapper = styled.div`
 
   top: 0;
   width: calc(100%);
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.background};
   width: 100%;
   height: 100%;
 
@@ -110,7 +110,7 @@ const LogoWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 const Logo = styled.a`
