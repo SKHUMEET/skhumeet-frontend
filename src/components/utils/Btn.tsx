@@ -1,12 +1,11 @@
 import React, { ReactNode, ButtonHTMLAttributes } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 type BtnProps = {
   children: ReactNode;
   onClick: () => void;
   color?: string;
   disabled?: boolean;
-  css?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Btn({
@@ -14,7 +13,6 @@ export default function Btn({
   onClick,
   color,
   disabled,
-  css: extraCss,
   ...props
 }: BtnProps) {
   return (
