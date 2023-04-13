@@ -57,6 +57,7 @@ const Container = styled.div`
 
 const Img = styled.img`
   width: 100%;
+  height: 30%;
   margin: 20px 0;
 
   border-radius: 5px;

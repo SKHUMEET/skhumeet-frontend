@@ -31,8 +31,8 @@ const Auth = () => {
     const login = () => {
       naverLogin = new naver.LoginWithNaverId({
         clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID, // ClientID
-        // callbackUrl: "https://skhumeet.vercel.app/auth", // Callback URL
-        callbackUrl: "http://localhost:3000/auth", // Callback URL
+        callbackUrl: "https://skhumeet.vercel.app/auth", // Callback URL
+        // callbackUrl: "http://localhost:3000/auth", // Callback URL
         isPopup: false, // 팝업 형태로 인증 여부
         loginButton: {
           color: "green", // 색상
