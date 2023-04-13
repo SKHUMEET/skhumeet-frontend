@@ -229,13 +229,14 @@ const RegisterForm = ({
 export default RegisterForm;
 
 const RegisterFormContainer = styled.div`
-  margin-top: 4vh;
-  background-color: ${({ theme }) => theme.color.background};
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+
+  width: 100%;
+  padding: 5px 20px;
+
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 const RegisterHeader = styled.div`

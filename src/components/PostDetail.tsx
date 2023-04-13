@@ -94,6 +94,8 @@ const InfoContainer = styled.div`
 const ContactContainer = styled.div`
   padding: 1rem;
   padding-bottom: 0;
+
+  font-size: 16px;
 `;
 
 const TitleContainer = styled.div`
