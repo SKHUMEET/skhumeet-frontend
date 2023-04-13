@@ -245,7 +245,7 @@ const RegisterFormContainer = styled.div`
 `;
 
 const RegisterHeader = styled.div`
-  margin: 1rem 0;
+  margin: 5px 0;
 `;
 
 const RegisterBody = styled.div`
