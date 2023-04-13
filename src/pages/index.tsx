@@ -1,5 +1,6 @@
 import HomeList from "@/components/List/HomeList";
 import Btn from "@/components/utils/Btn";
+import Footer from "@/components/utils/Footer";
 import MainBanner from "@/components/utils/MainBanner";
 import Seo from "@/components/utils/Seo";
 import { useMainCategory } from "@/hooks/main";
@@ -81,6 +82,7 @@ export default function Home() {
           <HomeList category={"etc"} items={etc.content ?? []} key={"etc"} />
         )}
       </ListGridWrapper>
+      <Footer />
     </HomeContainer>
   );
 }

@@ -22,7 +22,7 @@ const ListItem = ({ item }: { item: MAIN }) => {
       </TitleWrapper>
       <CommentWrapper>
         <GrView />
-        {item.view}
+        <span style={{ marginLeft: "5px" }}>{item.view}</span>
       </CommentWrapper>
     </Container>
   );
@@ -65,6 +65,10 @@ export const Title = styled.div`
 
   transition: 0.3s;
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   :hover {
     color: ${({ theme }) => theme.color.main};
   }
@@ -75,4 +79,7 @@ export const Time = styled.span`
   font-size: 11px;
 `;
 
-const CommentWrapper = styled.div``;
+const CommentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
