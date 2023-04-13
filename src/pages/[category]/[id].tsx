@@ -14,7 +14,7 @@ const Detail = ({ id }: { id: number }) => {
     () => getPostById(id)
   );
 
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <>로딩 중</>;
   if (isError) return <>{error}</>;
   return (
     <>

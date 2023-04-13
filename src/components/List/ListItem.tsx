@@ -13,7 +13,7 @@ const ListItem = ({ item }: { item: MAIN }) => {
         <div>
           <Title>{item.title}</Title>
           <Time>
-            마감일: {formDate(item.endDate)} &#183; {item.member}
+            마감일 {formDate(item.endDate)} &nbsp; &#183; &nbsp; {item.member}
           </Time>
         </div>
       </TitleWrapper>
@@ -39,7 +39,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding-bottom: 10px;
+  padding-bottom: 1rem;
 
   border-bottom: 1px solid #d3d3d3;
 

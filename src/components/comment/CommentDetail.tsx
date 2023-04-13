@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { User, formDate, storageConstants } from "@/types";
+import { User, storageConstants } from "@/types";
 import { del, instance } from "@/libs/api";
 import customAlert from "../modal/CustomModalAlert";
 import Btn from "../utils/Btn";
@@ -12,12 +12,14 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [user, setUser] = useState<User>();
   const [editComment, setEditComment] = useState<string>(item.context);
+
   const handleDeleteComment = async (id: number) => {
     await del(`/api/comment/${id}`).then((res) => {
       customAlert("댓글이 삭제되었습니다.");
       router.reload();
     });
   };
+
   const handlePatchComment = async () => {
     if (editComment.length === 0) {
       customAlert("댓글을 작성해주세요");
@@ -28,6 +30,7 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
       context: editComment,
     });
   };
+
   useEffect(() => {
     const storedUser: User | null =
       (typeof window !== "undefined" &&
@@ -35,12 +38,12 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
       null;
     setUser(storedUser as User);
   }, []);
+
   return (
     <Container>
       <CommentItem>
-        <Writer>{item.writer}</Writer>
         {!isEdit ? (
-          <span>{item.context} </span>
+          <span>{item.context}</span>
         ) : (
           <div>
             <form onSubmit={handlePatchComment}>
@@ -53,7 +56,10 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
             </form>
           </div>
         )}
-        <WriteDate>{formDate(item.modifiedDate)} </WriteDate>
+        <WriteDate>
+          {item.modifiedDate.replace("T", " ")} &nbsp; &#183; &nbsp;{" "}
+          {item.writer}
+        </WriteDate>
       </CommentItem>
       {user?.name === item.writer && (
         <EditWrapper>
@@ -86,16 +92,12 @@ const CommentItem = styled.div`
   color: black;
 `;
 
-const Writer = styled.span`
-  margin-right: 1rem;
-
-  font-weight: 600;
-`;
-
 const WriteDate = styled.p`
+  margin-top: 5px;
+
   color: ${({ theme }) => theme.color.hover};
 
-  font-size: small;
+  font-size: x-small;
 `;
 
 const EditWrapper = styled.div`
