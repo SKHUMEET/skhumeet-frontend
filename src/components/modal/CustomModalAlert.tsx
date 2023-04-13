@@ -63,6 +63,7 @@ const AlertModal = {
     opacity: 0;
     pointer-events: none;
     transition: all 0.1s ease-in-out;
+    cursor: default;
 
     ${({ showModal }) =>
       showModal &&

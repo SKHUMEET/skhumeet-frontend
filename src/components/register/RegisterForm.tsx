@@ -323,6 +323,7 @@ const ContentInput = styled.textarea`
 
   line-height: 180%;
   outline: none;
+  word-break: break-all;
 
   :focus-visible {
     border: 1px dashed ${({ theme }) => theme.color.main};
