@@ -1,25 +1,31 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import { Status, Time, Title } from "./ListItem";
-
-import { FaRegCommentAlt } from "react-icons/fa";
+import { Category, ConvertKorean } from "@/types";
 import { MAIN, formDate } from "@/types";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import Bookmark from "../utils/Bookmark";
+import { GrView } from "react-icons/gr";
+
 const ListCardItem = ({ item }: { item: MAIN }) => {
+  const theme = useContext(ThemeContext);
+
   return (
     <Container>
       <TitleWrapper>
         <Time>마감일: {formDate(item.endDate)}</Time>
         {/* 북마크 디테일 페이지에서만 됨 */}
         {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
+        <Title>{item.title}</Title>
       </TitleWrapper>
-      <Title>ListCardItem</Title>
-      <Img src="/Test.jpg" alt="" />
-      <TitleWrapper>
-        <Status>모집 완료</Status>
-        <FaRegCommentAlt />
-      </TitleWrapper>
+      <Img src="/Logo.svg" alt="로고" />
+      <StateWrapper>
+        <Status color={theme.color.light}>
+          {ConvertKorean[item.status.toLowerCase() as Category]}
+        </Status>
+        <ViewWrapper>
+          <GrView />
+          <span style={{ marginLeft: "5px" }}>{item.view}</span>
+        </ViewWrapper>
+      </StateWrapper>
     </Container>
   );
 };
@@ -27,8 +33,11 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
 export default ListCardItem;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
   height: 44.5vh;
-  margin: 2px 5px;
   padding: 10px 15px;
 
   border: 1px solid #c3c3c3;
@@ -44,5 +53,15 @@ const Img = styled.img`
 
 const TitleWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+`;
+
+const StateWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
+`;
+
+const ViewWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;

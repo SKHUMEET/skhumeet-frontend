@@ -1,6 +1,5 @@
 import {
   Category,
-  CategoryProps,
   ConvertKorean,
   MAIN,
   User,
@@ -15,6 +14,7 @@ import { useDeleteMainCategory } from "@/hooks/main";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Bookmark from "./utils/Bookmark";
+
 const PostDetail = ({ data }: { data: MAIN }) => {
   const deletePost = useDeleteMainCategory();
   const router = useRouter();
@@ -59,14 +59,15 @@ const PostDetail = ({ data }: { data: MAIN }) => {
         <Bookmark isMarked={data.bookmarked} postId={data.id} />
         {ConvertKorean[data.category.toLowerCase() as Category]}
         <InfoContainer>
-          작성자: {data.member} | 마감일: {formDate(data.endDate)} | 작성일:
+          작성자: {data.member} &#183; 마감일: {formDate(data.endDate)} &#183;
+          작성일:
           {formDate(data.createdDate)}
         </InfoContainer>
-        <ContactContainer>
-          조회수: {data.view} | 연락 방법: {data.contact}
-        </ContactContainer>
         <InfoContainer>
           <TitleContainer>{data.title}</TitleContainer>
+          <ContactContainer>
+            조회수: {data.view} &#183; 연락 방법: {data.contact}
+          </ContactContainer>
           <ContentContainer
             dangerouslySetInnerHTML={{ __html: data.context }}
           />
@@ -89,22 +90,19 @@ const PostDetail = ({ data }: { data: MAIN }) => {
 export default PostDetail;
 
 const InfoContainer = styled.div`
-  padding: 1rem;
+  padding: 5px 1rem;
+
   border-bottom: 2px solid #6ab03061;
+
+  font-size: 15px;
 `;
 
 const ContactContainer = styled.div`
-  padding: 1rem;
-  padding-bottom: 0;
-
-  font-size: 16px;
+  margin: 0;
+  font-size: 12px;
 `;
 
 const TitleContainer = styled.div`
-  padding-bottom: 10px;
-
-  border-bottom: 1px solid ${({ theme }) => theme.color.hover};
-
   font-size: x-large;
 `;
 

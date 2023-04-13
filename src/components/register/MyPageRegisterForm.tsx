@@ -34,7 +34,7 @@ const MyPageRegisterForm = ({ user }: { user: User | null | undefined }) => {
   return (
     <UserWrapper>
       <UserContainer>
-        <LogoImg src="/Logooo.svg" alt="" />
+        <LogoImg src="/Logo.svg" alt="" />
         <UserImg src={profileImg} alt="" />
         <label htmlFor="profileImgInput">
           <Button>이미지 수정하기</Button>

@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { FaRegCommentAlt } from "react-icons/fa";
 import { Category, ConvertKorean, MAIN } from "@/types";
 import { GrView } from "react-icons/gr";
-import Bookmark from "../utils/Bookmark";
 //  북마크,댓글개수,제목,현황,마감일, 작성자
 const ListItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
   console.log(item);
+
   return (
     <Container>
       <TitleWrapper>

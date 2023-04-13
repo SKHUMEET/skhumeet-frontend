@@ -33,7 +33,7 @@ const NavBar = () => {
         <TopWrapper>
           <LogoWrapper>
             <Logo onClick={() => router.push("/")}>
-              <LogoImg src="/Logooo.svg" />
+              <LogoImg src="/Logo.svg" />
             </Logo>
           </LogoWrapper>
           <NavUser>

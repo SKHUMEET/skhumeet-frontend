@@ -46,7 +46,7 @@ const ProfileRegisterForm = ({
             <H4Wrapper>
               성공회대 학생(교수)임을 <mark>인증</mark>하기 위해{" "}
             </H4Wrapper>
-            <mark>이름과 학번(사번)</mark>을 입력해주세요!
+            <mark> 이름과 학번(사번)</mark>을 입력해주세요!
           </h4>
         </div>
         <div style={{ width: "100%" }}>
