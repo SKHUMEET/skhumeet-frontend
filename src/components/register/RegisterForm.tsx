@@ -101,6 +101,7 @@ const RegisterForm = ({
     if (contact.length === 0) {
       alert("연락 방법을 입력해 주세요");
     }
+    console.log(form);
     if (kind === "register") {
       postMain({
         title,

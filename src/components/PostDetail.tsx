@@ -54,14 +54,15 @@ const PostDetail = ({ data }: { data: MAIN }) => {
               <>
                 <Btn onClick={() => setIsModalOpen(true)}>수정하기</Btn>
                 <Btn onClick={handleDelete}>삭제하기</Btn>
-                <InfoContainer>
-                  <BookmarkWrapper>
-                    <Bookmark isMarked={data.bookmarked} postId={data.id} />
-                  </BookmarkWrapper>
-                </InfoContainer>
               </>
             )}
+            <InfoContainer>
+              <BookmarkWrapper>
+                <Bookmark isMarked={data.bookmarked} postId={data.id} />
+              </BookmarkWrapper>
+            </InfoContainer>
           </UDContainer>
+
           {/* <button onClick={handleAButton}>custom alert</button> */}
           <h3>{ConvertKorean[data.category.toLowerCase() as Category]}</h3>
         </Header>
