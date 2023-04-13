@@ -46,7 +46,10 @@ const MyPageRegisterForm = ({ user }: { user: User | null | undefined }) => {
           hidden
         />
         <div>
-          {user?.name}님 의 학적 정보:{user?.memberNumber}
+          <p>
+            {user?.name}님({user?.nickname})
+          </p>
+          <p>{user?.memberNumber}</p>
         </div>
       </UserContainer>
     </UserWrapper>

@@ -115,7 +115,7 @@ const RegisterForm = ({
         id: data?.id!,
       });
     }
-    router.push(`/${category.toLowerCase()}`);
+    router.push(`/${category?.toLowerCase()}`);
   };
 
   const handleContextChange = (content: string) => {
@@ -125,8 +125,8 @@ const RegisterForm = ({
 
   useEffect(() => {
     const registerStyle =
-      category.toLowerCase() === "department_event" ||
-      category.toLowerCase() === "club"
+      category?.toLowerCase() === "department_event" ||
+      category?.toLowerCase() === "club"
         ? "grid"
         : "list";
     setRegisterType(registerStyle);
@@ -140,7 +140,7 @@ const RegisterForm = ({
           name="category"
           list={categoryList}
           onChange={handleChangeDropDown}
-          defaultItem={category.toLowerCase()}
+          defaultItem={category?.toLowerCase()}
         />
         {kind === "register" && registerType === "list" && (
           <span style={{ fontSize: "small", fontWeight: "bold" }}>

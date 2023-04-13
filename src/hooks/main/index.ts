@@ -122,6 +122,7 @@ export const usePostMainCategory = () => {
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
         queryClient.removeQueries([queryKeys.detail]);
+        queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {
           return getMainCategory(category, 1);
         });
@@ -150,6 +151,7 @@ export const usePatchMainCategory = () => {
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
         queryClient.removeQueries([queryKeys.detail]);
+        queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {
           return getMainCategory(category, 1);
         });
