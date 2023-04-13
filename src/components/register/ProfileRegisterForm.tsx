@@ -47,15 +47,16 @@ const ProfileRegisterForm = ({
   return (
     <Container>
       <Wrapper>
+        <img style={{ width: "15vw" }} src="/Logo.svg" alt="로고" />
         <div>
           <h3 style={{ marginBottom: "10px" }}>
             SKHUMEET에 오신 것을 환영합니다!
           </h3>
           <h4>
             <H4Wrapper>
-              성공회대 학생(교수)임을 <mark>인증</mark>하기 위해{" "}
+              성공회대 학생(교수)임을 <mark>인증</mark>하기 위해&nbsp;
             </H4Wrapper>
-            <mark> 이름과 학번(사번)</mark>을 입력해주세요!
+            <mark>이름과 학번(사번)</mark>을 입력해주세요!
           </h4>
         </div>
         <div style={{ width: "100%" }}>
@@ -90,8 +91,18 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  position: fixed;
   width: 100%;
-  height: 100%;
+  max-height: 100%;
+  margin: auto;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  overflow: auto;
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 const Wrapper = styled.div`
@@ -102,9 +113,10 @@ const Wrapper = styled.div`
 
   width: 30rem;
   height: 40rem;
+  padding: 2rem 0;
 
   background-color: ${({ theme }) => theme.color.background};
-  /* border: 3px solid ${({ theme }) => theme.color.main}; */
+  border: 2px solid ${({ theme }) => theme.color.main};
   border-radius: 20px;
 
   text-align: center;
@@ -140,6 +152,8 @@ const Wrapper = styled.div`
 
 const H4Wrapper = styled.div`
   display: inline-block;
+
+  font-size: 0.8rem;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
     display: block;
@@ -181,6 +195,3 @@ const InputSpan = styled.span`
     font-size: 80%;
   }
 `;
-function elif() {
-  throw new Error("Function not implemented.");
-}

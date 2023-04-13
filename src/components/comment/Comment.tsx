@@ -77,21 +77,25 @@ export const CommentContainer = styled.form`
 
 export const CommentInput = styled.textarea`
   width: 100%;
-  height: 4vh;
-  margin-top: 5px;
+  height: 10vh;
+  padding: 5px;
 
+  background-color: transparent;
   border: none;
-  border-bottom: 1px solid black;
+  border-radius: 5px;
 
   outline: none;
   resize: none;
+
+  box-shadow: 0px 0px 5px -1.5px inset #69b030;
 `;
 
 const Notion = styled.p`
-  margin-top: 1rem;
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
 
   color: black;
+
+  text-align: center;
 `;
 
 const DateP = styled.p`

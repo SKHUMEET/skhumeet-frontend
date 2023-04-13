@@ -145,7 +145,9 @@ const RegisterForm = ({
   return (
     <RegisterFormContainer>
       <RegisterHeader>
-        {kind === "edit" && <div>수정하기</div>}
+        {/* <h3 style={{ marginBottom: "1rem" }}>
+          {kind === "edit" && <div>수정하기</div>}
+        </h3> */}
         <DropDown
           name="category"
           list={categoryList}
@@ -182,8 +184,9 @@ const RegisterForm = ({
         )}
         <br />
         <DateContainer>
-          마감일:
-          <DateInput
+          마감일
+          <ContactInput
+            style={{ margin: "0", marginLeft: "5px" }}
             name="endDate"
             value={endDate}
             type="date"
@@ -191,12 +194,12 @@ const RegisterForm = ({
           />
         </DateContainer>
         <DateContainer>
-          연락 방법:
+          연락 방법
           <ContactInput
             name="contact"
             value={contact}
             onChange={handleChange}
-            placeholder="오픈채팅 or 전화번호"
+            placeholder="오픈채팅 링크 or 전화번호"
           />
         </DateContainer>
       </RegisterHeader>
@@ -249,7 +252,7 @@ const RegisterFormContainer = styled.div`
   justify-content: center;
 
   width: 100%;
-  padding: 5px 20px;
+  padding: 1rem 20px;
 
   background-color: ${({ theme }) => theme.color.background};
 `;
@@ -272,15 +275,13 @@ const FormContainer = styled.form`
   align-items: center;
 
   width: 100%;
-  padding: 5px;
 
-  border-top: 2px solid ${({ theme }) => theme.color.main};
-  border-bottom: 2px solid ${({ theme }) => theme.color.main};
+  border-top: 2px solid ${({ theme }) => theme.color.light};
+  border-bottom: 2px solid ${({ theme }) => theme.color.light};
 
   > input,
   textarea {
     width: 100%;
-    margin: 5px 0;
   }
 `;
 
@@ -288,44 +289,39 @@ const DateContainer = styled.div`
   font-size: small;
 `;
 
-const DateInput = styled.input`
-  margin-left: 10px;
-
-  outline: none;
-`;
-
 const ContactInput = styled.input`
-  margin-top: 5px;
-  margin-left: 10px;
+  margin: 10px;
+  padding: 5px;
 
   outline: none;
+
+  border: none;
+  box-shadow: 0px 0px 5px -1.5px inset #69b030;
 `;
 
 const TitleInput = styled.input`
-  height: 2rem;
-  padding-bottom: 5px;
+  padding: 1rem 0;
 
   border: none;
-  border-bottom: 1px solid ${({ theme }) => theme.color.main};
+  border-bottom: 2px solid ${({ theme }) => theme.color.light};
 
   font-size: 1rem;
+  font-weight: 600;
   outline: none;
-
-  :focus {
-    border-bottom: 1.5px solid ${({ theme }) => theme.color.main};
-  }
 `;
 
 const ContentInput = styled.textarea`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  height: 50vh;
+  height: 45vh;
+  padding-top: 1rem;
 
   overflow: auto;
   border: none;
   text-align: left;
 
+  line-height: 180%;
   outline: none;
 
   :focus-visible {

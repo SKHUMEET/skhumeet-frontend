@@ -6,7 +6,7 @@ import { del, instance } from "@/libs/api";
 import customAlert from "../modal/CustomModalAlert";
 import Btn from "../utils/Btn";
 import { COMMENT } from "@/types";
-import { CommentContainer, CommentInput } from "./Comment";
+
 const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
@@ -71,10 +71,13 @@ export default CommentDetail;
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
   justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+
   border-bottom: 1px solid #d3d3d3;
-  padding: 1rem 0;
 `;
 
 const CommentItem = styled.div`
@@ -99,6 +102,8 @@ const EditWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  width: 5rem;
 
   > span {
     cursor: pointer;

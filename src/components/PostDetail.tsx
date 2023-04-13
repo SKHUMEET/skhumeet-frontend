@@ -61,26 +61,26 @@ const PostDetail = ({ data }: { data: MAIN }) => {
                 <Btn onClick={handleDelete} color={theme.color.light}>
                   삭제하기
                 </Btn>
+                <InfoContainer>
+                  <BookmarkWrapper>
+                    <Bookmark isMarked={data.bookmarked} postId={data.id} />
+                  </BookmarkWrapper>
+                </InfoContainer>
               </>
             )}
           </UDContainer>
           {/* <button onClick={handleAButton}>custom alert</button> */}
-          <p style={{ fontWeight: "bold" }}>
-            {ConvertKorean[data.category.toLowerCase() as Category]}
-          </p>
+          <h3>{ConvertKorean[data.category.toLowerCase() as Category]}</h3>
         </Header>
         <InfoContainer>
-          작성자: {data.member} &#183; 마감일: {formDate(data.endDate)} &#183;
-          작성일: {formDate(data.createdDate)}
-          <BookmarkWrapper>
-            <Bookmark isMarked={data.bookmarked} postId={data.id} />
-          </BookmarkWrapper>
-        </InfoContainer>
-        <InfoContainer>
+          <h1>{data.title}</h1>
           <ContactContainer>
-            조회수: {data.view} &#183; 연락 방법: {data.contact}
+            조회수 {data.view} &nbsp; &#183; &nbsp; 연락 방법 {data.contact}{" "}
+            &nbsp; &#183; &nbsp; 작성자 {data.member} &nbsp; &#183; &nbsp;
+            마감일 {formDate(data.endDate)} &nbsp; &#183; &nbsp; 작성일{" "}
+            {formDate(data.createdDate)}
           </ContactContainer>
-          <TitleContainer>{data.title}</TitleContainer>
+
           <ContentContainer
             dangerouslySetInnerHTML={{ __html: data.context }}
           />
@@ -115,9 +115,7 @@ const UDContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
-  padding: 10px 0;
-
-  border-bottom: 2px solid #6ab03061;
+  padding: 1rem 0;
 
   font-size: 15px;
 `;
@@ -127,14 +125,19 @@ const BookmarkWrapper = styled.div`
 `;
 
 const ContactContainer = styled.div`
-  margin: 0;
+  margin-top: 1rem;
+
+  padding-bottom: 1rem;
+
+  border-bottom: 2px solid ${({ theme }) => theme.color.light};
+
+  color: ${({ theme }) => theme.color.hover};
   font-size: 12px;
 `;
 
-const TitleContainer = styled.div`
-  font-size: x-large;
-`;
+export const ContentContainer = styled.div`
+  padding: 1rem 0;
 
-const ContentContainer = styled.div`
-  padding-top: 10px;
+  border-bottom: 2px solid ${({ theme }) => theme.color.light};
+  line-height: 180%;
 `;
