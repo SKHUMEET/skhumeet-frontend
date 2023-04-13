@@ -21,6 +21,10 @@ export default Layout;
 const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  background-color: ${({ theme }) => theme.color.background};
 `;
 const LayoutWrapper = styled.div`
   display: flex;
@@ -39,19 +43,7 @@ const LayoutWrapper = styled.div`
 const ChildrenWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: calc(100%-8vh);
+  padding-top: 8vh;
   flex-direction: column;
-`;
-
-const NavigateWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  height: 200px;
-  position: sticky;
-  top: 20px;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.large}) {
-    display: none;
-  }
 `;

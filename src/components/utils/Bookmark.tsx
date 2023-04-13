@@ -4,7 +4,6 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@/react-query/constants";
 import { useRouter } from "next/router";
 const Bookmark = ({
   isMarked,
@@ -22,8 +21,15 @@ const Bookmark = ({
         queryClient.clear();
         router.reload();
       });
+    } else {
+      await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
+        customAlert("북마크 해제");
+        queryClient.clear();
+        router.reload();
+      });
     }
   };
+
   return (
     <BookmarkWrapper onClick={handleBookmark}>
       {isMarked ? <BsBookmarkFill /> : <BsBookmark />}

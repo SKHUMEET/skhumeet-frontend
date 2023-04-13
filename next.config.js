@@ -35,7 +35,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*", // path 주소
-        destination: "http://api-skhumeet.duckdns.org//api/:path*",
+        destination: "http://api-skhumeet.duckdns.org/api/:path*",
       },
     ];
   },

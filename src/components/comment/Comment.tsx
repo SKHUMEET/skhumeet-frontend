@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import styled from "styled-components";
-import { User } from "@/types";
 import { get, post } from "@/libs/api";
-import customAlert from "./modal/CustomModalAlert";
-import Btn from "./utils/Btn";
+import customAlert from "../modal/CustomModalAlert";
+import Btn from "../utils/Btn";
+
+import CommentDetail from "./CommentDetail";
 
 export interface Comment {
   author: string;
@@ -46,21 +46,7 @@ const Comment = ({ postId }: { postId: number }) => {
       {list?.length ? (
         <>
           {list.map((el) => (
-            <Container
-              style={{ marginBottom: "1rem" }}
-              key={(el.id, el.writer, el.context, el.modifiedDate)}
-            >
-              <CommentItem key={el.id}>
-                <Writer>{el.writer}</Writer>
-                <span>{el.context} </span>
-                <WriteDate>{el.modifiedDate} </WriteDate>
-              </CommentItem>
-              {/* <TimeContainer style={{ paddingLeft: "0" }}>
-                <DateP style={{ color: "#8e8e8e", marginBottom: "5px" }}>
-                  {formatDate(el.modifiedDate)}
-                </DateP>
-              </TimeContainer>{" "} */}
-            </Container>
+            <CommentDetail item={el} key={el.id} postId={postId} />
           ))}
         </>
       ) : (
@@ -81,30 +67,7 @@ const Comment = ({ postId }: { postId: number }) => {
 
 export default Comment;
 
-const TimeContainer = styled.div`
-  float: left;
-  padding-top: 5px;
-  padding-left: 10px;
-`;
-
-const Container = styled.div`
-  border-bottom: 1px solid #d3d3d3;
-`;
-
-const CommentItem = styled.div`
-  width: 55vw;
-  padding: 1rem;
-
-  color: black;
-`;
-
-const Writer = styled.span`
-  margin-right: 1rem;
-
-  font-weight: 600;
-`;
-
-const CommentContainer = styled.form`
+export const CommentContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,7 +75,7 @@ const CommentContainer = styled.form`
   width: 100%;
 `;
 
-const CommentInput = styled.textarea`
+export const CommentInput = styled.textarea`
   width: 100%;
   height: 4vh;
   margin-top: 5px;
@@ -121,6 +84,7 @@ const CommentInput = styled.textarea`
   border-bottom: 1px solid black;
 
   outline: none;
+  resize: none;
 `;
 
 const Notion = styled.p`
@@ -138,31 +102,4 @@ const DateP = styled.p`
 
   font-size: small;
   text-align: left;
-`;
-
-// const Btn = styled.button`
-//   display: flex;
-//   align-items: center;
-
-//   width: fit-content;
-//   margin: 0 5px;
-//   padding: 2px 3px;
-
-//   background-color: white;
-//   border: black;
-//   border-radius: 10px;
-
-//   cursor: pointer;
-
-//   transition: 0.2s;
-
-//   &:hover {
-//     transform: translateY(-2px);
-//   }
-// `;
-
-const WriteDate = styled.p`
-  color: ${({ theme }) => theme.color.hover};
-
-  font-size: small;
 `;

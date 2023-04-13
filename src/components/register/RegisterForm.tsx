@@ -27,7 +27,7 @@ interface RegisterFormProps {
 }
 
 const RegisterForm = ({
-  category: defaultCategory,
+  category: defaultCategory = "hansotbab",
   kind,
   type = "list",
   data,
@@ -124,7 +124,8 @@ const RegisterForm = ({
         id: data?.id!,
       });
     }
-    router.push(`/${category.toLowerCase()}`);
+
+    router.push(`/${category?.toLowerCase()}`);
   };
 
   const handleContextChange = (content: string) => {

@@ -9,7 +9,7 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { Modal } from "./modal";
 import RegisterForm from "./register/RegisterForm";
-import Comment from "./Comment";
+import Comment from "./comment/Comment";
 import { useDeleteMainCategory } from "@/hooks/main";
 import { useRouter } from "next/router";
 import styled, { ThemeContext } from "styled-components";
@@ -77,10 +77,10 @@ const PostDetail = ({ data }: { data: MAIN }) => {
           </BookmarkWrapper>
         </InfoContainer>
         <InfoContainer>
-          <TitleContainer>{data.title}</TitleContainer>
           <ContactContainer>
             조회수: {data.view} &#183; 연락 방법: {data.contact}
           </ContactContainer>
+          <TitleContainer>{data.title}</TitleContainer>
           <ContentContainer
             dangerouslySetInnerHTML={{ __html: data.context }}
           />

@@ -40,7 +40,6 @@ export const Modal = ({
   );
 };
 
-// Modal 창 위치 및 style
 const BackDrop = styled.div<{ backdropColor?: string }>`
   width: 100vw;
   height: 100%;

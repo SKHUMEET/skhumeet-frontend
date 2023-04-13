@@ -60,21 +60,23 @@ export default NavBar;
 
 const Nav = styled.nav`
   top: 0;
+  left: 0;
+  right: 0;
   align-items: center;
 
-  position: sticky;
+  position: fixed;
   width: 100%;
-  height: 10vh;
+  height: 8vh;
 
   background: ${({ theme }) => theme.color.background};
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: 0px 7px 2px -7px ${({ theme }) => theme.color.hover};
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
 `;
 
 const NavWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   width: 100%;
@@ -88,19 +90,20 @@ const TopWrapper = styled.div`
 
   top: 0;
   width: calc(100%);
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.background};
   width: 100%;
   height: 100%;
 
   padding: 0;
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    width: 60vw;
     padding-right: 0;
 
-    box-shadow: 0px 7px 2px -7px ${({ theme }) => theme.color.hover};
+    /* box-shadow: 0px 0px 5px -2px ${({ theme }) => theme.color.main}; */
   }
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
     padding-right: 40px;
   }
 `;
@@ -110,7 +113,7 @@ const LogoWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 const Logo = styled.a`

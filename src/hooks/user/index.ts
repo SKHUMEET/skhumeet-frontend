@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { post } from "@/libs/api";
 import {
   setAccessToken,

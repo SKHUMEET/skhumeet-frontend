@@ -1,9 +1,4 @@
-import {
-  UseMutateFunction,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { del, get, instance, post } from "@/libs/api";
 import { Category, MAIN, MAINREQUEST } from "@/types";
 import { queryKeys } from "@/react-query/constants";
@@ -127,6 +122,7 @@ export const usePostMainCategory = () => {
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
         queryClient.removeQueries([queryKeys.detail]);
+        queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {
           return getMainCategory(category, 1);
         });
@@ -155,6 +151,7 @@ export const usePatchMainCategory = () => {
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
         queryClient.removeQueries([queryKeys.detail]);
+        queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {
           return getMainCategory(category, 1);
         });

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import Image from "next/image";
-import { get, post } from "@/libs/api";
+import { get } from "@/libs/api";
 import { User, storageConstants } from "@/types";
 
 const ToggleUser = () => {
@@ -37,12 +37,6 @@ const ToggleUser = () => {
       },
     });
 
-    // await post("/api/member/logout",{},{
-    //   headers:{
-    //     AccessToken:
-    //     RefreshToken:
-    //   }
-    // })
     if (res) {
       router.push("/auth"); // 로그인 페이지로 이동
     }
@@ -61,13 +55,7 @@ const ToggleUser = () => {
     <ToggleContainer>
       {userImage && (
         <ImageButton onClick={() => setIsOpen(!isOpen)}>
-          <Image
-            src={userImage as string}
-            width="35"
-            height="35"
-            alt=""
-            style={{ borderRadius: "30px" }}
-          />
+          <ProfileImage src={userImage as string} alt="" />
         </ImageButton>
       )}
       {isOpen && (
@@ -108,6 +96,13 @@ const ImageButton = styled.div`
   object-fit: contain;
 
   overflow: hidden;
+`;
+
+const ProfileImage = styled.img`
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
 `;
 
 const ToggleDropDown = {

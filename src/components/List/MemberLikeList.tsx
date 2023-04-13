@@ -1,12 +1,9 @@
-import { del } from "@/libs/api";
 import React from "react";
 import styled from "styled-components";
-import customAlert from "../modal/CustomModalAlert";
-import { queryClient } from "@/react-query/queryClient";
 import { useRouter } from "next/router";
-import ListItem from "./ListItem";
+import ListItem from "@/components/List/ListItem";
 import { Category, User } from "@/types";
-import Pagination from "../Pagination";
+import Pagination from "@/components/Pagination";
 
 interface MemberListProps {
   user: User | null | undefined;
@@ -23,13 +20,6 @@ const MemberLikeList = ({
   setPage,
   totalPage,
 }: MemberListProps) => {
-  const handleBookmarkDelete = async (bookmarkId: number) => {
-    await del(`/api/post/bookmark?bookmarkId=${bookmarkId}`).then((res) => {
-      customAlert("북마크 생성");
-      queryClient.clear();
-      router.reload();
-    });
-  };
   const router = useRouter();
   const handleClickListItem = (category: Category, id: number) => {
     router.push(`/${category}/${id}`); //디테일페이지
@@ -60,7 +50,6 @@ const MemberLikeList = ({
                   //  북마크,댓글개수,제목,현황,마감일,작성자
                 />
               </div>
-              {/* <div onClick={() => handleBookmarkDelete(el.id)}>북마크 삭제</div> */}
             </>
           ))
         )}

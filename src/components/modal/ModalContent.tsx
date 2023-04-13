@@ -7,7 +7,6 @@ interface ModalContentProps {
   onClose: () => void;
 }
 
-// Modal 창 open 시 title, content
 export const ModalContent = ({
   title,
   children,
@@ -29,7 +28,6 @@ export const ModalContent = ({
   );
 };
 
-// 전체 Modal 창
 const Wrapper = styled.div`
   width: 480px;
   border-radius: 10px;
@@ -39,14 +37,12 @@ const Wrapper = styled.div`
   overflow: scroll;
 `;
 
-// Modal title
 const HeaderWrapper = styled.div`
   width: 100%;
   text-align: center;
   font-size: 15pt;
 `;
 
-// modal close button
 const CloseButton = styled.div`
   width: 100%;
   text-align: right;
@@ -57,7 +53,6 @@ const CloseButton = styled.div`
   }
 `;
 
-// Modal content
 const Content = styled.div`
   width: 100%;
 `;

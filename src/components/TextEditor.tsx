@@ -1,6 +1,5 @@
 import {
   useState,
-  useRef,
   useCallback,
   RefObject,
   ChangeEvent,
@@ -79,7 +78,9 @@ const TextEditor = ({
           Right
         </ToolbarButton>
         <label htmlFor="imageInput">
-          <BiImageAdd />
+          <ToolbarButton>
+            <BiImageAdd />
+          </ToolbarButton>
         </label>
         <input
           id="imageInput"
@@ -96,15 +97,7 @@ const TextEditor = ({
           contentEditable={true}
           suppressContentEditableWarning={true}
           onInput={handleChange}
-          // dangerouslySetInnerHTML={{ __html: context }}
         />
-        {/* <div
-          ref={editorRef}
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          onInput={handleChange}
-          dangerouslySetInnerHTML={{ __html: textContext }}
-        /> */}
       </EditorContainer>
     </>
   );

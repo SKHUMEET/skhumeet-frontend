@@ -15,15 +15,10 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
         <Time>
           마감일: {formDate(item.endDate)} &#183; {item.member}
         </Time>
-        {/* 북마크 디테일 페이지에서만 됨 */}
-        {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
         <Title>{item.title}</Title>
       </TitleWrapper>
       <Img src="/Logo.svg" alt="로고" />
       <StateWrapper>
-        {/* <State color={theme.color.light}>
-          {ConvertKorean[item.status.toLowerCase() as Category]}
-        </State> */}
         <StatusBtn
           onClick={() => {}}
           status={item.status.toLowerCase() as Status}

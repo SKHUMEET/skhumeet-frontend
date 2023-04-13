@@ -9,8 +9,6 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 *{
-  /* font-family: 'Noto Sans KR', sans-serif; */
-  /* font-family: 'Nanum Gothic', sans-serif; */
   font-family: 'NanumSquareNeo-Variable';
   padding:0;
   margin:0;
@@ -22,8 +20,17 @@ body{
   color:${({ theme }) => theme.color.text};
 }
 
+nav{
+  background: ${({ theme }) => theme.color.background}
+}
+
 ::selection {
   background-color: ${({ theme }) => theme.color.main};
+}
+
+mark{
+  background-color:${({ theme }) => theme.color.light}
+
 }
 /* html::-webkit-scrollbar {
   width: 1rem;

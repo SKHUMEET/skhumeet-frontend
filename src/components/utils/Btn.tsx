@@ -31,7 +31,7 @@ export const SubmitBtn = styled.button<{ color?: string }>`
   padding: 2px 5px;
 
   background-color: ${({ theme, color }) => color ?? theme.color.main};
-  color: white;
+  color: ${({ theme }) => theme.color.background};
   border: 1px solid ${({ theme, color }) => color ?? theme.color.main};
   border-radius: 3px;
 
@@ -39,7 +39,7 @@ export const SubmitBtn = styled.button<{ color?: string }>`
   cursor: pointer;
 
   &:hover:not(:disabled) {
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.background};
     color: ${({ theme, color }) => color ?? theme.color.main};
   }
 `;

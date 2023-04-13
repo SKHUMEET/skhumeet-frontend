@@ -25,12 +25,6 @@ export default function SidebarModal({
 }
 
 const Container = styled.div`
-  /* @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
-   // height: 8vh;
-    //background-color: white;
-    //margin-top: 0.7rem;
-    padding-left: 1rem;
-  } */
   position: relative;
 `;
 
@@ -40,7 +34,6 @@ const HamburgerIcon = styled.div<SidebarProps>`
   justify-content: center;
   width: 30px;
   height: 7vh;
-  /* margin-right: 10px; */
 
   padding-top: 10px;
   top: 0;
@@ -148,7 +141,6 @@ const Overlay = styled.div<SidebarProps>`
       right: 10vw;
       width: 30vw;
 
-      /* background: ${({ theme }) => theme.color.background}; */
       box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);
       border-left: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
@@ -166,7 +158,6 @@ const Overlay = styled.div<SidebarProps>`
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
     width: 100vw;
   }
-  /* 전체화면일 때 */
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     width: 10vw;
     left: 83vw;
@@ -175,7 +166,7 @@ const Overlay = styled.div<SidebarProps>`
     margin-left: 10px;
 
     background: ${({ theme }) => theme.color.background};
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     backdrop-filter: blur(25px);

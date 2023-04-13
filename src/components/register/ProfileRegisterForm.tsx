@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { LoginUserProfileProps } from "@/pages/auth";
 import styled from "styled-components";
 import { useAuth } from "@/hooks/user";
-import Btn from "../utils/Btn";
+import Btn from "@/components/utils/Btn";
 
 const ProfileRegisterForm = ({
   id,
@@ -100,8 +100,8 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  width: 50%;
-  height: 63%;
+  width: 30rem;
+  height: 40rem;
 
   background-color: ${({ theme }) => theme.color.background};
   /* border: 3px solid ${({ theme }) => theme.color.main}; */

@@ -4,11 +4,9 @@ import styled from "styled-components";
 interface PaginationData {
   totalPages: number;
   currentPage: number;
-  // 페이지 번호 변경될 때 호출되는 함수
   onPageChange: (page: number) => void;
 }
 
-// PaginationData 속성 받아옴
 const Pagination = ({
   totalPages,
   currentPage,
@@ -18,21 +16,18 @@ const Pagination = ({
 
   const [currentGroup, setCurrentGroup] = useState(1);
 
-  // 페이지 번호 변경될 때 호출
   const handlePageChange = (page: number) => {
     onPageChange(page);
     const group = Math.ceil(page / pageSize);
     setCurrentGroup(group);
   };
 
-  // 이전 그룹 버튼 클릭 시 호출
   const handlePrevClick = () => {
     const prevGroup = currentGroup - 1;
     setCurrentGroup(prevGroup);
     onPageChange((prevGroup - 1) * pageSize + (currentPage % pageSize));
   };
 
-  // 다음 그룹 버튼 클릭 시 호출
   const handleNextClick = () => {
     const nextGroup = currentGroup + 1;
     setCurrentGroup(nextGroup);
@@ -40,15 +35,12 @@ const Pagination = ({
   };
 
   const pageButtons = [];
-  // 첫 페이지
   const startPage = (currentGroup - 1) * pageSize + 1;
-  // 마지막 페이지
   const endPage =
     startPage + pageSize - 1 > totalPages
       ? totalPages
       : startPage + pageSize - 1;
 
-  // pageButtons에 추가
   for (let i = startPage; i <= endPage; i++) {
     pageButtons.push(
       <PaginationButton
@@ -105,7 +97,7 @@ const PaginationButton = styled.button<{ isActive?: boolean }>`
   }
 
   &:disabled {
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.background};
     color: gray;
   }
 `;

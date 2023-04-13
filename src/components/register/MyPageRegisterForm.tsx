@@ -1,9 +1,8 @@
 import { User } from "@/types";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import Btn from "../utils/Btn";
 import imageUpload from "@/hooks/firebase/imageUpload";
-import { instance } from "../../libs/api";
+import { instance } from "@/libs/api";
 import { setStoredUser } from "@/hooks/user-storage";
 import { useRouter } from "next/router";
 
@@ -94,14 +93,14 @@ const Button = styled.div`
   padding: 2px 8px;
 
   background-color: ${({ theme, color }) => color ?? theme.color.main};
-  color: white;
+  color: ${({ theme }) => theme.color.background};
   border: 1px solid ${({ theme, color }) => color ?? theme.color.main};
   border-radius: 3px;
 
   text-align: center;
 
   :hover {
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.background};
     color: ${({ theme, color }) => color ?? theme.color.main};
   }
 `;

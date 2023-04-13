@@ -31,6 +31,7 @@ const Auth = () => {
     const login = () => {
       naverLogin = new naver.LoginWithNaverId({
         clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID, // ClientID
+        // callbackUrl: "https://skhumeet.vercel.app/auth", // Callback URL
         callbackUrl: "http://localhost:3000/auth", // Callback URL
         isPopup: false, // 팝업 형태로 인증 여부
         loginButton: {
@@ -56,6 +57,9 @@ const Auth = () => {
         const nickname = naverLogin.user?.getNickName() as string;
         const profile_image = naverLogin.user?.getProfileImage() as string;
 
+        // if (!id) {
+        //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
+        // }
         const res = await findMemeberById(id);
         if (res.status === 200) {
           window.location.replace("/");
@@ -68,7 +72,6 @@ const Auth = () => {
       } catch (err) {
         console.error(err);
       }
-      //   naverLogin.reprompt(); // 정보제공창 다시 보여주기
     };
 
     const initNaverLogin = async () => {
@@ -136,9 +139,10 @@ const Auth = () => {
             </Button.ButtonList>
           </Button.Container>
           <Mention>
-            * 네이버는 개발 모드라 처음 가입한 아이디로만 로그인 되기 때문에(타
-            아이디로 로그인 불가능) <mark>카카오</mark>로 로그인 하는 것을
-            추천합니다!
+            네이버는 개발 모드라 서버에 저장된 아이디로만 로그인 되기 때문에(타
+            아이디로 로그인 불가능)
+            <br />
+            <mark>카카오</mark>로 로그인 하는 것을 추천합니다!
           </Mention>
         </Container>
       </Wrapper>
@@ -164,10 +168,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 
   position: fixed;
-  max-width: 100%;
+  width: 100%;
   max-height: 100%;
   margin: auto;
 
@@ -186,8 +190,10 @@ const Container = styled.div`
   justify-content: center;
   align-content: center;
 
+  width: 30rem;
+  height: 40rem;
   padding: 2rem 0;
-
+  border-radius: 20px;
   border: 2px solid ${({ theme }) => theme.color.main};
 `;
 
