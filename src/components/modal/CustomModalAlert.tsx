@@ -22,7 +22,7 @@ const CustomAlert = ({ message, onConfirm }: CustomAlertProps) => {
     <>
       <AlertModal.Container showModal={showModal}>
         <AlertModal.Content onClick={handleConfirm}>
-          <LogoImg src="/Logooo.svg" alt="" height="50%" />
+          <LogoImg src="/Logo.svg" alt="" height="50%" />
           <AlertModal.Message>{message}</AlertModal.Message>
         </AlertModal.Content>
       </AlertModal.Container>

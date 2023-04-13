@@ -1,7 +1,10 @@
 import HomeList from "@/components/List/HomeList";
-import customAlert from "@/components/modal/CustomModalAlert";
+import Btn from "@/components/utils/Btn";
+import Footer from "@/components/utils/Footer";
+import MainBanner from "@/components/utils/MainBanner";
 import Seo from "@/components/utils/Seo";
 import { useMainCategory } from "@/hooks/main";
+import router from "next/router";
 import styled from "styled-components";
 
 export default function Home() {
@@ -19,7 +22,23 @@ export default function Home() {
   return (
     <HomeContainer>
       <Seo />
-      <Banner onClick={() => customAlert("확인")} />
+      {/* <MainBanner /> */}
+      <BannerImg src="/BannerT.png" alt="" />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "1rem",
+        }}
+      >
+        <Btn
+          onClick={() => {
+            router.push("/register");
+          }}
+        >
+          작성하기
+        </Btn>
+      </div>
       <ListGridWrapper>
         {hansotbab && (
           <HomeList
@@ -63,6 +82,7 @@ export default function Home() {
           <HomeList category={"etc"} items={etc.content ?? []} key={"etc"} />
         )}
       </ListGridWrapper>
+      <Footer />
     </HomeContainer>
   );
 }
@@ -74,11 +94,8 @@ const HomeContainer = styled.div`
   width: 100%;
 `;
 
-const Banner = styled.div<{ color?: string }>`
-  width: 100%;
-  height: 30vh;
-
-  background-color: ${({ theme, color }) => color ?? theme.color.main};
+const BannerImg = styled.img`
+  -webkit-user-drag: none;
 `;
 
 const ListGridWrapper = styled.div`

@@ -27,7 +27,7 @@ interface RegisterFormProps {
 }
 
 const RegisterForm = ({
-  category: defaultCategory,
+  category: defaultCategory = "hansotbab",
   kind,
   type = "list",
   data,
@@ -115,6 +115,7 @@ const RegisterForm = ({
         id: data?.id!,
       });
     }
+
     router.push(`/${category?.toLowerCase()}`);
   };
 
@@ -245,7 +246,7 @@ const RegisterFormContainer = styled.div`
 `;
 
 const RegisterHeader = styled.div`
-  margin: 1rem 0;
+  margin: 5px 0;
 `;
 
 const RegisterBody = styled.div`
@@ -326,5 +327,8 @@ const ContentInput = styled.textarea`
 `;
 
 const BtnContainer = styled.div`
-  float: right;
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 1rem;
 `;
