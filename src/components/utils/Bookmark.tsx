@@ -5,6 +5,7 @@ import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+
 const Bookmark = ({
   isMarked,
   postId,
@@ -32,7 +33,7 @@ const Bookmark = ({
 
   return (
     <BookmarkWrapper onClick={handleBookmark}>
-      {isMarked ? <BsBookmarkFill /> : <BsBookmark />}
+      {isMarked ? <BsBookmarkFill color="#69b030" /> : <BsBookmark />}
     </BookmarkWrapper>
   );
 };
