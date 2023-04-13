@@ -23,7 +23,13 @@ export default function Home() {
       <Seo />
       {/* <MainBanner /> */}
       <BannerImg src="/BannerT.png" alt="" />
-      <div style={{ float: "right" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "1rem",
+        }}
+      >
         <Btn
           onClick={() => {
             router.push("/register");

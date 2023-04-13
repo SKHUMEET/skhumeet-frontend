@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { Status, Time, Title } from "./ListItem";
+import { State, Time, Title } from "./ListItem";
 import { Category, ConvertKorean } from "@/types";
 import { MAIN, formDate } from "@/types";
 import { GrView } from "react-icons/gr";
@@ -18,9 +18,9 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
       </TitleWrapper>
       <Img src="/Logo.svg" alt="로고" />
       <StateWrapper>
-        <Status color={theme.color.light}>
+        <State color={theme.color.light}>
           {ConvertKorean[item.status.toLowerCase() as Category]}
-        </Status>
+        </State>
         <ViewWrapper>
           <GrView />
           <span style={{ marginLeft: "5px" }}>{item.view}</span>
@@ -42,6 +42,10 @@ const Container = styled.div`
 
   border: 1px solid #c3c3c3;
   border-radius: 1rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Img = styled.img`
@@ -54,6 +58,12 @@ const Img = styled.img`
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  font-size: large;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const StateWrapper = styled.div`

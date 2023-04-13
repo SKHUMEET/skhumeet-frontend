@@ -71,7 +71,7 @@ const ListContainer2 = styled.div<{ itemStyle: "list" | "card" }>`
       : css`
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          grid-row-gap: 30;
+          gap: 20px;
         `};
 
   width: 100%;
@@ -85,6 +85,10 @@ export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
         `
       : css`
           /* grid-template-rows: repeat(3fr); */
+          :hover {
+            transform: translateY(-5px);
+            /* transform: scale(1.05); */
+          }
         `};
 
   padding-top: 10px;
@@ -101,9 +105,4 @@ export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
   cursor: default;
 
   transition: 0.3s;
-
-  :hover {
-    transform: translateY(-5px);
-    /* transform: scale(1.05); */
-  }
 `;

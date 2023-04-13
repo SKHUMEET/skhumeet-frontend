@@ -64,12 +64,12 @@ const Comment = ({ postId }: { postId: number }) => {
           ))}
         </>
       ) : (
-        <Notion>댓글없음</Notion>
+        <Notion>첫 번째로 댓글을 달아 보세요!</Notion>
       )}
 
       <CommentContainer onSubmit={handleSubmitComment}>
         <CommentInput
-          placeholder="Write comment"
+          placeholder="댓글을 작성해 주세요"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
@@ -108,10 +108,12 @@ const CommentContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
 `;
 
 const CommentInput = styled.textarea`
-  width: 50vw;
+  width: 100%;
   height: 5vh;
 
   border: none;
@@ -121,6 +123,9 @@ const CommentInput = styled.textarea`
 `;
 
 const Notion = styled.p`
+  margin-top: 1rem;
+  margin-bottom: 5px;
+
   color: black;
 `;
 

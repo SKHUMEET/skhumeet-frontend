@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { MAIN, ConvertKorean, Category, Status } from "@/types";
 import { useRouter } from "next/router";
+import { State } from "./ListItem";
 
 interface HomeList {
   category: Category;
@@ -9,6 +10,7 @@ interface HomeList {
 }
 
 const HomeList = ({ category, items }: HomeList) => {
+  const theme = useContext(ThemeContext);
   const router = useRouter();
   return (
     <HomeListContainer>
@@ -22,8 +24,14 @@ const HomeList = ({ category, items }: HomeList) => {
               key={idx}
               onClick={() => router.push(`/${category}/${item.id}`)}
             >
-              <span>{item.title}</span>
-              <span>{ConvertKorean[item.status.toLowerCase() as Status]}</span>
+              <Title>{item.title}</Title>
+              <State
+                style={{ padding: "0 5px" }}
+                color={theme.color.light}
+                onClick={() => router.push(`/${category}`)}
+              >
+                {ConvertKorean[item.status.toLowerCase() as Status]}{" "}
+              </State>
             </HomeListItem>
           );
         })
@@ -42,11 +50,15 @@ const HomeListContainer = styled.div`
 
   /* width: 95%; */
   /* margin: 10px; */
-  padding: 20px;
+  padding: 10px 20px;
 
   height: 200px;
   border-radius: 5px;
   box-shadow: 2px 3px 5px #b9b9b9;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const HomeListTitle = styled.div`
@@ -61,9 +73,23 @@ const HomeListTitle = styled.div`
 const HomeListItem = styled.div`
   display: flex;
   justify-content: space-between;
+
+  padding: 5px 0;
+
   line-height: 25px;
 
+  cursor: default;
+  transition: 0.2s;
+
   :hover {
-    background-color: ${({ theme }) => theme.color.hover};
+    transform: translateY(-3px);
   }
+`;
+
+const Title = styled.div`
+  width: 80%;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

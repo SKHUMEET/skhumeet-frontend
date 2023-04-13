@@ -125,8 +125,8 @@ const RegisterForm = ({
 
   useEffect(() => {
     const registerStyle =
-      category.toLowerCase() === "department_event" ||
-      category.toLowerCase() === "club"
+      category?.toLowerCase() === "department_event" ||
+      category?.toLowerCase() === "club"
         ? "grid"
         : "list";
     setRegisterType(registerStyle);
@@ -140,7 +140,7 @@ const RegisterForm = ({
           name="category"
           list={categoryList}
           onChange={handleChangeDropDown}
-          defaultItem={category.toLowerCase()}
+          defaultItem={category?.toLowerCase()}
         />
         {kind === "register" && registerType === "list" && (
           <span style={{ fontSize: "small", fontWeight: "bold" }}>
@@ -326,5 +326,8 @@ const ContentInput = styled.textarea`
 `;
 
 const BtnContainer = styled.div`
-  float: right;
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 1rem;
 `;

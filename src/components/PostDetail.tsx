@@ -6,19 +6,20 @@ import {
   formDate,
   storageConstants,
 } from "@/types";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal } from "./modal";
 import RegisterForm from "./register/RegisterForm";
 import Comment from "./Comment";
 import { useDeleteMainCategory } from "@/hooks/main";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import Bookmark from "./utils/Bookmark";
+import Btn from "./utils/Btn";
 
 const PostDetail = ({ data }: { data: MAIN }) => {
   const deletePost = useDeleteMainCategory();
   const router = useRouter();
-
+  const theme = useContext(ThemeContext);
   const [user, setUser] = useState<User>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleModalClose = () => {
@@ -45,23 +46,35 @@ const PostDetail = ({ data }: { data: MAIN }) => {
       : "list";
 
   return (
-    <>
+    <Container>
       <div>
-        <div>
-          {data.memberNumber === user?.memberNumber && (
-            <>
-              <button onClick={() => setIsModalOpen(true)}>수정하기</button>
-              <button onClick={handleDelete}>삭제하기</button>
-            </>
-          )}
-        </div>
-        {/* <button onClick={handleAButton}>custom alert</button> */}
-        <Bookmark isMarked={data.bookmarked} postId={data.id} />
-        {ConvertKorean[data.category.toLowerCase() as Category]}
+        <Header>
+          <UDContainer>
+            {data.memberNumber === user?.memberNumber && (
+              <>
+                <Btn
+                  onClick={() => setIsModalOpen(true)}
+                  color={theme.color.light}
+                >
+                  수정하기
+                </Btn>
+                <Btn onClick={handleDelete} color={theme.color.light}>
+                  삭제하기
+                </Btn>
+              </>
+            )}
+          </UDContainer>
+          {/* <button onClick={handleAButton}>custom alert</button> */}
+          <p style={{ fontWeight: "bold" }}>
+            {ConvertKorean[data.category.toLowerCase() as Category]}
+          </p>
+        </Header>
         <InfoContainer>
           작성자: {data.member} &#183; 마감일: {formDate(data.endDate)} &#183;
-          작성일:
-          {formDate(data.createdDate)}
+          작성일: {formDate(data.createdDate)}
+          <BookmarkWrapper>
+            <Bookmark isMarked={data.bookmarked} postId={data.id} />
+          </BookmarkWrapper>
         </InfoContainer>
         <InfoContainer>
           <TitleContainer>{data.title}</TitleContainer>
@@ -83,18 +96,34 @@ const PostDetail = ({ data }: { data: MAIN }) => {
           data={data}
         />
       </Modal>
-    </>
+    </Container>
   );
 };
 
 export default PostDetail;
 
+const Container = styled.div`
+  padding: 0 1rem;
+`;
+
+const Header = styled.div`
+  margin-top: 1rem;
+`;
+
+const UDContainer = styled.div`
+  float: right;
+`;
+
 const InfoContainer = styled.div`
-  padding: 5px 1rem;
+  padding: 10px 0;
 
   border-bottom: 2px solid #6ab03061;
 
   font-size: 15px;
+`;
+
+const BookmarkWrapper = styled.div`
+  float: right;
 `;
 
 const ContactContainer = styled.div`
