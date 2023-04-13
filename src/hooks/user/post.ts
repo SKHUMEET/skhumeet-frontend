@@ -1,6 +1,6 @@
 import { get } from "@/libs/api";
 import { queryKeys } from "@/react-query/constants";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 const commonOptions = {

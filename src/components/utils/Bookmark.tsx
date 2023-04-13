@@ -4,7 +4,6 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@/react-query/constants";
 import { useRouter } from "next/router";
 const Bookmark = ({
   isMarked,

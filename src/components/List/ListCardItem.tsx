@@ -4,15 +4,12 @@ import { Status, Time, Title } from "./ListItem";
 
 import { FaRegCommentAlt } from "react-icons/fa";
 import { MAIN, formDate } from "@/types";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import Bookmark from "../utils/Bookmark";
+
 const ListCardItem = ({ item }: { item: MAIN }) => {
   return (
     <Container>
       <TitleWrapper>
         <Time>마감일: {formDate(item.endDate)}</Time>
-        {/* 북마크 디테일 페이지에서만 됨 */}
-        {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
       </TitleWrapper>
       <Title>ListCardItem</Title>
       <Img src="/Test.jpg" alt="" />

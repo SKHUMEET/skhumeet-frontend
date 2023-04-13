@@ -1,6 +1,5 @@
 import {
   Category,
-  CategoryProps,
   ConvertKorean,
   MAIN,
   User,
@@ -55,7 +54,6 @@ const PostDetail = ({ data }: { data: MAIN }) => {
             </>
           )}
         </div>
-        {/* <button onClick={handleAButton}>custom alert</button> */}
         <Bookmark isMarked={data.bookmarked} postId={data.id} />
         {ConvertKorean[data.category.toLowerCase() as Category]}
         <InfoContainer>

@@ -42,16 +42,3 @@ const ChildrenWrapper = styled.div`
   height: 100%;
   flex-direction: column;
 `;
-
-const NavigateWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  height: 200px;
-  position: sticky;
-  top: 20px;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.large}) {
-    display: none;
-  }
-`;

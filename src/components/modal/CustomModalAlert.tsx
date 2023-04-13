@@ -2,6 +2,54 @@ import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
+interface CustomAlertProps {
+  message: string;
+  onConfirm: () => void;
+}
+
+const CustomAlert = ({ message, onConfirm }: CustomAlertProps) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleConfirm = () => {
+    setShowModal(false);
+    setTimeout(() => onConfirm(), 1);
+  };
+
+  useEffect(() => {
+    setTimeout(() => setShowModal(true), 1);
+  }, []);
+  return (
+    <>
+      <AlertModal.Container showModal={showModal}>
+        <AlertModal.Content onClick={handleConfirm}>
+          <LogoImg src="/Logooo.svg" alt="" height="50%" />
+          <AlertModal.Message>{message}</AlertModal.Message>
+        </AlertModal.Content>
+      </AlertModal.Container>
+    </>
+  );
+};
+
+const customAlert = (message: string) => {
+  const handleConfirm = () => {
+    const modalRoot = document.getElementById("modal-alert-portal-wrapper");
+    if (modalRoot) modalRoot.remove();
+  };
+  if (typeof window !== "undefined") {
+    const subDiv = document.createElement("div");
+    subDiv.id = "modal-alert-portal-wrapper";
+    document.body.appendChild(subDiv);
+    ReactDOM.render(
+      <>
+        <CustomAlert message={message} onConfirm={handleConfirm} />
+      </>,
+      subDiv
+    );
+  }
+};
+
+export default customAlert;
+
 const AlertModal = {
   Container: styled.div<{ showModal: boolean }>`
     position: fixed;
@@ -50,52 +98,3 @@ const LogoImg = styled.img`
   width: 15vw;
   object-fit: contain;
 `;
-
-interface CustomAlertProps {
-  message: string;
-  onConfirm: () => void;
-}
-
-const CustomAlert = ({ message, onConfirm }: CustomAlertProps) => {
-  const [showModal, setShowModal] = useState(false);
-
-  const handleConfirm = () => {
-    setShowModal(false);
-    setTimeout(() => onConfirm(), 1);
-  };
-
-  useEffect(() => {
-    setTimeout(() => setShowModal(true), 1);
-  }, []);
-  return (
-    <>
-      <AlertModal.Container showModal={showModal}>
-        <AlertModal.Content onClick={handleConfirm}>
-          <LogoImg src="/Logooo.svg" alt="" height="50%" />
-          <AlertModal.Message>{message}</AlertModal.Message>
-          {/* <button >확인</button> */}
-        </AlertModal.Content>
-      </AlertModal.Container>
-    </>
-  );
-};
-
-const customAlert = (message: string) => {
-  const handleConfirm = () => {
-    const modalRoot = document.getElementById("modal-alert-portal-wrapper");
-    if (modalRoot) modalRoot.remove();
-  };
-  if (typeof window !== "undefined") {
-    const subDiv = document.createElement("div");
-    subDiv.id = "modal-alert-portal-wrapper";
-    document.body.appendChild(subDiv);
-    ReactDOM.render(
-      <>
-        <CustomAlert message={message} onConfirm={handleConfirm} />
-      </>,
-      subDiv
-    );
-  }
-};
-
-export default customAlert;

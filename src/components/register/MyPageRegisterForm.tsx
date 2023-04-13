@@ -1,9 +1,8 @@
 import { User } from "@/types";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import Btn from "../utils/Btn";
 import imageUpload from "@/hooks/firebase/imageUpload";
-import { instance } from "../../libs/api";
+import { instance } from "@/libs/api";
 import { setStoredUser } from "@/hooks/user-storage";
 import { useRouter } from "next/router";
 

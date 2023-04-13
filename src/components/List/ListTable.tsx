@@ -23,13 +23,6 @@ export default function ListTable({
 
   return (
     <ListContainer>
-      {/* <div>
-        {totalPage && list ? (
-          <ListTable list={list} page={page} category={"hansotbab"} />
-        ) : (
-          <div>There are no posts</div>
-        )}
-      </div> */}
       <ListContainer2 itemStyle={itemStyle}>
         {list.map((el, idx) => (
           <ListWrapper

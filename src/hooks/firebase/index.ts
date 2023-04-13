@@ -3,7 +3,7 @@ import "firebase/compat/auth";
 
 import { getStorage } from "firebase/storage";
 import "firebase/compat/auth";
-import firebaseconfig from "@/firebaseconfig.json";
+import firebaseconfig from "./firebaseconfig.json";
 
 const app = firebase.initializeApp(firebaseconfig);
 

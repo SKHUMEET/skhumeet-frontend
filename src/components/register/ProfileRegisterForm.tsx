@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { LoginUserProfileProps } from "@/pages/auth";
 import styled from "styled-components";
 import { useAuth } from "@/hooks/user";
-import Btn from "../utils/Btn";
+import Btn from "@/components/utils/Btn";
 
 const ProfileRegisterForm = ({
   id,

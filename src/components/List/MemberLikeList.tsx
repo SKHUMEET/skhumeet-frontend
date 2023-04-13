@@ -1,12 +1,12 @@
 import { del } from "@/libs/api";
 import React from "react";
 import styled from "styled-components";
-import customAlert from "../modal/CustomModalAlert";
+import customAlert from "@/components/modal/CustomModalAlert";
 import { queryClient } from "@/react-query/queryClient";
-import router, { useRouter } from "next/router";
-import ListItem from "./ListItem";
-import { Category, MAIN, User } from "@/types";
-import Pagination from "../Pagination";
+import { useRouter } from "next/router";
+import ListItem from "@/components/List/ListItem";
+import { Category, User } from "@/types";
+import Pagination from "@/components/Pagination";
 
 interface MemberListProps {
   user: User | null | undefined;

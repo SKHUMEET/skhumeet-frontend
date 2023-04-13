@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import Image from "next/image";
-import { get, post } from "@/libs/api";
+import { get } from "@/libs/api";
 import { User, storageConstants } from "@/types";
 
 const ToggleUser = () => {
@@ -37,12 +37,6 @@ const ToggleUser = () => {
       },
     });
 
-    // await post("/api/member/logout",{},{
-    //   headers:{
-    //     AccessToken:
-    //     RefreshToken:
-    //   }
-    // })
     if (res) {
       router.push("/auth"); // 로그인 페이지로 이동
     }

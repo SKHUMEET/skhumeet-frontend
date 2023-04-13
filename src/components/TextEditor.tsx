@@ -1,6 +1,5 @@
 import {
   useState,
-  useRef,
   useCallback,
   RefObject,
   ChangeEvent,
@@ -96,15 +95,7 @@ const TextEditor = ({
           contentEditable={true}
           suppressContentEditableWarning={true}
           onInput={handleChange}
-          // dangerouslySetInnerHTML={{ __html: context }}
         />
-        {/* <div
-          ref={editorRef}
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          onInput={handleChange}
-          dangerouslySetInnerHTML={{ __html: textContext }}
-        /> */}
       </EditorContainer>
     </>
   );
