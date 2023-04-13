@@ -52,15 +52,8 @@ const PostDetail = ({ data }: { data: MAIN }) => {
           <UDContainer>
             {data.memberNumber === user?.memberNumber && (
               <>
-                <Btn
-                  onClick={() => setIsModalOpen(true)}
-                  color={theme.color.light}
-                >
-                  수정하기
-                </Btn>
-                <Btn onClick={handleDelete} color={theme.color.light}>
-                  삭제하기
-                </Btn>
+                <Btn onClick={() => setIsModalOpen(true)}>수정하기</Btn>
+                <Btn onClick={handleDelete}>삭제하기</Btn>
                 <InfoContainer>
                   <BookmarkWrapper>
                     <Bookmark isMarked={data.bookmarked} postId={data.id} />

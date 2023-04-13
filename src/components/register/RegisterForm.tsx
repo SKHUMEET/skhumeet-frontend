@@ -282,6 +282,7 @@ const FormContainer = styled.form`
   > input,
   textarea {
     width: 100%;
+    resize: none;
   }
 `;
 
@@ -315,7 +316,8 @@ const ContentInput = styled.textarea`
   justify-content: flex-start;
   width: 100%;
   height: 45vh;
-  padding-top: 1rem;
+  margin: 1rem 0;
+  /* padding-top: 1rem; */
 
   overflow: auto;
   border: none;
