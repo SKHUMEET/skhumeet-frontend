@@ -44,6 +44,6 @@ const ChildrenWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  padding-top: 8vh;
+  padding-top: 10vh;
   flex-direction: column;
 `;

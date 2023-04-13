@@ -86,7 +86,8 @@ const patchMain = async ({
   context,
   images,
   id,
-}: Omit<MAINREQUEST, "view"> & { id: number }) => {
+  view,
+}: MAINREQUEST & { id: number }) => {
   const res = await instance
     .patch(`/api/post?id=${id}`, {
       title,
@@ -96,6 +97,7 @@ const patchMain = async ({
       endDate: new Date(endDate),
       context,
       images,
+      view,
     })
     .then((res: any) => {
       console.log("102", res);
@@ -139,8 +141,7 @@ export const usePostMainCategory = () => {
 export const usePatchMainCategory = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
-    (mainRequest: Omit<MAINREQUEST, "view"> & { id: number }) =>
-      patchMain(mainRequest),
+    (mainRequest: MAINREQUEST & { id: number }) => patchMain(mainRequest),
     {
       onSuccess: (data) => {
         console.log(data);

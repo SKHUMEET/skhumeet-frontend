@@ -24,25 +24,29 @@ export default function ListTable({
   return (
     <ListContainer>
       <ListContainer2 itemStyle={itemStyle}>
-        {list.map((el, idx) => (
-          <ListWrapper
-            key={(el.id, el.title, el.nickname, el.modifiedDate)}
-            onClick={() => handleClickListItem(el.id)}
-            itemStyle={itemStyle}
-          >
-            {itemStyle === "list" ? (
-              <ListItem
-                item={el}
-                //  북마크,댓글개수,제목,현황,마감일,작성자
-              />
-            ) : (
-              <ListCardItem
-                item={el}
-                // 북마크,이미지,댓글개수,제목,현황,마감일,작성자, 이미지 없으면 글
-              />
-            )}
-          </ListWrapper>
-        ))}
+        {list.length === 0 ? (
+          <div style={{ marginTop: "1rem" }}>아직 게시글이 없습니다.</div>
+        ) : (
+          list.map((el, idx) => (
+            <ListWrapper
+              key={(el.id, el.title, el.nickname, el.modifiedDate)}
+              onClick={() => handleClickListItem(el.id)}
+              itemStyle={itemStyle}
+            >
+              {itemStyle === "list" ? (
+                <ListItem
+                  item={el}
+                  //  북마크,댓글개수,제목,현황,마감일,작성자
+                />
+              ) : (
+                <ListCardItem
+                  item={el}
+                  // 북마크,이미지,댓글개수,제목,현황,마감일,작성자, 이미지 없으면 글
+                />
+              )}
+            </ListWrapper>
+          ))
+        )}
       </ListContainer2>
     </ListContainer>
   );
