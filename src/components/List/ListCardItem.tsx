@@ -17,7 +17,12 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
         </Time>
         <Title>{item.title}</Title>
       </TitleWrapper>
-      <Img src="/Logo.svg" alt="로고" />
+      {item.images[0] ? (
+        <Img src={item.images[0]} alt="" />
+      ) : (
+        <Img src="/Logo.svg" alt="로고" />
+      )}
+
       <StateWrapper>
         <StatusBtn
           onClick={() => {}}

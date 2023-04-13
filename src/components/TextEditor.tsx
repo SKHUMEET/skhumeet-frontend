@@ -77,11 +77,11 @@ const TextEditor = ({
         >
           Right
         </ToolbarButton>
-        <label htmlFor="imageInput">
-          <ToolbarButton>
-            <BiImageAdd />
-          </ToolbarButton>
-        </label>
+
+        <ImageButton htmlFor="imageInput">
+          <BiImageAdd />
+        </ImageButton>
+
         <input
           id="imageInput"
           type="file"
@@ -128,6 +128,18 @@ const ToolbarContainer = styled.div`
 `;
 
 const ToolbarButton = styled.button`
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #eee;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ddd;
+  }
+`;
+
+const ImageButton = styled.label`
   padding: 5px 10px;
   border: none;
   border-radius: 3px;
