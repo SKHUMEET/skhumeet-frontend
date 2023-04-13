@@ -193,8 +193,9 @@ const Container = styled.div`
   width: 30rem;
   height: 40rem;
   padding: 2rem 0;
-  border-radius: 20px;
+
   border: 2px solid ${({ theme }) => theme.color.main};
+  border-radius: 20px;
 `;
 
 const Header = {

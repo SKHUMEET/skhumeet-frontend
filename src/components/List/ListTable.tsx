@@ -84,7 +84,7 @@ export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
           }
         `};
 
-  padding-top: 10px;
+  padding-top: 1rem;
 
   border: none;
 

@@ -46,7 +46,9 @@ const MyPageRegisterForm = ({ user }: { user: User | null | undefined }) => {
           hidden
         />
         <Info>
-          {user?.name}님의 학적 정보: {user?.memberNumber}
+          {user?.name}
+          <br />
+          {user?.memberNumber}
         </Info>
       </UserContainer>
     </UserWrapper>
@@ -56,13 +58,18 @@ const MyPageRegisterForm = ({ user }: { user: User | null | undefined }) => {
 export default MyPageRegisterForm;
 
 const UserWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: auto;
+
+  overflow: auto;
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 const UserContainer = styled.div`
@@ -70,11 +77,13 @@ const UserContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  height: 70%;
+
+  width: 30rem;
+  height: 33rem;
   padding: 2rem 0;
 
   border: 2px solid ${({ theme }) => theme.color.main};
+  border-radius: 20px;
 `;
 
 const LogoImg = styled.img`
@@ -107,4 +116,7 @@ const Button = styled.div`
 
 const Info = styled.div`
   margin-top: 1rem;
+
+  line-height: 180%;
+  text-align: center;
 `;

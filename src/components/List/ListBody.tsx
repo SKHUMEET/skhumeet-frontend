@@ -70,6 +70,10 @@ const ListBodyHeader = styled.div`
 
   width: 100%;
   margin-top: 1rem;
+  padding-bottom: 1rem;
+
+  border-bottom: 2px solid ${({ theme }) => theme.color.light};
+  font-size: 1.5rem;
 `;
 
 const CategoryWrapper = styled.div`
