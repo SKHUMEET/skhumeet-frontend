@@ -10,7 +10,7 @@ const Post = () => {
   const [user, setUser] = useState<User | null>();
   const { data, page, setPage } = useMemberPost();
   const [totalPages, setTotalPages] = useState(0);
-  console.log(data);
+  console.log("data", data);
   useEffect(() => {
     setTotalPages(data.totalPages);
   }, [data]);
@@ -25,7 +25,7 @@ const Post = () => {
   return (
     <>
       <Seo title="내가 쓴 글" />
-      {data && (
+      {data.content && (
         <MemberList
           user={user}
           list={data.content}

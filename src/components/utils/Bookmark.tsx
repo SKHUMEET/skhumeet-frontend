@@ -22,11 +22,6 @@ const Bookmark = ({
         queryClient.clear();
         router.reload();
       });
-    } else {
-      await del(`/api/post/bookmark?bookmarkId=${postId}`).then((res) => {
-        customAlert("북마크 해제");
-        queryClient.clear();
-      });
     }
   };
   return (

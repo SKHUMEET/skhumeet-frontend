@@ -1,27 +1,35 @@
-import { Category, MAIN, User } from "@/types";
-import React from "react";
-import ListItem from "./ListItem";
-import Pagination from "../Pagination";
-import styled from "styled-components";
-import { useRouter } from "next/router";
 import { del } from "@/libs/api";
+import React from "react";
+import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { queryClient } from "@/react-query/queryClient";
+import router, { useRouter } from "next/router";
+import ListItem from "./ListItem";
+import { Category, MAIN, User } from "@/types";
+import Pagination from "../Pagination";
 
 interface MemberListProps {
   user: User | null | undefined;
-  list: MAIN[];
+  list: any[];
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   totalPage: number;
 }
-const MemberList = ({
+
+const MemberLikeList = ({
   user,
   list,
   page,
   setPage,
   totalPage,
 }: MemberListProps) => {
+  const handleBookmarkDelete = async (bookmarkId: number) => {
+    await del(`/api/post/bookmark?bookmarkId=${bookmarkId}`).then((res) => {
+      customAlert("북마크 생성");
+      queryClient.clear();
+      router.reload();
+    });
+  };
   const router = useRouter();
   const handleClickListItem = (category: Category, id: number) => {
     router.push(`/${category}/${id}`); //디테일페이지
@@ -32,23 +40,26 @@ const MemberList = ({
       <ListBodyContainer>
         <ListBodyHeader>{user?.name}님 환영합니다!</ListBodyHeader>
         {list.length === 0 ? (
-          <div>아직 작성하신 글이 없군요!</div>
+          <div>아직 북마크 한 글이 없군요!</div>
         ) : (
           list.map((el) => (
-            <div
-              onClick={() =>
-                handleClickListItem(
-                  el.category.toLowerCase() as Category,
-                  el.id
-                )
-              }
-              key={el.id}
-            >
-              <ListItem
-                item={el}
-                //  북마크,댓글개수,제목,현황,마감일,작성자
-              />
-            </div>
+            <>
+              <div
+                onClick={() =>
+                  handleClickListItem(
+                    el.post.category.toLowerCase() as Category,
+                    el.post.id
+                  )
+                }
+                key={el.post.id}
+              >
+                <ListItem
+                  item={el.post}
+                  //  북마크,댓글개수,제목,현황,마감일,작성자
+                />
+              </div>
+              {/* <div onClick={() => handleBookmarkDelete(el.id)}>북마크 삭제</div> */}
+            </>
           ))
         )}
 
@@ -64,7 +75,7 @@ const MemberList = ({
   );
 };
 
-export default MemberList;
+export default MemberLikeList;
 
 const ListBodyContainer = styled.div`
   width: 100%;
