@@ -100,8 +100,8 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  width: 50%;
-  height: 63%;
+  width: 30rem;
+  height: 40rem;
 
   background-color: ${({ theme }) => theme.color.background};
   /* border: 3px solid ${({ theme }) => theme.color.main}; */

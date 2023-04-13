@@ -77,10 +77,10 @@ const PostDetail = ({ data }: { data: MAIN }) => {
           </BookmarkWrapper>
         </InfoContainer>
         <InfoContainer>
-          <TitleContainer>{data.title}</TitleContainer>
           <ContactContainer>
             조회수: {data.view} &#183; 연락 방법: {data.contact}
           </ContactContainer>
+          <TitleContainer>{data.title}</TitleContainer>
           <ContentContainer
             dangerouslySetInnerHTML={{ __html: data.context }}
           />

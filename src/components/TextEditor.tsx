@@ -78,7 +78,9 @@ const TextEditor = ({
           Right
         </ToolbarButton>
         <label htmlFor="imageInput">
-          <BiImageAdd />
+          <ToolbarButton>
+            <BiImageAdd />
+          </ToolbarButton>
         </label>
         <input
           id="imageInput"

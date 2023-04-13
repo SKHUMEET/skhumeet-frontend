@@ -67,7 +67,7 @@ const Comment = ({ postId }: { postId: number }) => {
 
 export default Comment;
 
-const CommentContainer = styled.form`
+export const CommentContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,9 +75,10 @@ const CommentContainer = styled.form`
   width: 100%;
 `;
 
-const CommentInput = styled.textarea`
+export const CommentInput = styled.textarea`
   width: 100%;
-  height: 5vh;
+  height: 4vh;
+  margin-top: 5px;
 
   border: none;
   border-bottom: 1px solid black;

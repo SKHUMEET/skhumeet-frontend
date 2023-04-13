@@ -6,6 +6,7 @@ import { del, instance } from "@/libs/api";
 import customAlert from "../modal/CustomModalAlert";
 import Btn from "../utils/Btn";
 import { COMMENT } from "@/types";
+import { CommentContainer, CommentInput } from "./Comment";
 const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
@@ -35,61 +36,49 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
     setUser(storedUser as User);
   }, []);
   return (
-    <Container
-      style={{ marginBottom: "1rem" }}
-      key={(item.id, item.writer, item.context, item.modifiedDate)}
-    >
-      <CommentItem key={item.id}>
+    <Container>
+      <CommentItem>
         <Writer>{item.writer}</Writer>
-
         {!isEdit ? (
           <span>{item.context} </span>
         ) : (
-          <CommentContainer onSubmit={handlePatchComment}>
-            <CommentInput
-              placeholder="Write comment"
-              value={editComment}
-              onChange={(e) => setEditComment(e.target.value)}
-            />
-            <Btn onClick={() => {}}>수정하기</Btn>
-          </CommentContainer>
+          <div>
+            <form onSubmit={handlePatchComment}>
+              <input
+                placeholder="Write comment"
+                value={editComment}
+                onChange={(e) => setEditComment(e.target.value)}
+              />
+              <Btn onClick={() => {}}>수정하기</Btn>
+            </form>
+          </div>
         )}
-
         <WriteDate>{formDate(item.modifiedDate)} </WriteDate>
-        {user?.name === item.writer && (
-          <>
-            <div onClick={() => setIsEdit(!isEdit)}>
-              {isEdit ? "취소" : "수정"}
-            </div>
-            <div onClick={() => handleDeleteComment(item.id)}>삭제</div>
-          </>
-        )}
-        <div></div>
       </CommentItem>
-      {/* <TimeContainer style={{ paddingLeft: "0" }}>
-    <DateP style={{ color: "#8e8e8e", marginBottom: "5px" }}>
-      {formatDate(el.modifiedDate)}
-    </DateP>
-  </TimeContainer>{" "} */}
+      {user?.name === item.writer && (
+        <EditWrapper>
+          <span onClick={() => setIsEdit(!isEdit)}>
+            {isEdit ? "취소" : "수정"}
+          </span>
+          <span onClick={() => handleDeleteComment(item.id)}>삭제</span>
+        </EditWrapper>
+      )}
     </Container>
   );
 };
 
 export default CommentDetail;
 
-const TimeContainer = styled.div`
-  float: left;
-  padding-top: 5px;
-  padding-left: 10px;
-`;
-
 const Container = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   border-bottom: 1px solid #d3d3d3;
+  padding: 1rem 0;
 `;
 
 const CommentItem = styled.div`
   width: 55vw;
-  padding: 1rem;
 
   color: black;
 `;
@@ -106,21 +95,15 @@ const WriteDate = styled.p`
   font-size: small;
 `;
 
-const CommentContainer = styled.form`
+const EditWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 0.5rem;
+
+  > span {
+    cursor: pointer;
+    :hover {
+      color: ${({ theme }) => theme.color.hover};
+    }
+  }
 `;
-
-const CommentInput = styled.textarea`
-  width: 50vw;
-  height: 5vh;
-
-  border: none;
-  border-bottom: 1px solid black;
-
-  outline: none;
-`;
-function patch(arg0: string, arg1: { postId: number; context: any }) {
-  throw new Error("Function not implemented.");
-}

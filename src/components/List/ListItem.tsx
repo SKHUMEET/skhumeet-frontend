@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MAIN, Status } from "@/types";
+import { MAIN, Status, formDate } from "@/types";
 import { GrView } from "react-icons/gr";
 import StatusBtn from "../utils/StatusBtn";
 //  북마크,댓글개수,제목,현황,마감일, 작성자
@@ -13,19 +13,19 @@ const ListItem = ({ item }: { item: MAIN }) => {
         <div>
           <Title>{item.title}</Title>
           <Time>
-            마감일: {item.endDate.split("T")[0]} &#183; {item.member}
+            마감일: {formDate(item.endDate)} &#183; {item.member}
           </Time>
         </div>
       </TitleWrapper>
       <CommentWrapper>
-        <div>
-          <GrView />
-          <span style={{ marginLeft: "5px" }}>{item.view}</span>
-        </div>{" "}
         <StatusBtn
           onClick={() => {}}
           status={item.status.toLowerCase() as Status}
         />
+        <ViewContainer>
+          <GrView size={14} style={{ marginLeft: "1rem" }} />
+          <span style={{ marginLeft: "5px" }}>{item.view}</span>
+        </ViewContainer>
       </CommentWrapper>
     </Container>
   );
@@ -84,6 +84,12 @@ export const Time = styled.span`
 
 const CommentWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+`;
+
+const ViewContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  opacity: 0.3;
 `;

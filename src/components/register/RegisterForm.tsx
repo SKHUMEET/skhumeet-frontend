@@ -92,6 +92,15 @@ const RegisterForm = ({
 
   const handleSubmit = () => {
     console.log(form);
+    if (title.length === 0) {
+      alert("제목을 입력해 주세요");
+    }
+    if (context.length === 0) {
+      alert("내용을 입력해 주세요");
+    }
+    if (contact.length === 0) {
+      alert("연락 방법을 입력해 주세요");
+    }
     if (kind === "register") {
       postMain({
         title,
@@ -187,7 +196,7 @@ const RegisterForm = ({
             name="contact"
             value={contact}
             onChange={handleChange}
-            placeholder="오픈채팅 링크 or 전화번호"
+            placeholder="오픈채팅 or 전화번호"
           />
         </DateContainer>
       </RegisterHeader>

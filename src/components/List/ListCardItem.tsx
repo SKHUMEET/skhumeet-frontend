@@ -12,14 +12,13 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
   return (
     <Container>
       <TitleWrapper>
-        <Time>마감일: {formDate(item.endDate)}</Time>
+        <Time>
+          마감일: {formDate(item.endDate)} &#183; {item.member}
+        </Time>
         <Title>{item.title}</Title>
       </TitleWrapper>
       <Img src="/Logo.svg" alt="로고" />
       <StateWrapper>
-        {/* <State color={theme.color.light}>
-          {ConvertKorean[item.status.toLowerCase() as Category]}
-        </State> */}
         <StatusBtn
           onClick={() => {}}
           status={item.status.toLowerCase() as Status}

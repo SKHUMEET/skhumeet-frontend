@@ -1,7 +1,6 @@
 import HomeList from "@/components/List/HomeList";
 import Btn from "@/components/utils/Btn";
 import Footer from "@/components/utils/Footer";
-import MainBanner from "@/components/utils/MainBanner";
 import Seo from "@/components/utils/Seo";
 import { useMainCategory } from "@/hooks/main";
 import router from "next/router";
@@ -23,7 +22,7 @@ export default function Home() {
     <HomeContainer>
       <Seo />
       {/* <MainBanner /> */}
-      <BannerImg src="/BannerT.png" alt="" />
+      <BannerImg src="/Banner.svg" alt="배너" />
       <div
         style={{
           display: "flex",
