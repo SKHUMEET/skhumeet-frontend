@@ -22,6 +22,10 @@ body{
 ::selection {
     background-color: ${({ theme }) => theme.color.main};
   }
+
+mark{
+  background-color:${({ theme }) => theme.color.light}
+}
 /* html::-webkit-scrollbar {
   width: 1rem;
 }
