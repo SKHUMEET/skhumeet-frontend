@@ -123,7 +123,7 @@ const Auth = () => {
       <Wrapper>
         <Container>
           <Header.Container>
-            <LogoImg src="/Logooo.svg" alt="" />
+            <LogoImg src="/Logo.svg" alt="" />
             <Header.Title>함께 SKHUMEET 하려면?</Header.Title>
           </Header.Container>
           <Button.Container>

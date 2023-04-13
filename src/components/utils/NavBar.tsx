@@ -33,7 +33,7 @@ const NavBar = () => {
         <TopWrapper>
           <LogoWrapper>
             <Logo onClick={() => router.push("/")}>
-              <LogoImg src="/Logooo.svg" />
+              <LogoImg src="/Logo.svg" />
             </Logo>
           </LogoWrapper>
           <NavUser>
@@ -88,14 +88,20 @@ const TopWrapper = styled.div`
 
   top: 0;
   width: calc(100%);
-  padding-right: 40px;
   background-color: white;
   width: 100%;
   height: 100%;
 
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
-    /* border-bottom: 2px solid ${({ theme }) => theme.color.main}; */
+  padding: 0;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
+    padding-right: 0;
+
     box-shadow: 0px 7px 2px -7px ${({ theme }) => theme.color.hover};
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    padding-right: 40px;
   }
 `;
 

@@ -1,18 +1,23 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
+
+type BtnProps = {
+  children: ReactNode;
+  onClick: () => void;
+  color?: string;
+  disabled?: boolean;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Btn({
   children,
   onClick,
   color,
-}: {
-  children: ReactNode;
-  onClick: () => void;
-  color?: string;
-}) {
+  disabled,
+  ...props
+}: BtnProps) {
   return (
     <>
-      <SubmitBtn onClick={onClick} color={color}>
+      <SubmitBtn onClick={onClick} color={color} disabled={disabled} {...props}>
         {children}
       </SubmitBtn>
     </>
@@ -21,7 +26,7 @@ export default function Btn({
 
 const SubmitBtn = styled.button<{ color?: string }>`
   width: 5rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   margin-left: 5px;
   padding: 2px 5px;
 
@@ -32,7 +37,7 @@ const SubmitBtn = styled.button<{ color?: string }>`
 
   text-align: center;
 
-  :hover {
+  &:hover:not(:disabled) {
     background-color: white;
     color: ${({ theme, color }) => color ?? theme.color.main};
   }

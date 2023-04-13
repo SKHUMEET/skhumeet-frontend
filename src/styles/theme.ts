@@ -13,7 +13,8 @@ export const lightTheme = {
     text: "#202124",
     background: "#fefefe",
     hover: "#c6c6c6",
-    light: "#68bd3081",
+    // light: "#68bd3081",
+    light: "#B3DB97",
     main: "#69b030",
   },
 };
@@ -27,7 +28,7 @@ export const darkTheme = {
     text: "#fefefe",
     background: "#2b2b2b",
     hover: "#c6c6c6",
-    light: "#68bd3081",
+    light: "#B3DB97",
     main: "#69b030",
   },
 };

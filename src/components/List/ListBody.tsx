@@ -73,7 +73,5 @@ const ListBodyHeader = styled.div`
 `;
 
 const CategoryWrapper = styled.div`
-  margin-top: 1rem;
-
   font-weight: 600;
 `;

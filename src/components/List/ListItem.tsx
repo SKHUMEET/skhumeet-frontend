@@ -1,29 +1,33 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { FaRegCommentAlt } from "react-icons/fa";
-import { Category, ConvertKorean, MAIN } from "@/types";
+import { Category, ConvertKorean, MAIN, Status } from "@/types";
 import { GrView } from "react-icons/gr";
-import Bookmark from "../utils/Bookmark";
+import StatusBtn from "../utils/StatusBtn";
 //  북마크,댓글개수,제목,현황,마감일, 작성자
 const ListItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
   console.log(item);
+
   return (
     <Container>
       <TitleWrapper>
         {/* 북마크 디테일 페이지에서만 됨 */}
         {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
         <div>
-          <Status color={theme.color.light}>
+          {/* <State color={theme.color.light}>
             {ConvertKorean[item.status.toLowerCase() as Category]}
-          </Status>
+          </State> */}
+          <StatusBtn
+            onClick={() => {}}
+            status={item.status.toLowerCase() as Status}
+          />
           <Title>{item.title}</Title>
           <Time>마감일: {item.endDate.split("T")[0]}</Time>
         </div>
       </TitleWrapper>
       <CommentWrapper>
         <GrView />
-        {item.view}
+        <span style={{ marginLeft: "5px" }}>{item.view}</span>
       </CommentWrapper>
     </Container>
   );
@@ -37,10 +41,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin-right: 1rem;
   padding-bottom: 10px;
-  padding-right: 1rem;
-  padding-left: 1rem;
 
   border-bottom: 1px solid #d3d3d3;
 `;
@@ -51,10 +52,9 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 
-export const Status = styled.span<{ color?: string }>`
+export const State = styled.span<{ color?: string }>`
   width: fit-content;
   padding: 2px 5px;
-  margin-bottom: 3px;
 
   background-color: ${({ color, theme }) => color ?? theme.color.main};
   border-radius: 5px;
@@ -64,14 +64,27 @@ export const Status = styled.span<{ color?: string }>`
 `;
 
 export const Title = styled.div`
+  margin: 5px 0;
+
   font-weight: 600;
+
+  transition: 0.3s;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  :hover {
+    color: ${({ theme }) => theme.color.main};
+  }
 `;
 
 export const Time = styled.span`
-  margin-bottom: 10px;
-
   color: #999999;
   font-size: 11px;
 `;
 
-const CommentWrapper = styled.div``;
+const CommentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
