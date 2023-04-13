@@ -45,10 +45,12 @@ const MemberLikeList = ({
                 }
                 key={el.post.id}
               >
-                <ListItem
-                  item={el.post}
-                  //  북마크,댓글개수,제목,현황,마감일,작성자
-                />
+                <div style={{ paddingTop: "10px" }}>
+                  <ListItem
+                    item={el.post}
+                    //  북마크,댓글개수,제목,현황,마감일,작성자
+                  />
+                </div>
               </div>
             </>
           ))
@@ -75,8 +77,6 @@ export const ListBodyContainer = styled.div`
   width: 100%;
   margin-top: 1rem;
   padding: 1rem 0;
-
-  border: 1px solid black;
 
   cursor: default;
 `;
