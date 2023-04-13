@@ -19,7 +19,7 @@ const Container = styled.div`
   margin-top: 1rem;
   padding: 1rem 0;
 
-  border-top: 1px solid ${({ theme }) => theme.color.hover};
+  border-top: 1px solid ${({ theme }) => theme.color.light};
   /* box-shadow: 0px -1px 2px ${({ theme }) => theme.color.hover}; */
 
   font-size: 13px;

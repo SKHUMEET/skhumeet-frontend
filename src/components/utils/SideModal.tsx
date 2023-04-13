@@ -166,7 +166,7 @@ const Overlay = styled.div<SidebarProps>`
     margin-left: 10px;
 
     background: ${({ theme }) => theme.color.background};
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     backdrop-filter: blur(25px);

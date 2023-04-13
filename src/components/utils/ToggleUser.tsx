@@ -55,13 +55,7 @@ const ToggleUser = () => {
     <ToggleContainer>
       {userImage && (
         <ImageButton onClick={() => setIsOpen(!isOpen)}>
-          <Image
-            src={userImage as string}
-            width="35"
-            height="35"
-            alt=""
-            style={{ borderRadius: "30px" }}
-          />
+          <ProfileImage src={userImage as string} alt="" />
         </ImageButton>
       )}
       {isOpen && (
@@ -102,6 +96,13 @@ const ImageButton = styled.div`
   object-fit: contain;
 
   overflow: hidden;
+`;
+
+const ProfileImage = styled.img`
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
 `;
 
 const ToggleDropDown = {

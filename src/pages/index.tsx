@@ -29,8 +29,18 @@ export default function Home() {
           display: "flex",
           justifyContent: "flex-end",
           marginTop: "1rem",
+          alignItems: "center",
         }}
       >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
+          지금 바로 함께
+        </div>
         <Btn
           onClick={() => {
             router.push("/register");

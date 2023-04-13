@@ -43,6 +43,7 @@ const LayoutWrapper = styled.div`
 const ChildrenWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: calc(100%-8vh);
+  padding-top: 8vh;
   flex-direction: column;
 `;

@@ -58,8 +58,8 @@ const HomeListContainer = styled.div`
 
   height: 200px;
   border-radius: 5px;
-  box-shadow: 2px 3px 5px #b9b9b9;
-
+  /* box-shadow: 2px 3px 5px #b9b9b9; */
+  box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -69,7 +69,7 @@ const HomeListTitle = styled.div`
   margin: 10px 0;
   padding-bottom: 10px;
 
-  border-bottom: 1.5px solid #68bd3081;
+  border-bottom: 1.5px solid ${({ theme }) => theme.color.light};
 
   font-weight: bold;
 `;
