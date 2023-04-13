@@ -12,7 +12,9 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
   return (
     <Container>
       <TitleWrapper>
-        <Time>마감일: {formDate(item.endDate)}</Time>
+        <Time>
+          마감일: {formDate(item.endDate)} &#183; {item.member}
+        </Time>
         {/* 북마크 디테일 페이지에서만 됨 */}
         {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
         <Title>{item.title}</Title>

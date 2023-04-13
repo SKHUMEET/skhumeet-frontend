@@ -3,9 +3,9 @@ import React from "react";
 import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { queryClient } from "@/react-query/queryClient";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import ListItem from "./ListItem";
-import { Category, MAIN, User } from "@/types";
+import { Category, User } from "@/types";
 import Pagination from "../Pagination";
 
 interface MemberListProps {
@@ -38,9 +38,11 @@ const MemberLikeList = ({
   return (
     <>
       <ListBodyContainer>
-        <ListBodyHeader>{user?.name}님 환영합니다!</ListBodyHeader>
+        <ListBodyHeader>
+          <p style={{ textAlign: "center" }}>{user?.name}님 환영합니다!</p>
+        </ListBodyHeader>
         {list.length === 0 ? (
-          <div>아직 북마크 한 글이 없군요!</div>
+          <div>아직 작성하신 글이 없군요!</div>
         ) : (
           list.map((el) => (
             <>
@@ -62,7 +64,6 @@ const MemberLikeList = ({
             </>
           ))
         )}
-
         {totalPage > 1 && (
           <Pagination
             totalPages={totalPage}
@@ -77,14 +78,25 @@ const MemberLikeList = ({
 
 export default MemberLikeList;
 
-const ListBodyContainer = styled.div`
+export const ListBodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 0;
+
+  border: 1px solid black;
+
+  cursor: default;
 `;
 
 const ListBodyHeader = styled.div`
   display: flex;
-  justify-content: space-between;
 
   width: 100%;
-  margin-top: 1rem;
+  margin: 1rem 0;
+
+  text-align: center;
 `;

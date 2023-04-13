@@ -114,7 +114,8 @@ const CommentContainer = styled.form`
 
 const CommentInput = styled.textarea`
   width: 100%;
-  height: 5vh;
+  height: 4vh;
+  margin-top: 5px;
 
   border: none;
   border-bottom: 1px solid black;

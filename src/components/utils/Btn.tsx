@@ -24,7 +24,7 @@ export default function Btn({
   );
 }
 
-const SubmitBtn = styled.button<{ color?: string }>`
+export const SubmitBtn = styled.button<{ color?: string }>`
   width: 5rem;
   /* margin-top: 1rem; */
   margin-left: 5px;
@@ -36,6 +36,7 @@ const SubmitBtn = styled.button<{ color?: string }>`
   border-radius: 3px;
 
   text-align: center;
+  cursor: pointer;
 
   &:hover:not(:disabled) {
     background-color: white;
