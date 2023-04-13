@@ -21,8 +21,15 @@ const Bookmark = ({
         queryClient.clear();
         router.reload();
       });
+    } else {
+      await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
+        customAlert("북마크 해제");
+        queryClient.clear();
+        router.reload();
+      });
     }
   };
+
   return (
     <BookmarkWrapper onClick={handleBookmark}>
       {isMarked ? <BsBookmarkFill /> : <BsBookmark />}

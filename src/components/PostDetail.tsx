@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Modal } from "./modal";
 import RegisterForm from "./register/RegisterForm";
-import Comment from "./Comment";
+import Comment from "./comment/Comment";
 import { useDeleteMainCategory } from "@/hooks/main";
 import { useRouter } from "next/router";
 import styled from "styled-components";

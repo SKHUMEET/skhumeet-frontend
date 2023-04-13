@@ -98,3 +98,10 @@ export const formDate = (data: string | undefined) => {
     return data;
   }
 };
+export interface COMMENT {
+  id: number;
+  writer: string;
+  context: string;
+  childComments: string[];
+  modifiedDate: string;
+}
