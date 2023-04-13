@@ -9,7 +9,7 @@ import { User, storageConstants } from "@/types";
 const ToggleUser = () => {
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const [userImage, setUserImage] = useState<string>();
 
@@ -52,10 +52,14 @@ const ToggleUser = () => {
   }, []);
 
   return (
-    <ToggleContainer>
+    <ToggleContainer onMouseLeave={() => setIsOpen(false)}>
       {userImage && (
-        <ImageButton onClick={() => setIsOpen(!isOpen)}>
-          <ProfileImage src={userImage as string} alt="" />
+        <ImageButton>
+          <ProfileImage
+            src={userImage as string}
+            alt=""
+            onMouseOver={() => setIsOpen(!isOpen)}
+          />
         </ImageButton>
       )}
       {isOpen && (
@@ -82,6 +86,7 @@ export default ToggleUser;
 
 const ToggleContainer = styled.div`
   position: relative;
+  cursor: pointer;
   width: 100%;
 `;
 
@@ -107,18 +112,20 @@ const ProfileImage = styled.img`
 
 const ToggleDropDown = {
   Content: styled.div`
+    position: absolute;
+    opacity: 1;
+    width: 10rem;
+    padding: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     top: 100%;
     right: 0;
 
-    position: absolute;
-    width: 10rem;
-    padding: 8px;
+    background-color: ${({ theme }) => theme.color.background};
 
-    background-color: #fff;
-    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
 
     cursor: default;
   `,
@@ -126,8 +133,11 @@ const ToggleDropDown = {
   Item: styled.div`
     margin: 10px 0;
 
+    transition: 0.2s;
+
     :hover {
-      background-color: ${({ theme }) => theme.color.hover};
+      transform: translateY(-3px);
+      opacity: 1;
     }
   `,
 };

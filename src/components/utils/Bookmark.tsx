@@ -18,13 +18,13 @@ const Bookmark = ({
   const handleBookmark = async () => {
     if (!isMarked) {
       await post(`/api/post/bookmark?postId=${postId}`).then((res) => {
-        customAlert("북마크 생성");
+        // customAlert("북마크 생성");
         queryClient.clear();
         router.reload();
       });
     } else {
       await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
-        customAlert("북마크 해제");
+        // customAlert("북마크 해제");
         queryClient.clear();
         router.reload();
       });

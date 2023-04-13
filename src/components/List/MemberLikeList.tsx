@@ -32,7 +32,7 @@ const MemberLikeList = ({
           <p style={{ textAlign: "center" }}>{user?.name}님 환영합니다!</p>
         </ListBodyHeader>
         {list.length === 0 ? (
-          <div>아직 작성하신 글이 없군요!</div>
+          <div>아직 북마크한 글이 없군요!</div>
         ) : (
           list.map((el) => (
             <>
@@ -75,8 +75,6 @@ export const ListBodyContainer = styled.div`
   width: 100%;
   margin-top: 1rem;
   padding: 1rem 0;
-
-  border: 1px solid black;
 
   cursor: default;
 `;

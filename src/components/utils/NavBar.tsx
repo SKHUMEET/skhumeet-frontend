@@ -89,22 +89,21 @@ const TopWrapper = styled.div`
   align-items: center;
 
   top: 0;
-  width: calc(100%);
   background-color: ${({ theme }) => theme.color.background};
   width: 100%;
   height: 100%;
 
-  padding: 0;
-
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
+    width: 80vw;
+    padding-right: 40px;
+  }
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    width: 100vw;
+    padding-right: 40px;
+  }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     width: 60vw;
     padding-right: 0;
-
-    /* box-shadow: 0px 0px 5px -2px ${({ theme }) => theme.color.main}; */
-  }
-
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
-    padding-right: 40px;
   }
 `;
 
