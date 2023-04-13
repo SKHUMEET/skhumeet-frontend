@@ -46,9 +46,9 @@ const MyPageRegisterForm = ({ user }: { user: User | null | undefined }) => {
           onChange={handleFileUpload}
           hidden
         />
-        <div>
-          {user?.name}님 의 학적 정보:{user?.memberNumber}
-        </div>
+        <Info>
+          {user?.name}님의 학적 정보: {user?.memberNumber}
+        </Info>
       </UserContainer>
     </UserWrapper>
   );
@@ -59,6 +59,7 @@ export default MyPageRegisterForm;
 const UserWrapper = styled.div`
   width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,16 +82,16 @@ const LogoImg = styled.img`
   width: 15vw;
   margin-bottom: 2rem;
 `;
+
 const UserImg = styled.img`
-  width: 30%;
-  height: 30%;
+  width: 130px;
+  height: 130px;
 `;
 
 const Button = styled.div`
-  width: 8rem;
   margin-top: 1rem;
   margin-left: 5px;
-  padding: 2px 5px;
+  padding: 2px 8px;
 
   background-color: ${({ theme, color }) => color ?? theme.color.main};
   color: white;
@@ -103,4 +104,8 @@ const Button = styled.div`
     background-color: white;
     color: ${({ theme, color }) => color ?? theme.color.main};
   }
+`;
+
+const Info = styled.div`
+  margin-top: 1rem;
 `;

@@ -3,6 +3,7 @@ import styled, { ThemeContext } from "styled-components";
 import { MAIN, ConvertKorean, Category, Status } from "@/types";
 import { useRouter } from "next/router";
 import { State } from "./ListItem";
+import StatusBtn from "../utils/StatusBtn";
 
 interface HomeList {
   category: Category;
@@ -25,13 +26,16 @@ const HomeList = ({ category, items }: HomeList) => {
               onClick={() => router.push(`/${category}/${item.id}`)}
             >
               <Title>{item.title}</Title>
-              <State
+              {/* <State
                 style={{ padding: "0 5px" }}
                 color={theme.color.light}
                 onClick={() => router.push(`/${category}`)}
-              >
-                {ConvertKorean[item.status.toLowerCase() as Status]}{" "}
-              </State>
+              > */}
+              <StatusBtn
+                onClick={() => {}}
+                status={item.status.toLowerCase() as Status}
+              />
+              {/* </State> */}
             </HomeListItem>
           );
         })

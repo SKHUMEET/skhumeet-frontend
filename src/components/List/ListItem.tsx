@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { Category, ConvertKorean, MAIN } from "@/types";
+import { Category, ConvertKorean, MAIN, Status } from "@/types";
 import { GrView } from "react-icons/gr";
+import StatusBtn from "../utils/StatusBtn";
 //  북마크,댓글개수,제목,현황,마감일, 작성자
 const ListItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
@@ -13,9 +14,13 @@ const ListItem = ({ item }: { item: MAIN }) => {
         {/* 북마크 디테일 페이지에서만 됨 */}
         {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
         <div>
-          <State color={theme.color.light}>
+          {/* <State color={theme.color.light}>
             {ConvertKorean[item.status.toLowerCase() as Category]}
-          </State>
+          </State> */}
+          <StatusBtn
+            onClick={() => {}}
+            status={item.status.toLowerCase() as Status}
+          />
           <Title>{item.title}</Title>
           <Time>마감일: {item.endDate.split("T")[0]}</Time>
         </div>

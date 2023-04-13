@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { State, Time, Title } from "./ListItem";
-import { Category, ConvertKorean } from "@/types";
+import { Category, ConvertKorean, Status } from "@/types";
 import { MAIN, formDate } from "@/types";
 import { GrView } from "react-icons/gr";
+import StatusBtn from "../utils/StatusBtn";
 
 const ListCardItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
@@ -18,9 +19,13 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
       </TitleWrapper>
       <Img src="/Logo.svg" alt="로고" />
       <StateWrapper>
-        <State color={theme.color.light}>
+        {/* <State color={theme.color.light}>
           {ConvertKorean[item.status.toLowerCase() as Category]}
-        </State>
+        </State> */}
+        <StatusBtn
+          onClick={() => {}}
+          status={item.status.toLowerCase() as Status}
+        />
         <ViewWrapper>
           <GrView />
           <span style={{ marginLeft: "5px" }}>{item.view}</span>
