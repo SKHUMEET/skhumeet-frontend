@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { MAIN, ConvertKorean, Category } from "@/types";
+import { MAIN, ConvertKorean, Category, Status } from "@/types";
 import { useRouter } from "next/router";
 
 interface HomeList {
@@ -23,15 +23,7 @@ const HomeList = ({ category, items }: HomeList) => {
               onClick={() => router.push(`/${category}/${item.id}`)}
             >
               <span>{item.title}</span>
-              {/* {typeof item.isRecruiting !== "undefined" && item.isRecruiting ? (
-              <div>
-                <Category color={theme.color.main}>모집 중</Category>
-              </div>
-            ) : (
-              <div>
-                <Category color={theme.color.light}>모집 완료</Category>
-              </div>
-            )} */}
+              <span>{ConvertKorean[item.status.toLowerCase() as Status]}</span>
             </HomeListItem>
           );
         })

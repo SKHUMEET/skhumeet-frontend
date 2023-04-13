@@ -1,8 +1,10 @@
 import {
+  Category,
   CategoryProps,
   ConvertKorean,
   MAIN,
   User,
+  formDate,
   storageConstants,
 } from "@/types";
 import React, { useEffect, useState } from "react";
@@ -12,15 +14,13 @@ import Comment from "./Comment";
 import { useDeleteMainCategory } from "@/hooks/main";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-
-const PostDetail = ({ data }: { data: MAIN }, { category }: CategoryProps) => {
+import Bookmark from "./utils/Bookmark";
+const PostDetail = ({ data }: { data: MAIN }) => {
   const deletePost = useDeleteMainCategory();
   const router = useRouter();
 
   const [user, setUser] = useState<User>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [bookmark, setBookmark] = useState(false);
-
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
@@ -39,7 +39,8 @@ const PostDetail = ({ data }: { data: MAIN }, { category }: CategoryProps) => {
   }, []);
 
   const registerStyle =
-    data.category === "department_event" || data.category === "club"
+    data.category.toLowerCase() === "department_event" ||
+    data.category.toLowerCase() === "club"
       ? "grid"
       : "list";
 
@@ -55,10 +56,11 @@ const PostDetail = ({ data }: { data: MAIN }, { category }: CategoryProps) => {
           )}
         </div>
         {/* <button onClick={handleAButton}>custom alert</button> */}
-        {ConvertKorean[category]}
+        <Bookmark isMarked={data.bookmarked} postId={data.id} />
+        {ConvertKorean[data.category.toLowerCase() as Category]}
         <InfoContainer>
-          작성자: {data.member} | 마감일: {data.endDate} | 작성일:
-          {data.createDate}
+          작성자: {data.member} | 마감일: {formDate(data.endDate)} | 작성일:
+          {formDate(data.createdDate)}
         </InfoContainer>
         <ContactContainer>
           조회수: {data.view} | 연락 방법: {data.contact}

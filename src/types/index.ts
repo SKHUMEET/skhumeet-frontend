@@ -79,13 +79,22 @@ export interface MAIN {
   contact: string;
   status: Status;
   endDate: string;
-  createDate: string;
+  createdDate: string;
   view: number;
   context: string;
   images: string[];
+  bookmarked: boolean;
 }
 
 export type MAINREQUEST = Omit<
   MAIN,
-  "id" | "createDate" | "member" | "memberNumber"
+  "id" | "createdDate" | "member" | "memberNumber" | "bookmarked"
 >;
+
+export const formDate = (data: string | undefined) => {
+  if (typeof data === "string") {
+    return data.split("T")[0];
+  } else {
+    return data;
+  }
+};

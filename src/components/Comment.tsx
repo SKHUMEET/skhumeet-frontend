@@ -67,16 +67,14 @@ const Comment = ({ postId }: { postId: number }) => {
         <Notion>댓글없음</Notion>
       )}
 
-      {/* <CommentForm onSubmit={handleSubmitComment}> */}
-      <CommentContainer>
+      <CommentContainer onSubmit={handleSubmitComment}>
         <CommentInput
           placeholder="Write comment"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-        <Btn onClick={handleSubmitComment}>저장하기</Btn>
+        <Btn onClick={() => {}}>저장하기</Btn>
       </CommentContainer>
-      {/* </CommentForm> */}
     </>
   );
 };
@@ -106,16 +104,7 @@ const Writer = styled.span`
   font-weight: 600;
 `;
 
-const CommentForm = styled.form`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 55vw;
-  margin-bottom: 2rem;
-`;
-
-const CommentContainer = styled.div`
+const CommentContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;

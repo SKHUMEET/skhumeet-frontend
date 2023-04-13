@@ -24,9 +24,10 @@ const TextEditor = ({
   const applyFormat = useCallback((tag: string, type?: string) => {
     document.execCommand(tag, false, type);
   }, []);
+
   const handleChange = () => {
     if (editorRef.current) {
-      const value = editorRef.current.innerText;
+      const value = editorRef.current.innerHTML;
       console.log("content", value);
       setTextContext(value);
       handleContextChange(value);

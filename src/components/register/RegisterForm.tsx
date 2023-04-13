@@ -4,6 +4,7 @@ import {
   MAINREQUEST,
   Status,
   categoryList,
+  formDate,
   statusList as originStatusList,
 } from "@/types";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
@@ -43,7 +44,8 @@ const RegisterForm = ({
     contact: data?.contact ?? "",
     status: data?.status ?? originStatusList[0],
     endDate:
-      data?.endDate.split("T")[0] ?? new Date().toISOString().split("T")[0],
+      (formDate(data?.endDate) as string) ??
+      (formDate(new Date().toISOString()) as string),
     view: data?.view ?? 1,
     context: data?.context ?? "",
     images: data?.images ?? [],
@@ -74,6 +76,7 @@ const RegisterForm = ({
     if (e.target.files) {
       await imageUpload(e.target.files).then((res) => {
         setForm({ ...form, images: [...images, ...res] });
+
         if (res) {
           customAlert("이미지 업로드 완료");
           const imgElement = document.createElement("img");
@@ -84,9 +87,11 @@ const RegisterForm = ({
         }
       });
     }
+    return "";
   };
 
   const handleSubmit = () => {
+    console.log(form);
     if (kind === "register") {
       postMain({
         title,
@@ -102,8 +107,8 @@ const RegisterForm = ({
       patchMain({
         title,
         category,
-        contact,
         status,
+        contact,
         endDate,
         context,
         images,
