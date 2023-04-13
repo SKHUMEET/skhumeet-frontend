@@ -1,4 +1,4 @@
-import { MAIN, User, storageConstants } from "@/types";
+import { MAIN, User, formDate, storageConstants } from "@/types";
 import React, { useEffect, useState } from "react";
 import { Modal } from "./modal";
 import RegisterForm from "./register/RegisterForm";
@@ -6,12 +6,13 @@ import { del, instance } from "@/libs/api";
 import Comment from "./Comment";
 import { useDeleteMainCategory } from "@/hooks/main";
 import { useRouter } from "next/router";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import Bookmark from "./utils/Bookmark";
 const PostDetail = ({ data }: { data: MAIN }) => {
   const deletePost = useDeleteMainCategory();
   const router = useRouter();
   const [user, setUser] = useState<User>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [bookmark, setBookmark] = useState(false);
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
@@ -28,7 +29,8 @@ const PostDetail = ({ data }: { data: MAIN }) => {
   }, []);
 
   const registerStyle =
-    data.category === "department_event" || data.category === "club"
+    data.category.toLowerCase() === "department_event" ||
+    data.category.toLowerCase() === "club"
       ? "grid"
       : "list";
 
@@ -45,9 +47,10 @@ const PostDetail = ({ data }: { data: MAIN }) => {
         </div>
         {/* <button onClick={handleAButton}>custom alert</button> */}
         <div>
-          작성자: {data.member} | 마감일: {data.endDate} | 작성일:
-          {data.createDate}
+          작성자: {data.member} | 마감일: {formDate(data.endDate)} | 작성일:
+          {formDate(data.createdDate)}
         </div>
+        <Bookmark isMarked={data.bookmarked} postId={data.id} />
         <div>조회수: {data.view}</div>
         <div>연락 방법: {data.contact}</div>
         <div dangerouslySetInnerHTML={{ __html: data.context }} />

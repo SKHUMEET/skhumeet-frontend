@@ -75,9 +75,9 @@ const ToggleUser = () => {
           <ToggleDropDown.Item onClick={() => handleClick("/mypage", "post")}>
             작성한 글 보기
           </ToggleDropDown.Item>
-          {/* <ToggleDropDown.Item onClick={() => handleClick("/mypage", "like")}>
+          <ToggleDropDown.Item onClick={() => handleClick("/mypage", "like")}>
             북마크 한 글 보기
-          </ToggleDropDown.Item> */}
+          </ToggleDropDown.Item>
           <ToggleDropDown.Item onClick={() => handleClick("/mypage")}>
             마이페이지
           </ToggleDropDown.Item>

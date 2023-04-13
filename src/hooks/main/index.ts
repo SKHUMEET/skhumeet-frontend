@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { get, instance, post } from "@/libs/api";
+import { del, get, instance, post } from "@/libs/api";
 import { Category, MAIN, MAINREQUEST } from "@/types";
 import { queryKeys } from "@/react-query/constants";
 import { useEffect, useState } from "react";
@@ -85,8 +85,8 @@ const postMain = async ({
 const patchMain = async ({
   title,
   category,
-  contact = "email",
   status,
+  contact,
   endDate,
   context,
   images,
@@ -96,8 +96,8 @@ const patchMain = async ({
     .patch(`/api/post?id=${id}`, {
       title,
       category,
-      contact,
       status,
+      contact,
       endDate: new Date(endDate),
       context,
       images,
@@ -124,8 +124,12 @@ export const usePostMainCategory = () => {
         const category = data?.category.toLowerCase() as Category;
 
         console.log(category);
+        // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
-
+        queryClient.removeQueries([queryKeys.detail]);
+        queryClient.setQueryData([queryKeys[category]], () => {
+          return getMainCategory(category, 1);
+        });
         customAlert("글이 작성되었습니다.");
       },
       onError: () => {
@@ -148,8 +152,12 @@ export const usePatchMainCategory = () => {
         const category = data?.category.toLowerCase() as Category;
 
         console.log(category);
+        // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
-
+        queryClient.removeQueries([queryKeys.detail]);
+        queryClient.setQueryData([queryKeys[category]], () => {
+          return getMainCategory(category, 1);
+        });
         customAlert("글이 수정되었습니다.");
       },
       onError: () => {
@@ -168,7 +176,7 @@ export const getPostById = async (id: number) => {
 };
 
 export const deletePostById = async (id: number) => {
-  await instance.delete(`/api/post?id=${id}`).then((res) => console.log(res));
+  await del(`/api/post?id=${id}`).then((res) => console.log(res));
 };
 
 export const useDeleteMainCategory = () => {

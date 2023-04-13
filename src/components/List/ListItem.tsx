@@ -1,27 +1,29 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { BsBookmark } from "react-icons/bs";
 import { FaRegCommentAlt } from "react-icons/fa";
-import { MAIN } from "@/types";
-
+import { Category, ConvertKorean, MAIN } from "@/types";
+import { GrView } from "react-icons/gr";
+import Bookmark from "../utils/Bookmark";
 //  북마크,댓글개수,제목,현황,마감일, 작성자
 const ListItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
-
+  console.log(item);
   return (
     <Container>
       <TitleWrapper>
-        <BsBookmark style={{ marginRight: "5px" }} />
+        {/* 북마크 디테일 페이지에서만 됨 */}
+        {/* <Bookmark isMarked={item.bookmarked} postId={item.id} /> */}
         <div>
-          <Category color={theme.color.light}>모집 완료</Category>
+          <Status color={theme.color.light}>
+            {ConvertKorean[item.status.toLowerCase() as Category]}
+          </Status>
           <Title>{item.title}</Title>
-          <Time>
-            마감일: {item.endDate.toLocaleString()} | {item.nickname}
-          </Time>
+          <Time>마감일: {item.endDate.split("T")[0]}</Time>
         </div>
       </TitleWrapper>
       <CommentWrapper>
-        <FaRegCommentAlt /> 0
+        <GrView />
+        {item.view}
       </CommentWrapper>
     </Container>
   );
@@ -49,7 +51,7 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 
-export const Category = styled.span<{ color?: string }>`
+export const Status = styled.span<{ color?: string }>`
   width: fit-content;
   padding: 2px 5px;
   margin-bottom: 3px;

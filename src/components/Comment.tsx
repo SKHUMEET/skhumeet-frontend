@@ -65,14 +65,14 @@ const Comment = ({ postId }: { postId: number }) => {
         <Notion>댓글없음</Notion>
       )}
 
-      {/* <CommentForm onSubmit={handleSubmitComment}> */}
-      <CommentInput
-        placeholder="Write comment"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-      />
-      <Btn onClick={handleSubmitComment}>저장하기</Btn>
-      {/* </CommentForm> */}
+      <CommentForm onSubmit={handleSubmitComment}>
+        <CommentInput
+          placeholder="Write comment"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <Btn>저장하기</Btn>
+      </CommentForm>
     </>
   );
 };

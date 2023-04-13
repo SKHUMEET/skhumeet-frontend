@@ -1,8 +1,9 @@
-import { MAIN, User } from "@/types";
+import { Category, MAIN, User } from "@/types";
 import React from "react";
 import ListItem from "./ListItem";
 import Pagination from "../Pagination";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 interface MemberListProps {
   user: User | null | undefined;
@@ -18,6 +19,11 @@ const MemberList = ({
   setPage,
   totalPage,
 }: MemberListProps) => {
+  const router = useRouter();
+  const handleClickListItem = (category: Category, id: number) => {
+    router.push(`/${category}/${id}`); //디테일페이지
+  };
+
   return (
     <>
       <ListBodyContainer>
@@ -26,11 +32,20 @@ const MemberList = ({
           <div>아직 작성하신 글이 없군요!</div>
         ) : (
           list.map((el) => (
-            <ListItem
+            <div
+              onClick={() =>
+                handleClickListItem(
+                  el.category.toLowerCase() as Category,
+                  el.id
+                )
+              }
               key={el.id}
-              item={el}
-              //  북마크,댓글개수,제목,현황,마감일,작성자
-            />
+            >
+              <ListItem
+                item={el}
+                //  북마크,댓글개수,제목,현황,마감일,작성자
+              />
+            </div>
           ))
         )}
 

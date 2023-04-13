@@ -6,13 +6,16 @@ import Seo from "@/components/utils/Seo";
 import { useQuery } from "@tanstack/react-query";
 import { getPostById } from "@/hooks/main";
 import PostDetail from "@/components/PostDetail";
+import { queryKeys } from "@/react-query/constants";
 
 const Detail = ({ id }: { id: number }) => {
-  const { data, isError, isLoading, error } = useQuery(["detail", id], () =>
-    getPostById(id)
+  const { data, isError, isLoading, error } = useQuery(
+    [queryKeys.detail, id],
+    () => getPostById(id)
   );
 
   if (isLoading) return <>loading</>;
+  if (isError) return <>{error}</>;
   return (
     <>
       <Seo />
