@@ -17,17 +17,22 @@ const ListItem = ({ item }: { item: MAIN }) => {
           {/* <State color={theme.color.light}>
             {ConvertKorean[item.status.toLowerCase() as Category]}
           </State> */}
-          <StatusBtn
-            onClick={() => {}}
-            status={item.status.toLowerCase() as Status}
-          />
           <Title>{item.title}</Title>
-          <Time>마감일: {item.endDate.split("T")[0]}</Time>
+          <Time>
+            마감일: {item.endDate.split("T")[0]} &#183; {item.member}
+          </Time>
         </div>
       </TitleWrapper>
       <CommentWrapper>
-        <GrView />
-        <span style={{ marginLeft: "5px" }}>{item.view}</span>
+        {" "}
+        <StatusBtn
+          onClick={() => {}}
+          status={item.status.toLowerCase() as Status}
+        />
+        <ViewContainer>
+          <GrView size={14} style={{ marginLeft: "1rem" }} />
+          <span style={{ marginLeft: "5px" }}>{item.view}</span>
+        </ViewContainer>
       </CommentWrapper>
     </Container>
   );
@@ -87,4 +92,11 @@ export const Time = styled.span`
 const CommentWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const ViewContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  opacity: 0.3;
 `;

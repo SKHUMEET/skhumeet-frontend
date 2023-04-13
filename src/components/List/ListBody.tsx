@@ -26,7 +26,7 @@ const ListBody = ({ category }: CategoryProps) => {
         <ListBodyHeader>
           <CategoryWrapper>{ConvertKorean[category]}</CategoryWrapper>
           <div>
-            <Btn
+            <SubmitBtn
               onClick={() =>
                 router.push(
                   {
@@ -38,7 +38,7 @@ const ListBody = ({ category }: CategoryProps) => {
               }
             >
               작성하기
-            </Btn>
+            </SubmitBtn>
           </div>
         </ListBodyHeader>
         <ListTable
@@ -74,4 +74,17 @@ const ListBodyHeader = styled.div`
 
 const CategoryWrapper = styled.div`
   font-weight: 600;
+`;
+
+const SubmitBtn = styled(Btn)`
+  background-color: ${({ theme }) => theme.color.background};
+  border: 1px solid ${({ theme }) => theme.color.main};
+  color: ${({ theme }) => theme.color.main};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.main};
+    border: 1px solid ${({ theme }) => theme.color.main};
+    color: ${({ theme }) => theme.color.text};
+  }
 `;

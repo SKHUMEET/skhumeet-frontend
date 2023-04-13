@@ -1,27 +1,30 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 *{
-    font-family: 'Noto Sans KR', sans-serif;
-    padding:0;
-    margin:0;
-    box-sizing:border-box
+  /* font-family: 'Noto Sans KR', sans-serif; */
+  /* font-family: 'Nanum Gothic', sans-serif; */
+  font-family: 'NanumSquareNeo-Variable';
+  padding:0;
+  margin:0;
+  box-sizing:border-box
 }
 
 body{
-    background: ${({ theme }) => theme.color.background};
-    color:${({ theme }) => theme.color.text};
+  background: ${({ theme }) => theme.color.background};
+  color:${({ theme }) => theme.color.text};
 }
 
 ::selection {
-    background-color: ${({ theme }) => theme.color.main};
-  }
+  background-color: ${({ theme }) => theme.color.main};
+}
 /* html::-webkit-scrollbar {
   width: 1rem;
 }
@@ -32,5 +35,4 @@ html::-webkit-scrollbar-thumb {
   background:${({ theme }) => theme.color.main}
   
 } */
-
 `;
