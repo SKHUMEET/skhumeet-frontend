@@ -27,7 +27,6 @@ const TextEditor = ({
   const handleChange = () => {
     if (editorRef.current) {
       const value = editorRef.current.innerHTML;
-      console.log("content", value);
       setTextContext(value);
       handleContextChange(value);
     }

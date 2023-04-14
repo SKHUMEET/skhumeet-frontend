@@ -10,7 +10,6 @@ const Post = () => {
   const [user, setUser] = useState<User | null>();
   const { data, page, setPage } = useMemberPost();
   const [totalPages, setTotalPages] = useState(0);
-  console.log("data", data);
   useEffect(() => {
     setTotalPages(data.totalPages);
   }, [data]);

@@ -1,17 +1,13 @@
 import MemberLikeList from "@/components/List/MemberLikeList";
-import MemberList from "@/components/List/MemberList";
 import Seo from "@/components/utils/Seo";
 import { useMemberLikePost } from "@/hooks/user/post";
 import { User, storageConstants } from "@/types";
-import { get } from "http";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 
 const Like = () => {
   const [user, setUser] = useState<User | null>();
   const { data, page, setPage } = useMemberLikePost();
   const [totalPages, setTotalPages] = useState(0);
-  console.log("13", data);
   useEffect(() => {
     setTotalPages(data.totalPages);
   }, [data]);

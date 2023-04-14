@@ -5,8 +5,6 @@ import { GrView } from "react-icons/gr";
 import StatusBtn from "../utils/StatusBtn";
 //  북마크,댓글개수,제목,현황,마감일, 작성자
 const ListItem = ({ item }: { item: MAIN }) => {
-  console.log(item);
-
   return (
     <Container>
       <TitleWrapper>

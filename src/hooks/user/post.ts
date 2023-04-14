@@ -12,7 +12,6 @@ const getMemberPost = async (page: number) => {
   const res = await get(`/api/post/member?page=${page}`).then(
     (r: any) => r.data
   );
-  console.log("15", res);
 
   return res;
 };
@@ -21,7 +20,6 @@ const getMemberLikePost = async (page: number) => {
   const res = await get(`/api/post/bookmark?page=${page}`).then(
     (r: any) => r.data
   );
-  console.log("23", res);
 
   return res.data;
 };

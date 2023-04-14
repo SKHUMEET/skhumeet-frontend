@@ -18,12 +18,10 @@ const MyPageRegisterForm = ({ user }: { user: User | null | undefined }) => {
       const res = await imageUpload(e.target.files).then((res) => {
         return res;
       });
-      // console.log("20", res[0]);
       setProfileImg(res[0]);
       await instance
         .patch("/api/member", { profileImage: res[0] })
         .then((res) => {
-          console.log(res.data);
           setStoredUser(res.data);
         });
       router.reload();

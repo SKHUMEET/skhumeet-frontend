@@ -10,7 +10,6 @@ const ProfileRegisterForm = ({
   nickname,
   profile_image,
 }: LoginUserProfileProps) => {
-  console.log(id, name, nickname, profile_image);
   const { signup } = useAuth();
 
   const [nameForm, setNameForm] = useState<string>(name);
@@ -25,8 +24,6 @@ const ProfileRegisterForm = ({
   };
 
   const handleSubmit = () => {
-    console.log(id, nameForm, nickname, profile_image, studentIdForm);
-
     if (nameForm.length == 0 || studentIdForm.length == 0) {
       alert("이름과 학번을 입력해 주세요");
     }
@@ -34,8 +31,6 @@ const ProfileRegisterForm = ({
     studentIdForm &&
       signup(studentIdForm, id, nameForm, nickname, profile_image).then(
         (res) => {
-          console.log("res");
-
           if (res?.status && res.status === 200) {
             setTimeout(() => window.location.replace("/"), 500);
           }
