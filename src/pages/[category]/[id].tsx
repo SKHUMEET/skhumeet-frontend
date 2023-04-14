@@ -10,7 +10,7 @@ import { queryKeys } from "@/react-query/constants";
 
 const Detail = ({ id }: { id: number }) => {
   const { data, isError, isLoading, error } = useQuery(
-    [queryKeys.detail, id],
+    [queryKeys.detail, +id],
     () => getPostById(id)
   );
 

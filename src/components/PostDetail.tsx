@@ -19,7 +19,6 @@ import Btn from "./utils/Btn";
 const PostDetail = ({ data }: { data: MAIN }) => {
   const deletePost = useDeleteMainCategory();
   const router = useRouter();
-  const theme = useContext(ThemeContext);
   const [user, setUser] = useState<User>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleModalClose = () => {
@@ -64,7 +63,6 @@ const PostDetail = ({ data }: { data: MAIN }) => {
             </InfoContainer>
           </UDContainer>
 
-          {/* <button onClick={handleAButton}>custom alert</button> */}
           <h3>{ConvertKorean[data.category.toLowerCase() as Category]}</h3>
         </Header>
         <InfoContainer>

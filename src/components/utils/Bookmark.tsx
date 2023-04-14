@@ -1,5 +1,5 @@
 import { del, post } from "@/libs/api";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { queryKeys } from "@/react-query/constants";
 import { getPostById } from "@/hooks/main";
+import { useDeleteBookmark, usePostBookmark } from "@/hooks/main/bookmark";
 
 const Bookmark = ({
   isMarked,
@@ -15,30 +16,27 @@ const Bookmark = ({
   isMarked: boolean;
   postId: number;
 }) => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+  const [isBookmarked, setIsBookmarked] = useState(isMarked);
+  const postBookmark = usePostBookmark();
+  const deleteBookmark = useDeleteBookmark();
+  //todo: 북마크시 쿼리 수정
   const handleBookmark = async () => {
-    if (!isMarked) {
-      await post(`/api/post/bookmark?postId=${postId}`).then((res) => {
-        // customAlert("북마크 생성");
-        queryClient.removeQueries([queryKeys.detail, postId]);
-        queryClient.setQueryData([queryKeys.detail, postId], () =>
-          getPostById(postId)
-        );
-        // router.reload();
-      });
+    if (!isBookmarked) {
+      postBookmark(postId);
+      setIsBookmarked(true);
     } else {
-      await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
-        // customAlert("북마크 해제");
-        queryClient.invalidateQueries();
-        // router.reload();
-      });
+      deleteBookmark(postId);
+      setIsBookmarked(false);
     }
   };
 
+  useEffect(() => {
+    console.log("im", isBookmarked);
+  }, [isBookmarked]);
+
   return (
     <BookmarkWrapper onClick={handleBookmark}>
-      {isMarked ? <BsBookmarkFill color="#69b030" /> : <BsBookmark />}
+      {isBookmarked ? <BsBookmarkFill color="#69b030" /> : <BsBookmark />}
     </BookmarkWrapper>
   );
 };
