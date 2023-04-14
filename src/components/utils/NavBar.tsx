@@ -143,7 +143,7 @@ const LinkWrapper = styled(Link)<{ active: boolean }>`
   display: flex;
 
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1rem;
   text-decoration: none;
 
   color: ${(props) => props.theme.color.text};

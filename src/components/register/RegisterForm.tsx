@@ -98,9 +98,6 @@ const RegisterForm = ({
     if (context.length === 0) {
       alert("내용을 입력해 주세요");
     }
-    if (contact.length === 0) {
-      alert("연락 방법을 입력해 주세요");
-    }
     if (kind === "register") {
       postMain({
         title,

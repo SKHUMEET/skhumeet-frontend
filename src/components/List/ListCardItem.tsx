@@ -17,7 +17,12 @@ const ListCardItem = ({ item }: { item: MAIN }) => {
         </Time>
         <Title>{item.title}</Title>
       </TitleWrapper>
-      <Img src="/Logo.svg" alt="로고" />
+      {item.images[0] ? (
+        <Img src={item.images[0]} alt="" />
+      ) : (
+        <Img src="/Logo.svg" alt="로고" />
+      )}
+
       <StateWrapper>
         <StatusBtn
           onClick={() => {}}
@@ -52,9 +57,9 @@ const Container = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  margin: 20px 0;
+  height: 65%;
 
-  border-radius: 5px;
+  border-radius: 1rem;
 `;
 
 const TitleWrapper = styled.div`
