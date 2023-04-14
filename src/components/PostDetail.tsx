@@ -69,10 +69,20 @@ const PostDetail = ({ data }: { data: MAIN }) => {
         <InfoContainer>
           <h1>{data.title}</h1>
           <ContactContainer>
-            조회수 {data.view} &nbsp; &#183; &nbsp; 연락 방법 {data.contact}{" "}
-            &nbsp; &#183; &nbsp; 작성자 {data.member} &nbsp; &#183; &nbsp;
-            마감일 {formDate(data.endDate)} &nbsp; &#183; &nbsp; 작성일{" "}
-            {formDate(data.createdDate)}
+            <span>조회수 {data.view}</span>
+            <span>&nbsp; &#183; &nbsp;</span>
+            <span>연락 방법 {data.contact}</span>
+            <span>&nbsp; &#183; &nbsp;</span>
+            <span>작성자 {data.member}</span>
+            <span>&nbsp; &#183; &nbsp;</span>
+            마감일 {formDate(data.endDate)}
+            <span></span>
+            &nbsp; &#183; &nbsp;
+            <span></span>
+            <span>
+              작성일
+              {formDate(data.createdDate)}
+            </span>
           </ContactContainer>
 
           <ContentContainer
@@ -127,6 +137,11 @@ const ContactContainer = styled.div`
 
   color: ${({ theme }) => theme.color.hover};
   font-size: 12px;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr 10px);
+  }
 `;
 
 export const ContentContainer = styled.div`

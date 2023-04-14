@@ -72,6 +72,25 @@ const ListContainer2 = styled.div<{ itemStyle: "list" | "card" }>`
         `};
 
   width: 100%;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    ${(props) =>
+      props.itemStyle === "card" &&
+      css`
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      `};
+  }
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    ${(props) =>
+      props.itemStyle === "card" &&
+      css`
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+      `};
+  }
 `;
 
 export const ListWrapper = styled.div<{ itemStyle: "list" | "card" }>`
