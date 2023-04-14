@@ -46,7 +46,7 @@ const RegisterForm = ({
     endDate:
       (formDate(data?.endDate) as string) ??
       (formDate(new Date().toISOString()) as string),
-    view: data?.view ?? 1,
+    view: data?.view ?? 0,
     context: data?.context ?? "",
     images: data?.images ?? [],
   };
@@ -118,6 +118,7 @@ const RegisterForm = ({
         endDate,
         context,
         images,
+        view,
         id: data?.id!,
       });
     }
@@ -145,12 +146,24 @@ const RegisterForm = ({
         {/* <h3 style={{ marginBottom: "1rem" }}>
           {kind === "edit" && <div>수정하기</div>}
         </h3> */}
-        <DropDown
-          name="category"
-          list={categoryList}
-          onChange={handleChangeDropDown}
-          defaultItem={category?.toLowerCase()}
-        />
+        {kind === "edit" ? (
+          <span
+            style={{
+              fontWeight: "bold",
+              marginRight: "5px",
+            }}
+          >
+            {ConvertKorean[category?.toLowerCase() as Category]}
+          </span>
+        ) : (
+          <DropDown
+            name="category"
+            list={categoryList}
+            onChange={handleChangeDropDown}
+            defaultItem={category?.toLowerCase()}
+          />
+        )}
+
         {kind === "register" && registerType === "list" && (
           <span style={{ fontSize: "small", fontWeight: "bold" }}>
             상태: {ConvertKorean[status]}
