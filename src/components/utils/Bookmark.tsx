@@ -5,6 +5,8 @@ import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { queryKeys } from "@/react-query/constants";
+import { getPostById } from "@/hooks/main";
 
 const Bookmark = ({
   isMarked,
@@ -19,14 +21,17 @@ const Bookmark = ({
     if (!isMarked) {
       await post(`/api/post/bookmark?postId=${postId}`).then((res) => {
         // customAlert("북마크 생성");
-        queryClient.clear();
-        router.reload();
+        queryClient.removeQueries([queryKeys.detail, postId]);
+        queryClient.setQueryData([queryKeys.detail, postId], () =>
+          getPostById(postId)
+        );
+        // router.reload();
       });
     } else {
       await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
         // customAlert("북마크 해제");
-        queryClient.clear();
-        router.reload();
+        queryClient.invalidateQueries();
+        // router.reload();
       });
     }
   };

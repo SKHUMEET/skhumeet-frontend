@@ -19,11 +19,11 @@ export const queryClient = new QueryClient({
       onError: queryErrorHandler,
 
       // 밑에있는 옵션을 매번 사용하기는 권하지 않음
-      staleTime: 600000, // 10min
-      cacheTime: 900000, // 15min(don't make sense for staleTime to exceed cachetime)
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
+      staleTime: 60000, // 1min
+      cacheTime: 90000, // 1.5min(don't make sense for staleTime to exceed cachetime)
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
     },
     mutations: {
       onError: queryErrorHandler,

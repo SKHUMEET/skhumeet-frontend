@@ -26,6 +26,7 @@ const PostDetail = ({ data }: { data: MAIN }) => {
     setIsModalOpen(false);
   };
 
+  //Todo 북마크달리거나 댓글달린 글은 500에러 남
   const handleDelete = async () => {
     deletePost(data.id);
     router.push(`/${data.category.toLowerCase()}`);
