@@ -9,7 +9,7 @@ import { User, storageConstants } from "@/types";
 const ToggleUser = () => {
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [userImage, setUserImage] = useState<string>();
 
