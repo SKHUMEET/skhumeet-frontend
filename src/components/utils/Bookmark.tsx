@@ -16,27 +16,22 @@ const Bookmark = ({
   isMarked: boolean;
   postId: number;
 }) => {
-  const [isBookmarked, setIsBookmarked] = useState(isMarked);
   const postBookmark = usePostBookmark();
   const deleteBookmark = useDeleteBookmark();
-  //todo: 북마크시 쿼리 수정
+
   const handleBookmark = async () => {
-    if (!isBookmarked) {
+    if (!isMarked) {
       postBookmark(postId);
-      setIsBookmarked(true);
     } else {
       deleteBookmark(postId);
-      setIsBookmarked(false);
     }
   };
 
-  useEffect(() => {
-    console.log("im", isBookmarked);
-  }, [isBookmarked]);
+  useEffect(() => {}, [isMarked]);
 
   return (
     <BookmarkWrapper onClick={handleBookmark}>
-      {isBookmarked ? <BsBookmarkFill color="#69b030" /> : <BsBookmark />}
+      {isMarked ? <BsBookmarkFill color="#69b030" /> : <BsBookmark />}
     </BookmarkWrapper>
   );
 };

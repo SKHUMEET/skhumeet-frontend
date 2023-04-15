@@ -7,10 +7,6 @@ import customAlert from "@/components/modal/CustomModalAlert";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const commonOptions = {
-  staleTime: 0,
-  cacheTime: 300000, // 5 minutes
-};
 const getMainCategory = async (category: Category, page: number) => {
   const res = await get(`/api/post/category/${category}?page=${page}`).then(
     (r: any) => {
@@ -26,10 +22,8 @@ export const useMainCategory = (category: Category) => {
   const queryClient = useQueryClient();
   useEffect(() => {
     // assume increment of one month
-    queryClient.prefetchQuery(
-      [queryKeys[category], page + 1],
-      () => getMainCategory(category, page + 1),
-      commonOptions
+    queryClient.prefetchQuery([queryKeys[category], page + 1], () =>
+      getMainCategory(category, page + 1)
     );
   }, [page]);
 
@@ -40,14 +34,12 @@ export const useMainCategory = (category: Category) => {
   return { data, page, setPage };
 };
 
-export const usePrefetchMainCategory = (category: Category, page: number) => {
-  const queryClient = useQueryClient();
-  queryClient.prefetchQuery(
-    [queryKeys[category], page + 1],
-    () => getMainCategory(category, page + 1),
-    commonOptions
-  );
-};
+// export const usePrefetchMainCategory = (category: Category, page: number) => {
+//   const queryClient = useQueryClient();
+//   queryClient.prefetchQuery([queryKeys[category], page + 1], () =>
+//     getMainCategory(category, page + 1)
+//   );
+// };
 
 const postMain = async ({
   title,
