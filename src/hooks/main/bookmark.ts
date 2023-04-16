@@ -43,6 +43,7 @@ export const useDeleteBookmark = () => {
     onSuccess: ({ postId }: { postId: number }) => {
       console.log(postId);
       queryClient.invalidateQueries([queryKeys.detail, postId]);
+      queryClient.invalidateQueries([`${queryKeys.member}like`]);
       customAlert("북마크가 해제되었습니다.");
     },
     onError: () => {

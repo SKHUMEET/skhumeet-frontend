@@ -36,6 +36,7 @@ const HamburgerIcon = styled.div<SidebarProps>`
   height: 7vh;
 
   padding-top: 10px;
+  margin-right: 5px;
   top: 0;
   right: 0;
   cursor: pointer;

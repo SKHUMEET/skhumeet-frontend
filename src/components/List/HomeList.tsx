@@ -9,7 +9,7 @@ interface HomeList {
   category: Category;
   items: MAIN[];
 }
-
+//todo: 한번에 글 쓰는거 있지 말고 게시판마다 글 쓰게 해서 글 쓸 때 드롭다운 굳이 없어도...
 const HomeList = ({ category, items }: HomeList) => {
   const theme = useContext(ThemeContext);
   const router = useRouter();

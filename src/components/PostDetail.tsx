@@ -119,8 +119,6 @@ const UDContainer = styled.div`
 
 const InfoContainer = styled.div`
   padding: 1rem 0;
-
-  font-size: 15px;
 `;
 
 const BookmarkWrapper = styled.div`

@@ -28,8 +28,12 @@ export const useMainCategory = (category: Category) => {
   }, [page]);
 
   const fallback = {};
-  const { data = fallback } = useQuery([queryKeys[category], page], () =>
-    getMainCategory(category, page)
+  const { data = fallback } = useQuery(
+    [queryKeys[category], page],
+    () => getMainCategory(category, page),
+    {
+      refetchInterval: 60000, //1분마다 리페치
+    }
   );
   return { data, page, setPage };
 };

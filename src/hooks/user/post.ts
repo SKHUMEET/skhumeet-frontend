@@ -30,12 +30,8 @@ export const useMemberPost = () => {
 
   const fallback = {};
 
-  const { data = fallback } = useQuery(
-    [queryKeys.member, page],
-    () => getMemberPost(page),
-    {
-      refetchInterval: 60000, //1분마다 리페치
-    }
+  const { data = fallback } = useQuery([queryKeys.member, page], () =>
+    getMemberPost(page)
   );
   return { data, page, setPage };
 };

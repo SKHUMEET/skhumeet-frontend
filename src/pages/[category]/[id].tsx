@@ -8,6 +8,7 @@ import { getPostById } from "@/hooks/main";
 import PostDetail from "@/components/PostDetail";
 import { queryKeys } from "@/react-query/constants";
 
+//todo: 한솥밥, 어울림일 경우 기한 표시
 const Detail = ({ id }: { id: number }) => {
   const { data, isError, isLoading, error } = useQuery(
     [queryKeys.detail, +id],

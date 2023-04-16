@@ -6,6 +6,7 @@ import Btn from "../utils/Btn";
 
 import CommentDetail from "./CommentDetail";
 
+//todo: 게시글 글 보다 댓글 폰트가 더 커서 보기에 불편
 export interface Comment {
   author: string;
   childComments: string[];
@@ -67,6 +68,7 @@ const Comment = ({ postId }: { postId: number }) => {
 
 export default Comment;
 
+//todo: form 사용하지 않고 댓글 달기
 export const CommentContainer = styled.form`
   display: flex;
   justify-content: center;
@@ -87,7 +89,7 @@ export const CommentInput = styled.textarea`
   outline: none;
   resize: none;
 
-  box-shadow: 0px 0px 5px -1.5px inset #69b030;
+  box-shadow: 0px 0px 5px -1.5px inset ${({ theme }) => theme.color.main};
 `;
 
 const Notion = styled.p`

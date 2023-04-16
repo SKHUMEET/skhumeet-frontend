@@ -57,7 +57,7 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
           </div>
         )}
         <WriteDate>
-          {item.modifiedDate.replace("T", " ")} &nbsp; &#183; &nbsp;{" "}
+          {item.modifiedDate.replace("T", " ")} &nbsp; &#183; &nbsp;
           {item.writer}
         </WriteDate>
       </CommentItem>
@@ -83,12 +83,12 @@ const Container = styled.div`
   margin-bottom: 1rem;
   padding-bottom: 1rem;
 
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px dashed #d3d3d3;
+  font-size: 12px;
 `;
 
 const CommentItem = styled.div`
   width: 55vw;
-
   color: black;
 `;
 
