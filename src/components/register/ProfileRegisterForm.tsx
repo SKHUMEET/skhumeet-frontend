@@ -24,18 +24,23 @@ const ProfileRegisterForm = ({
   };
 
   const handleSubmit = () => {
-    if (nameForm.length == 0 || studentIdForm.length == 0) {
+    if (
+      nameForm.length === 0 ||
+      (!!Number(studentIdForm) && (setStudentIdForm.length === 8 || 5))
+      // !!Number(val)는 문자열이 숫자일 때 true를 리턴
+    ) {
       alert("이름과 학번을 입력해 주세요");
+    } else {
+      studentIdForm &&
+        signup(studentIdForm, id, nameForm, nickname, profile_image).then(
+          (res) => {
+            if (res?.status && res.status === 200) {
+              setTimeout(() => window.location.replace("/"), 500);
+            }
+          }
+        );
     }
 
-    studentIdForm &&
-      signup(studentIdForm, id, nameForm, nickname, profile_image).then(
-        (res) => {
-          if (res?.status && res.status === 200) {
-            setTimeout(() => window.location.replace("/"), 500);
-          }
-        }
-      );
     // axios.post
   };
 
