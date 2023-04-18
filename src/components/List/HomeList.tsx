@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { MAIN, ConvertKorean, Category, Status } from "@/types";
 import { useRouter } from "next/router";
-import { State } from "./ListItem";
 import StatusBtn from "../utils/StatusBtn";
 
 interface HomeList {
@@ -13,6 +12,7 @@ interface HomeList {
 const HomeList = ({ category, items }: HomeList) => {
   const theme = useContext(ThemeContext);
   const router = useRouter();
+
   return (
     <HomeListContainer>
       <HomeListTitle onClick={() => router.push(`/${category}`)}>
@@ -31,10 +31,12 @@ const HomeList = ({ category, items }: HomeList) => {
                 color={theme.color.light}
                 onClick={() => router.push(`/${category}`)}
               > */}
+              {/* <div style={{ cursor: "default" }}> */}
               <StatusBtn
                 onClick={() => {}}
                 status={item.status.toLowerCase() as Status}
               />
+              {/* </div> */}
               {/* </State> */}
             </HomeListItem>
           );
@@ -52,13 +54,11 @@ const HomeListContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  /* width: 95%; */
-  /* margin: 10px; */
+  height: 210px;
   padding: 10px 20px;
 
-  height: 200px;
   border-radius: 5px;
-  /* box-shadow: 2px 3px 5px #b9b9b9; */
+
   box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
   text-overflow: ellipsis;
   white-space: nowrap;

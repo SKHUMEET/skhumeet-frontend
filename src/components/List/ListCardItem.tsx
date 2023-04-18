@@ -57,9 +57,9 @@ const Container = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  margin: 20px 0;
+  height: 65%;
 
-  border-radius: 5px;
+  border-radius: 1rem;
 `;
 
 const TitleWrapper = styled.div`

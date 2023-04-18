@@ -92,6 +92,8 @@ const HomeContainer = styled.div`
   flex-direction: column;
 
   width: 100%;
+
+  cursor: default;
 `;
 
 const BannerImg = styled.img`
