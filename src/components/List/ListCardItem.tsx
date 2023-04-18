@@ -57,10 +57,11 @@ const Container = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  height: 60%;
+  height: 65%;
   margin: 20px 0;
   object-fit: contain;
   border-radius: 5px;
+
 `;
 
 const TitleWrapper = styled.div`
