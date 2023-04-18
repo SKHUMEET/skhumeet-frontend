@@ -27,6 +27,7 @@ const NavBar = () => {
     setIsOpen(false);
   }, [router]);
 
+  //todo:검색기능
   return (
     <Nav>
       <NavWrapper>
@@ -99,6 +100,7 @@ const TopWrapper = styled.div`
   }
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     width: 100vw;
+    padding: 5px;
     padding-right: 40px;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {

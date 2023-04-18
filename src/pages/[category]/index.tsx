@@ -4,6 +4,7 @@ import React from "react";
 import { Category, ConvertKorean, CategoryProps } from "@/types";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
+//todo: 모집중만 목록으로 보이게 필터
 const index = ({ category }: CategoryProps) => {
   return (
     <>

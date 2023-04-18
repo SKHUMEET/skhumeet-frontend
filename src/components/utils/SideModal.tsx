@@ -36,6 +36,7 @@ const HamburgerIcon = styled.div<SidebarProps>`
   height: 7vh;
 
   padding-top: 10px;
+  margin-right: 5px;
   top: 0;
   right: 0;
   cursor: pointer;
@@ -79,46 +80,55 @@ const HamburgerIcon = styled.div<SidebarProps>`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    //중간사이즈는 right 10% 줘야함
     right: 10%;
   }
 `;
 
 const Sidebar = styled.div<SidebarProps>`
+  position: fixed;
+  transition: all 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-
-  position: fixed;
   top: 6vh;
-  right: 10vw;
-  width: 30vw;
   height: 80%;
-  padding: 1rem;
+  ${({ isOpen }) =>
+    !isOpen
+      ? css`
+          width: 0;
+          right: -100vw;
+        `
+      : css`
+          right: 0;
+          z-index: 1;
 
-  background-color: transparent;
-  color: ${({ theme }) => theme.color.text};
+          @media screen and (max-width: ${({ theme }) =>
+              theme.breakpoints.large}) {
+            //small~large
+            width: 40vw;
+          }
 
-  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(350%)")};
-  transition: transform 0.3s ease-out;
-  z-index: ${({ isOpen }) => (isOpen ? 3 : -1)};
-  transition: 0.5s ease-in-out;
+          @media screen and (max-width: ${({ theme }) =>
+              theme.breakpoints.small}) {
+            //~small
+            //최소사이즈일 때
+            width: 100vw;
+          }
+        `}
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
-    right: 0vw;
-    width: 40vw;
-  }
-
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
-    width: 100vw;
-  }
-
-  /* 전체화면일 때 */
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    // 전체화면일 때
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     margin-left: 10px;
     width: 10vw;
     top: 10vh;
-    z-index: 1;
+    z-index: 1; // overlay 보다 앞에 나오게 하기 위해
     left: 83vw;
     align-content: flex-start;
     align-items: center;
@@ -130,35 +140,40 @@ const Sidebar = styled.div<SidebarProps>`
 
 const Overlay = styled.div<SidebarProps>`
   position: fixed;
-
-  z-index: ${({ isOpen }) => (isOpen ? "2" : "-1")};
-  transition: 0.5s;
+  transition: all 0.5s ease-in-out;
   ${({ isOpen }) =>
-    isOpen &&
-    css`
-      bottom: 0;
-      top: 0;
-      right: 10vw;
-      width: 30vw;
+    !isOpen
+      ? css`
+          width: 0;
+        `
+      : css`
+          bottom: 0;
+          top: 0;
+          right: 0;
 
-      box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
+          box-shadow: -6px 0px 4px 0px rgba(0, 0, 0, 0.1);
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
 
-      cursor: pointer;
+          cursor: pointer;
 
-      backdrop-filter: blur(25px);
-      transition: 0.5s;
-    `}
+          backdrop-filter: blur(25px);
+          transition: 0.5s;
+        `}
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
-    right: 0vw;
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
+    //small~large
     width: 40vw;
   }
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    //~small
+    //최소사이즈일 때
     width: 100vw;
   }
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    //~large
     width: 10vw;
     left: 83vw;
     height: 80%;

@@ -5,7 +5,7 @@ import { Category, ConvertKorean, Status } from "@/types";
 import { MAIN, formDate } from "@/types";
 import { GrView } from "react-icons/gr";
 import StatusBtn from "../utils/StatusBtn";
-
+//todo: view 말고 댓글로 보이기
 const ListCardItem = ({ item }: { item: MAIN }) => {
   const theme = useContext(ThemeContext);
 
@@ -58,8 +58,10 @@ const Container = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 65%;
+  margin: 20px 0;
+  object-fit: contain;
+  border-radius: 5px;
 
-  border-radius: 1rem;
 `;
 
 const TitleWrapper = styled.div`

@@ -3,16 +3,10 @@ import { queryKeys } from "@/react-query/constants";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
-const commonOptions = {
-  staleTime: 0,
-  cacheTime: 300000, // 5 minutes
-};
-
 const getMemberPost = async (page: number) => {
   const res = await get(`/api/post/member?page=${page}`).then(
     (r: any) => r.data
   );
-  console.log("15", res);
 
   return res;
 };
@@ -21,7 +15,6 @@ const getMemberLikePost = async (page: number) => {
   const res = await get(`/api/post/bookmark?page=${page}`).then(
     (r: any) => r.data
   );
-  console.log("23", res);
 
   return res.data;
 };
@@ -30,10 +23,8 @@ export const useMemberPost = () => {
   const queryClient = useQueryClient();
   useEffect(() => {
     // assume increment of one month
-    queryClient.prefetchQuery(
-      [queryKeys.member, page + 1],
-      () => getMemberPost(page),
-      commonOptions
+    queryClient.prefetchQuery([queryKeys.member, page + 1], () =>
+      getMemberPost(page)
     );
   }, [page]);
 
@@ -50,10 +41,8 @@ export const useMemberLikePost = () => {
   const queryClient = useQueryClient();
   useEffect(() => {
     // assume increment of one month
-    queryClient.prefetchQuery(
-      [`${queryKeys.member}like`, page + 1],
-      () => getMemberLikePost(page),
-      commonOptions
+    queryClient.prefetchQuery([`${queryKeys.member}like`, page + 1], () =>
+      getMemberLikePost(page)
     );
   }, [page]);
 

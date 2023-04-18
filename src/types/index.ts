@@ -91,6 +91,7 @@ export type MAINREQUEST = Omit<
   "id" | "createdDate" | "member" | "memberNumber" | "bookmarked"
 >;
 
+// 날짜 표시 시 며칠 전.. 이렇게 표시하는 거
 export const formDate = (data: string | undefined) => {
   if (typeof data === "string") {
     return data.split("T")[0];

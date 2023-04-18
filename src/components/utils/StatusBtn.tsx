@@ -8,6 +8,7 @@ type StatusBtnProps = {
   onClick: () => void;
 };
 
+//todo: 모집중, 모집완료, 홍보, 활동 색깔 다 다르게
 const StatusBtn = ({ status, onClick }: StatusBtnProps) => {
   const theme = useContext(ThemeContext);
   const [color, setColor] = useState(theme.color.main);

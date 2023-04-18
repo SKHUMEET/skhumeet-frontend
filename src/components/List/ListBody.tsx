@@ -14,7 +14,6 @@ const ListBody = ({ category }: CategoryProps) => {
   const listStyle =
     category === "department_event" || category === "club" ? "card" : "list";
   const { data, page, setPage } = useMainCategory(category);
-  console.log(data);
   const [totalPage, setTotalPage] = useState<number>(0);
 
   useEffect(() => {

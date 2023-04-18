@@ -20,7 +20,7 @@ const imageUpload = async (files: FileList) => {
     .then((res: any) => {
       return res.data.imagePath;
     })
-    .catch((el) => console.log("el", el));
+    .catch((err) => err);
 
   return data;
 };

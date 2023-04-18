@@ -91,12 +91,15 @@ const RegisterForm = ({
   };
 
   const handleSubmit = () => {
-    console.log(form);
     if (title.length === 0) {
       alert("제목을 입력해 주세요");
     }
     if (context.length === 0) {
       alert("내용을 입력해 주세요");
+    }
+    //todo 연락방법 ""이어도 됨
+    if (contact.length === 0) {
+      alert("연락 방법을 입력해 주세요");
     }
     if (kind === "register") {
       postMain({
@@ -127,7 +130,6 @@ const RegisterForm = ({
   };
 
   const handleContextChange = (content: string) => {
-    console.log("99", content);
     setForm({ ...form, context: content });
   };
 

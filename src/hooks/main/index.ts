@@ -7,14 +7,9 @@ import customAlert from "@/components/modal/CustomModalAlert";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const commonOptions = {
-  staleTime: 0,
-  cacheTime: 300000, // 5 minutes
-};
 const getMainCategory = async (category: Category, page: number) => {
   const res = await get(`/api/post/category/${category}?page=${page}`).then(
     (r: any) => {
-      console.log(r);
       return r.data;
     }
   );
@@ -27,28 +22,28 @@ export const useMainCategory = (category: Category) => {
   const queryClient = useQueryClient();
   useEffect(() => {
     // assume increment of one month
-    queryClient.prefetchQuery(
-      [queryKeys[category], page + 1],
-      () => getMainCategory(category, page + 1),
-      commonOptions
+    queryClient.prefetchQuery([queryKeys[category], page + 1], () =>
+      getMainCategory(category, page + 1)
     );
   }, [page]);
 
   const fallback = {};
-  const { data = fallback } = useQuery([queryKeys[category], page], () =>
-    getMainCategory(category, page)
+  const { data = fallback } = useQuery(
+    [queryKeys[category], page],
+    () => getMainCategory(category, page),
+    {
+      refetchInterval: 60000, //1분마다 리페치
+    }
   );
   return { data, page, setPage };
 };
 
-export const usePrefetchMainCategory = (category: Category, page: number) => {
-  const queryClient = useQueryClient();
-  queryClient.prefetchQuery(
-    [queryKeys[category], page + 1],
-    () => getMainCategory(category, page + 1),
-    commonOptions
-  );
-};
+// export const usePrefetchMainCategory = (category: Category, page: number) => {
+//   const queryClient = useQueryClient();
+//   queryClient.prefetchQuery([queryKeys[category], page + 1], () =>
+//     getMainCategory(category, page + 1)
+//   );
+// };
 
 const postMain = async ({
   title,
@@ -70,8 +65,6 @@ const postMain = async ({
     context,
     images,
   }).then((res: any) => {
-    console.log("72", res);
-    console.log("73", res.data);
     return res.data;
   });
   return res;
@@ -100,12 +93,9 @@ const patchMain = async ({
       view,
     })
     .then((res: any) => {
-      console.log("102", res);
-      console.log("103", res.data);
       return res.data;
     })
     .catch((err: any) => {
-      console.log("110", err);
       return err;
     });
   return res;
@@ -116,15 +106,12 @@ export const usePostMainCategory = () => {
     (mainRequest: MAINREQUEST) => postMain(mainRequest),
     {
       onSuccess: (data) => {
-        console.log(data);
-        console.log(data?.category);
         const category = data?.category.toLowerCase() as Category;
 
-        console.log(category);
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
-        queryClient.removeQueries([queryKeys.detail]);
-        queryClient.removeQueries([queryKeys.member]);
+        // queryClient.removeQueries([queryKeys.detail]);
+        // queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {
           return getMainCategory(category, 1);
         });
@@ -144,15 +131,12 @@ export const usePatchMainCategory = () => {
     (mainRequest: MAINREQUEST & { id: number }) => patchMain(mainRequest),
     {
       onSuccess: (data) => {
-        console.log(data);
-        console.log(data?.category);
         const category = data?.category.toLowerCase() as Category;
 
-        console.log(category);
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
         queryClient.removeQueries([queryKeys.detail]);
-        queryClient.removeQueries([queryKeys.member]);
+        // queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {
           return getMainCategory(category, 1);
         });
@@ -169,12 +153,11 @@ export const usePatchMainCategory = () => {
 export const getPostById = async (id: number) => {
   const res = await get(`/api/post?id=${id}`).then((r: any) => r.data);
 
-  console.log(res);
   return res;
 };
 
 export const deletePostById = async (id: number) => {
-  await del(`/api/post?id=${id}`).then((res) => console.log(res));
+  await del(`/api/post?id=${id}`).then((res) => res);
 };
 
 export const useDeleteMainCategory = () => {

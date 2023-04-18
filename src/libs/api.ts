@@ -50,6 +50,7 @@ const responseInterceptorRejected = async (error: AxiosError | any) => {
   const originalRequest = config;
 
   if (status === 403) {
+    console.log("403에러");
     try {
       const accessToken =
         typeof window !== "undefined"
@@ -59,7 +60,6 @@ const responseInterceptorRejected = async (error: AxiosError | any) => {
         typeof window !== "undefined"
           ? localStorage.getItem(storageConstants.refreshToken)
           : "";
-      console.log("tokens", accessToken, refreshToken);
       const data = await axios
         .post(
           `/api/member/reissue`,
@@ -72,10 +72,8 @@ const responseInterceptorRejected = async (error: AxiosError | any) => {
           }
         )
         .then((res: any) => {
-          console.log("71", res);
           return res.data;
         });
-      console.log("token", data.tokens);
       const newAccessToken = data.tokens.accessToken;
       const newRefreshToken = data.tokens.refreshToken;
 

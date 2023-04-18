@@ -1,10 +1,13 @@
 import { del, post } from "@/libs/api";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import styled from "styled-components";
 import customAlert from "../modal/CustomModalAlert";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { queryKeys } from "@/react-query/constants";
+import { getPostById } from "@/hooks/main";
+import { useDeleteBookmark, usePostBookmark } from "@/hooks/main/bookmark";
 
 const Bookmark = ({
   isMarked,
@@ -13,23 +16,18 @@ const Bookmark = ({
   isMarked: boolean;
   postId: number;
 }) => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+  const postBookmark = usePostBookmark();
+  const deleteBookmark = useDeleteBookmark();
+
   const handleBookmark = async () => {
     if (!isMarked) {
-      await post(`/api/post/bookmark?postId=${postId}`).then((res) => {
-        // customAlert("북마크 생성");
-        queryClient.clear();
-        router.reload();
-      });
+      postBookmark(postId);
     } else {
-      await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
-        // customAlert("북마크 해제");
-        queryClient.clear();
-        router.reload();
-      });
+      deleteBookmark(postId);
     }
   };
+
+  useEffect(() => {}, [isMarked]);
 
   return (
     <BookmarkWrapper onClick={handleBookmark}>

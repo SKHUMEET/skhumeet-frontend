@@ -37,6 +37,7 @@ const LayoutWrapper = styled.div`
   }
   @media screen and (max-width: ${(props) => props.theme.breakpoints.medium}) {
     width: 100vw;
+    padding: 5px;
   }
 `;
 

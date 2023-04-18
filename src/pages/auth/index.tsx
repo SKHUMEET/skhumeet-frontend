@@ -31,8 +31,8 @@ const Auth = () => {
     const login = () => {
       naverLogin = new naver.LoginWithNaverId({
         clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID, // ClientID
-        // callbackUrl: "https://skhumeet.vercel.app/auth", // Callback URL
-        callbackUrl: "http://localhost:3000/auth", // Callback URL
+        callbackUrl: "https://skhumeet.vercel.app/auth", // Callback URL
+        // callbackUrl: "http://localhost:3000/auth", // Callback URL
         isPopup: false, // 팝업 형태로 인증 여부
         loginButton: {
           color: "green", // 색상
@@ -94,9 +94,7 @@ const Auth = () => {
           url: "/v2/user/me", // 사용자 정보 가져오기
           success: async (res: any) => {
             // 로그인 성공할 경우 정보 확인 후 /kakao 페이지로 push
-            console.log(res);
             await findMemeberById(res.id).then((res) => {
-              console.log("res", res);
               res.status === 200 &&
                 setTimeout(() => window.location.replace("/"), 500);
               res.response &&
@@ -111,12 +109,12 @@ const Auth = () => {
             });
           },
           fail: (error: any) => {
-            console.log(error);
+            return error;
           },
         });
       },
       fail: (error: any) => {
-        console.log(error);
+        return error;
       },
     });
   };

@@ -22,8 +22,6 @@ export const useAuth = (): UseAuth => {
       loginId: id,
     })
       .then((res: any) => {
-        console.log("authindex res", res);
-        console.log(res.status);
         if (res.status === 200) {
           setAccessToken(res.data.tokens.accessToken);
           setRefreshToken(res.data.tokens.refreshToken);
@@ -52,7 +50,6 @@ export const useAuth = (): UseAuth => {
       profileImage,
     })
       .then((res: any) => {
-        console.log(res);
         if (res.response?.status === 400) {
           customAlert(res.response.data);
         } else {
