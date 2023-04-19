@@ -27,7 +27,8 @@ const ProfileRegisterForm = ({
   const handleSubmit = () => {
     if (
       nameForm.length === 0 ||
-      (!!Number(studentIdForm) && (setStudentIdForm.length === 9 || 5))
+      setStudentIdForm.length === 0
+
       // !!Number(val)는 문자열이 숫자일 때 true를 리턴
     ) {
       customAlert("이름과 학번을 입력해 주세요");
@@ -57,7 +58,7 @@ const ProfileRegisterForm = ({
             <H4Wrapper>
               성공회대 학생(교수)임을 <mark>인증</mark>하기 위해&nbsp;
             </H4Wrapper>
-            <mark>이름과 학번(사번)</mark>을 입력해주세요!
+            <mark>이름과 학번(사번)</mark> 을 정확히 입력해주세요!
           </h4>
         </div>
         <div style={{ width: "100%" }}>
