@@ -3,6 +3,7 @@ import { LoginUserProfileProps } from "@/pages/auth";
 import styled from "styled-components";
 import { useAuth } from "@/hooks/user";
 import Btn from "@/components/utils/Btn";
+import customAlert from "../modal/CustomModalAlert";
 
 const ProfileRegisterForm = ({
   id,
@@ -29,7 +30,7 @@ const ProfileRegisterForm = ({
       (!!Number(studentIdForm) && (setStudentIdForm.length === 9 || 5))
       // !!Number(val)는 문자열이 숫자일 때 true를 리턴
     ) {
-      alert("이름과 학번을 입력해 주세요");
+      customAlert("이름과 학번을 입력해 주세요");
     } else {
       studentIdForm &&
         signup(studentIdForm, id, nameForm, nickname, profile_image).then(

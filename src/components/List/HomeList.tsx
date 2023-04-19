@@ -19,7 +19,7 @@ const HomeList = ({ category, items }: HomeList) => {
         {ConvertKorean[category]}
       </HomeListTitle>
       {items.length ? (
-        items.slice(0, 5).map((item, idx) => {
+        items.slice(0, 4).map((item, idx) => {
           return (
             <HomeListItem
               key={idx}
@@ -62,7 +62,7 @@ const HomeListContainer = styled.div`
   box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const HomeListTitle = styled.div`
