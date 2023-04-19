@@ -29,10 +29,10 @@ const MemberLikeList = ({
     <>
       <ListBodyContainer>
         <ListBodyHeader>
-          <p style={{ textAlign: "center" }}>{user?.name}님 환영합니다!</p>
+          <p style={{ textAlign: "center" }}>{user?.name}님이 북마크한 글</p>
         </ListBodyHeader>
         {list.length === 0 ? (
-          <div>아직 북마크한 글이 없군요!</div>
+          <div>아직 북마크하신 글이 없군요!</div>
         ) : (
           list.map((el) => (
             <>

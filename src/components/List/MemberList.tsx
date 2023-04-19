@@ -28,7 +28,7 @@ const MemberList = ({
 
   return (
     <ListBodyContainer style={{ border: "none" }}>
-      <ListBodyHeader>{user?.name}님 환영합니다!</ListBodyHeader>
+      <ListBodyHeader>{user?.name}님이 작성하신 글</ListBodyHeader>
       {list.length === 0 ? (
         <div>아직 작성하신 글이 없군요!</div>
       ) : (
