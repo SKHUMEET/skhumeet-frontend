@@ -30,12 +30,11 @@ export default function App({ Component, pageProps }: AppProps) {
       }
     }
   }, [isLoggedIn]);
-
   return (
     <>
       <Head>
         <script
-          src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+          src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js"
           async
         />
         <script src="https://developers.kakao.com/sdk/js/kakao.js" async />

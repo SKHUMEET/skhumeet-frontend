@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { get } from "@/libs/api";
 import { User, storageConstants } from "@/types";
+import { useHandleLogout } from "@/hooks/user";
 
 const ToggleUser = () => {
   const router = useRouter();
@@ -23,23 +24,6 @@ const ToggleUser = () => {
     }
 
     setIsOpen(false);
-  };
-
-  const handleLogout = async () => {
-    localStorage.clear();
-    const res = await get("/oauth2.0/token", {
-      params: {
-        grant_type: "delete",
-        client_id: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID, // Client ID
-        client_secret: process.env.NEXT_PUBLIC_NAVER_CLIENT_SECRET, // Client Secret
-        access_token: router.query.token, // 발급된 Token 정보
-        service_provider: "NAVER",
-      },
-    });
-
-    if (res) {
-      router.push("/auth"); // 로그인 페이지로 이동
-    }
   };
 
   useEffect(() => {
@@ -73,7 +57,7 @@ const ToggleUser = () => {
           <ToggleDropDown.Item onClick={() => handleClick("/mypage")}>
             마이페이지
           </ToggleDropDown.Item>
-          <ToggleDropDown.Item onClick={handleLogout}>
+          <ToggleDropDown.Item onClick={useHandleLogout}>
             로그아웃
           </ToggleDropDown.Item>
         </ToggleDropDown.Content>

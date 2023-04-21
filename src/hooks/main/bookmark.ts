@@ -10,12 +10,11 @@ const postBookmark = async (postId: number): Promise<any> => {
       return res;
     }
   );
-  console.log("postbookmark", res);
+
   return { res, postId };
 };
 const deleteBookmark = async (postId: number): Promise<any> => {
   const res = await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
-    console.log(res);
     return res;
   });
   return { res, postId };
@@ -25,7 +24,6 @@ export const usePostBookmark = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation((postId: number) => postBookmark(postId), {
     onSuccess: ({ res, postId }: any) => {
-      console.log(res);
       queryClient.invalidateQueries([queryKeys.detail, +postId]);
 
       customAlert("북마크가 설정되었습니다.");
@@ -41,7 +39,6 @@ export const useDeleteBookmark = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation((postId: number) => deleteBookmark(postId), {
     onSuccess: ({ postId }: { postId: number }) => {
-      console.log(postId);
       queryClient.invalidateQueries([queryKeys.detail, postId]);
       queryClient.invalidateQueries([`${queryKeys.member}like`]);
       customAlert("북마크가 해제되었습니다.");
