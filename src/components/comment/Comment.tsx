@@ -8,7 +8,6 @@ import CommentDetail from "./CommentDetail";
 import { useComment, usePostComment } from "@/hooks/main/comment";
 import { COMMENT } from "@/types";
 
-//todo: 게시글 글 보다 댓글 폰트가 더 커서 보기에 불편
 export interface Comment {
   author: string;
   childComments: string[];
@@ -61,7 +60,6 @@ const Comment = ({ postId }: { postId: number }) => {
 
 export default Comment;
 
-//todo: form 사용하지 않고 댓글 달기
 export const CommentContainer = styled.div`
   display: flex;
   justify-content: center;

@@ -42,7 +42,7 @@ const RegisterForm = ({
     title: data?.title ?? "",
     category: data?.category ?? defaultCategory ?? "hansotbab",
     contact: data?.contact ?? "",
-    status: data?.status ?? originStatusList[0],
+    status: (data?.status.toLowerCase() as Status) ?? originStatusList[0],
     endDate:
       (formDate(data?.endDate) as string) ??
       (formDate(new Date().toISOString()) as string),
@@ -127,7 +127,8 @@ const RegisterForm = ({
       });
     }
 
-    router.push(`/${category?.toLowerCase()}`);
+    router.back(); //바로 전 화면
+    // router.push(`/${category?.toLowerCase()}`);
   };
 
   const handleContextChange = (content: string) => {
@@ -174,6 +175,7 @@ const RegisterForm = ({
         )}
         {kind === "edit" && registerType === "list" && (
           <DropDown
+            defaultItem={status}
             name="status"
             list={editStatusList}
             onChange={handleChangeDropDown}
@@ -190,6 +192,7 @@ const RegisterForm = ({
         )}
         {kind === "edit" && registerType === "grid" && (
           <DropDown
+            defaultItem={status}
             name="status"
             list={originStatusList}
             onChange={handleChangeDropDown}
