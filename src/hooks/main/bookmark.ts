@@ -1,22 +1,16 @@
 import { del, post } from "@/libs/api";
 import { queryKeys } from "@/react-query/constants";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPostById } from ".";
 import customAlert from "@/components/modal/CustomModalAlert";
 
 const postBookmark = async (postId: number): Promise<any> => {
-  const res = await post(`/api/post/bookmark?postId=${postId}`).then(
-    (res: any) => {
-      return res;
-    }
-  );
+  const res = await post(`/api/post/bookmark?postId=${postId}`);
 
   return { res, postId };
 };
 const deleteBookmark = async (postId: number): Promise<any> => {
-  const res = await del(`/api/post/bookmark?postId=${postId}`).then((res) => {
-    return res;
-  });
+  const res = await del(`/api/post/bookmark?postId=${postId}`);
+
   return { res, postId };
 };
 

@@ -6,29 +6,27 @@ import { del, instance } from "@/libs/api";
 import customAlert from "../modal/CustomModalAlert";
 import Btn from "../utils/Btn";
 import { COMMENT } from "@/types";
+import { useDeleteComment, useUpdateComment } from "@/hooks/main/comment";
 
 const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const [user, setUser] = useState<User>();
   const [editComment, setEditComment] = useState<string>(item.context);
-
+  const updateComment = useUpdateComment();
+  const deleteCommnet = useDeleteComment();
   const handleDeleteComment = async (id: number) => {
-    await del(`/api/comment/${id}`).then((res) => {
-      customAlert("댓글이 삭제되었습니다.");
-      router.reload();
-    });
+    deleteCommnet({ postId, commentId: id });
   };
 
   const handlePatchComment = async () => {
     if (editComment.length === 0) {
       customAlert("댓글을 작성해주세요");
       return;
+    } else {
+      updateComment({ postId, commentId: item.id, editComment });
+      setIsEdit(false);
     }
-
-    await instance.patch(`/api/comment/${postId}/comment/${item.id}`, {
-      context: editComment,
-    });
   };
 
   useEffect(() => {
@@ -46,14 +44,20 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
           <span>{item.context}</span>
         ) : (
           <div>
-            <form onSubmit={handlePatchComment}>
+            <div>
               <input
                 placeholder="Write comment"
                 value={editComment}
                 onChange={(e) => setEditComment(e.target.value)}
               />
-              <Btn onClick={() => {}}>수정하기</Btn>
-            </form>
+              <Btn
+                onClick={() => {
+                  handlePatchComment();
+                }}
+              >
+                수정하기
+              </Btn>
+            </div>
           </div>
         )}
         <WriteDate>

@@ -115,15 +115,16 @@ const LogoWrapper = styled.div`
   align-items: center;
 
   background-color: ${({ theme }) => theme.color.background};
+  cursor: pointer;
 `;
 
 const Logo = styled.a`
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: none;
-
+  transition: all 0.3s ease-in-out;
   :hover {
-    /* box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main}; */
+    transform: scale(1.1);
   }
 `;
 
