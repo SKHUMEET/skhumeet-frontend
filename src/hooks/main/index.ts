@@ -135,6 +135,7 @@ export const usePatchMainCategory = () => {
 
         // queryClient.invalidateQueries();
         queryClient.invalidateQueries([queryKeys[category]]);
+        queryClient.invalidateQueries([queryKeys.member]);
         queryClient.removeQueries([queryKeys.detail]);
         // queryClient.removeQueries([queryKeys.member]);
         queryClient.setQueryData([queryKeys[category]], () => {

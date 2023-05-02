@@ -24,7 +24,7 @@ export const useMemberPost = () => {
   useEffect(() => {
     // assume increment of one month
     queryClient.prefetchQuery([queryKeys.member, page + 1], () =>
-      getMemberPost(page)
+      getMemberPost(page + 1)
     );
   }, [page]);
 
@@ -42,7 +42,7 @@ export const useMemberLikePost = () => {
   useEffect(() => {
     // assume increment of one month
     queryClient.prefetchQuery([`${queryKeys.member}like`, page + 1], () =>
-      getMemberLikePost(page)
+      getMemberLikePost(page + 1)
     );
   }, [page]);
 
