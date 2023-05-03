@@ -20,8 +20,6 @@ export interface Comment {
 const Comment = ({ postId }: { postId: number }) => {
   const [newComment, setNewComment] = useState<string>("");
 
-  // const [list, setList] = useState<Comment[]>();
-
   const { data: list, page, setPage } = useComment(postId);
   const postComment = usePostComment();
   const handleSubmitComment = () => {
@@ -33,7 +31,7 @@ const Comment = ({ postId }: { postId: number }) => {
       setNewComment("");
     }
   };
-
+  //todo: comment pagination
   return (
     <>
       {list?.length ? (

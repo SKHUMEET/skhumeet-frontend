@@ -9,7 +9,6 @@ import { COMMENT } from "@/types";
 import { useDeleteComment, useUpdateComment } from "@/hooks/main/comment";
 
 const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
-  const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const [user, setUser] = useState<User>();
   const [editComment, setEditComment] = useState<string>(item.context);

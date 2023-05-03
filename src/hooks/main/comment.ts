@@ -1,7 +1,7 @@
 import { del, get, instance, post } from "@/libs/api";
 import { queryKeys } from "@/react-query/constants";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { COMMENT } from "@/types";
 import customAlert from "@/components/modal/CustomModalAlert";
 const getComment = async (postId: number, page: number) => {

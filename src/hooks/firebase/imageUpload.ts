@@ -1,5 +1,3 @@
-import customAlert from "@/components/modal/CustomModalAlert";
-import { post } from "@/libs/api";
 import { storageConstants } from "@/types";
 import axios from "axios";
 

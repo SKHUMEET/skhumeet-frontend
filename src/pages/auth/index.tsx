@@ -136,12 +136,6 @@ const Auth = () => {
               />
             </Button.ButtonList>
           </Button.Container>
-          <Mention>
-            네이버는 개발 모드라 서버에 저장된 아이디로만 로그인 되기 때문에(타
-            아이디로 로그인 불가능)
-            <br />
-            <mark>카카오</mark>로 로그인 하는 것을 추천합니다!
-          </Mention>
         </Container>
       </Wrapper>
       <Modal
@@ -232,10 +226,3 @@ const Button = {
     color: #ffffff;
   `,
 };
-
-const Mention = styled.p`
-  margin-top: 2rem;
-
-  font-size: 5px;
-  text-align: center;
-`;
