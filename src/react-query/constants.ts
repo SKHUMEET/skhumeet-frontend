@@ -8,4 +8,5 @@ export const queryKeys = {
   etc: "etc",
   member: "member",
   detail: "detail",
+  comment: "comment",
 };

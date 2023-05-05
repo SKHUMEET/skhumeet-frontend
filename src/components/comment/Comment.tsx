@@ -5,8 +5,9 @@ import customAlert from "../modal/CustomModalAlert";
 import Btn from "../utils/Btn";
 
 import CommentDetail from "./CommentDetail";
+import { useComment, usePostComment } from "@/hooks/main/comment";
+import { COMMENT } from "@/types";
 
-//todo: 게시글 글 보다 댓글 폰트가 더 커서 보기에 불편
 export interface Comment {
   author: string;
   childComments: string[];
@@ -19,34 +20,23 @@ export interface Comment {
 const Comment = ({ postId }: { postId: number }) => {
   const [newComment, setNewComment] = useState<string>("");
 
-  const [list, setList] = useState<Comment[]>();
-
-  useEffect(() => {
-    const getComment = async () => {
-      await get(`/api/comment/${postId}/page/1`).then((res: any) => {
-        setList(res.data);
-      });
-    };
-    getComment();
-  }, []);
-
+  const { data: list, page, setPage } = useComment(postId);
+  const postComment = usePostComment();
   const handleSubmitComment = () => {
     if (newComment.length === 0) {
       customAlert("댓글을 작성해주세요");
       return;
+    } else {
+      postComment({ postId, newComment });
+      setNewComment("");
     }
-
-    post(`/api/comment/new`, {
-      postId,
-      context: newComment,
-    });
   };
-
+  //todo: comment pagination
   return (
     <>
       {list?.length ? (
         <>
-          {list.map((el) => (
+          {list.map((el: COMMENT) => (
             <CommentDetail item={el} key={el.id} postId={postId} />
           ))}
         </>
@@ -54,13 +44,13 @@ const Comment = ({ postId }: { postId: number }) => {
         <Notion>첫 번째로 댓글을 달아 보세요!</Notion>
       )}
 
-      <CommentContainer onSubmit={handleSubmitComment}>
+      <CommentContainer>
         <CommentInput
           placeholder="댓글을 작성해 주세요"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-        <Btn onClick={() => {}}>저장하기</Btn>
+        <Btn onClick={handleSubmitComment}>저장하기</Btn>
       </CommentContainer>
     </>
   );
@@ -68,8 +58,7 @@ const Comment = ({ postId }: { postId: number }) => {
 
 export default Comment;
 
-//todo: form 사용하지 않고 댓글 달기
-export const CommentContainer = styled.form`
+export const CommentContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

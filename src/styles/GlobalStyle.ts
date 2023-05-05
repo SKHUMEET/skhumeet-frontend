@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   font-family: 'NanumSquareNeo-Variable';
   padding:0;
   margin:0;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
@@ -33,13 +33,15 @@ mark{
 
 }
 /* html::-webkit-scrollbar {
-  width: 1rem;
+  width: 0.3rem;
 }
 html::-webkit-scrollbar-track {
+
   background: ${({ theme }) => theme.color.background};
 }
 html::-webkit-scrollbar-thumb {
-  background:${({ theme }) => theme.color.main}
-  
+  background:${({ theme }) => theme.color.main};
+  border-radius:30px;
 } */
+
 `;

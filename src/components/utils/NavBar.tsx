@@ -44,7 +44,7 @@ const NavBar = () => {
         <SidebarModal handleToggle={toggleMenu} isOpen={isOpen}>
           {category.map((el: Category) => (
             <LinkWrapper
-              active={router.pathname.startsWith(`/${el}`)}
+              active={router.asPath.startsWith(`/${el}`).toString()}
               href={`/${el}`}
               key={el}
             >
@@ -115,15 +115,16 @@ const LogoWrapper = styled.div`
   align-items: center;
 
   background-color: ${({ theme }) => theme.color.background};
+  cursor: pointer;
 `;
 
 const Logo = styled.a`
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: none;
-
+  transition: all 0.3s ease-in-out;
   :hover {
-    /* box-shadow: 0px 0px 10px 1px ${({ theme }) => theme.color.main}; */
+    transform: scale(1.1);
   }
 `;
 
@@ -141,7 +142,7 @@ const NavUser = styled.div`
   text-align: end;
 `;
 
-const LinkWrapper = styled(Link)<{ active: boolean }>`
+const LinkWrapper = styled(Link)<{ active: string }>`
   display: flex;
 
   font-weight: 600;
@@ -151,7 +152,7 @@ const LinkWrapper = styled(Link)<{ active: boolean }>`
   color: ${(props) => props.theme.color.text};
 
   ${(props) =>
-    props.active &&
+    props.active === "true" &&
     css`
       text-decoration: underline;
       /* color: ${props.theme.color.hover}; */

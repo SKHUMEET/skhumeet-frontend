@@ -6,29 +6,26 @@ import { del, instance } from "@/libs/api";
 import customAlert from "../modal/CustomModalAlert";
 import Btn from "../utils/Btn";
 import { COMMENT } from "@/types";
+import { useDeleteComment, useUpdateComment } from "@/hooks/main/comment";
 
 const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
-  const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const [user, setUser] = useState<User>();
   const [editComment, setEditComment] = useState<string>(item.context);
-
+  const updateComment = useUpdateComment();
+  const deleteCommnet = useDeleteComment();
   const handleDeleteComment = async (id: number) => {
-    await del(`/api/comment/${id}`).then((res) => {
-      customAlert("댓글이 삭제되었습니다.");
-      router.reload();
-    });
+    deleteCommnet({ postId, commentId: id });
   };
 
   const handlePatchComment = async () => {
     if (editComment.length === 0) {
       customAlert("댓글을 작성해주세요");
       return;
+    } else {
+      updateComment({ postId, commentId: item.id, editComment });
+      setIsEdit(false);
     }
-
-    await instance.patch(`/api/comment/${postId}/comment/${item.id}`, {
-      context: editComment,
-    });
   };
 
   useEffect(() => {
@@ -43,32 +40,32 @@ const CommentDetail = ({ item, postId }: { item: COMMENT; postId: number }) => {
     <Container>
       <CommentItem>
         {!isEdit ? (
-          <span>{item.context}</span>
+          <>
+            <span>{item.context}</span>
+            <WriteDate>
+              {item.modifiedDate.replace("T", " ")} &nbsp; &#183; &nbsp;
+              {item.writer}
+            </WriteDate>
+          </>
         ) : (
-          <div>
-            <form onSubmit={handlePatchComment}>
-              <input
-                placeholder="Write comment"
-                value={editComment}
-                onChange={(e) => setEditComment(e.target.value)}
-              />
-              <Btn onClick={() => {}}>수정하기</Btn>
-            </form>
-          </div>
+          <CommentContainer>
+            <CommentInput
+              placeholder="댓글을 작성해 주세요"
+              value={editComment}
+              onChange={(e) => setEditComment(e.target.value)}
+            />
+            <Btn onClick={handlePatchComment}>수정하기</Btn>
+          </CommentContainer>
         )}
-        <WriteDate>
-          {item.modifiedDate.replace("T", " ")} &nbsp; &#183; &nbsp;
-          {item.writer}
-        </WriteDate>
+        {user?.name === item.writer && (
+          <EditWrapper>
+            <span onClick={() => setIsEdit(!isEdit)}>
+              {isEdit ? "취소" : "수정"}
+            </span>
+            <span onClick={() => handleDeleteComment(item.id)}>삭제</span>
+          </EditWrapper>
+        )}
       </CommentItem>
-      {user?.name === item.writer && (
-        <EditWrapper>
-          <span onClick={() => setIsEdit(!isEdit)}>
-            {isEdit ? "취소" : "수정"}
-          </span>
-          <span onClick={() => handleDeleteComment(item.id)}>삭제</span>
-        </EditWrapper>
-      )}
     </Container>
   );
 };
@@ -85,17 +82,39 @@ const Container = styled.div`
 
   border-bottom: 1px dashed #d3d3d3;
   font-size: 12px;
+  position: relative;
+`;
+export const CommentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
 `;
 
+export const CommentInput = styled.textarea`
+  width: 100%;
+  height: 10vh;
+  padding: 5px;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+
+  outline: none;
+  resize: none;
+
+  box-shadow: 0px 0px 5px -1.5px inset ${({ theme }) => theme.color.main};
+`;
 const CommentItem = styled.div`
-  width: 55vw;
+  width: 100%;
   color: black;
 `;
 
 const WriteDate = styled.p`
-  margin-top: 5px;
+  margin-top: 10px;
 
-  color: ${({ theme }) => theme.color.hover};
+  color: ${({ theme }) => theme.color.lightText};
 
   font-size: x-small;
 `;
@@ -105,7 +124,8 @@ const EditWrapper = styled.div`
   align-items: center;
   gap: 0.5rem;
 
-  width: 5rem;
+  right: 0;
+  position: absolute;
 
   > span {
     cursor: pointer;

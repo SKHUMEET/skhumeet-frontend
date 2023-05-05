@@ -42,7 +42,7 @@ const RegisterForm = ({
     title: data?.title ?? "",
     category: data?.category ?? defaultCategory ?? "hansotbab",
     contact: data?.contact ?? "",
-    status: data?.status ?? originStatusList[0],
+    status: (data?.status.toLowerCase() as Status) ?? originStatusList[0],
     endDate:
       (formDate(data?.endDate) as string) ??
       (formDate(new Date().toISOString()) as string),
@@ -91,15 +91,16 @@ const RegisterForm = ({
   };
 
   const handleSubmit = () => {
+    //todo 입력 실패 시 입력이 아예 안될지...?
     if (title.length === 0) {
-      alert("제목을 입력해 주세요");
+      customAlert("제목을 입력해 주세요");
     }
     if (context.length === 0) {
-      alert("내용을 입력해 주세요");
+      customAlert("내용을 입력해 주세요");
     }
     //todo 연락방법 ""이어도 됨
     if (contact.length === 0) {
-      alert("연락 방법을 입력해 주세요");
+      customAlert("연락 방법을 입력해 주세요");
     }
     if (kind === "register") {
       postMain({
@@ -126,7 +127,8 @@ const RegisterForm = ({
       });
     }
 
-    router.push(`/${category?.toLowerCase()}`);
+    router.back(); //바로 전 화면
+    // router.push(`/${category?.toLowerCase()}`);
   };
 
   const handleContextChange = (content: string) => {
@@ -173,6 +175,7 @@ const RegisterForm = ({
         )}
         {kind === "edit" && registerType === "list" && (
           <DropDown
+            defaultItem={status}
             name="status"
             list={editStatusList}
             onChange={handleChangeDropDown}
@@ -189,6 +192,7 @@ const RegisterForm = ({
         )}
         {kind === "edit" && registerType === "grid" && (
           <DropDown
+            defaultItem={status}
             name="status"
             list={originStatusList}
             onChange={handleChangeDropDown}

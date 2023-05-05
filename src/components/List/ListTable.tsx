@@ -29,7 +29,7 @@ export default function ListTable({
         ) : (
           list.map((el, idx) => (
             <ListWrapper
-              key={(el.id, el.title, el.nickname, el.modifiedDate)}
+              key={el.id}
               onClick={() => handleClickListItem(el.id)}
               itemStyle={itemStyle}
             >

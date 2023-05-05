@@ -1,3 +1,5 @@
+import customAlert from "@/components/modal/CustomModalAlert";
+import { useHandleLogout } from "@/hooks/user";
 import { storageConstants } from "@/types";
 import axios, {
   AxiosError,
@@ -73,6 +75,10 @@ const responseInterceptorRejected = async (error: AxiosError | any) => {
         )
         .then((res: any) => {
           return res.data;
+        })
+        .catch((err) => {
+          // customAlert("토큰이 만료되었습니다.");
+          useHandleLogout();
         });
       const newAccessToken = data.tokens.accessToken;
       const newRefreshToken = data.tokens.refreshToken;

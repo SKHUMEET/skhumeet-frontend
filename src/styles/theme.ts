@@ -11,6 +11,7 @@ export const lightTheme = {
   },
   color: {
     text: "#202124",
+    lightText: "grey",
     background: "#fefefe",
     hover: "#c6c6c6",
     // light: "#68bd3081",
@@ -26,6 +27,7 @@ export const darkTheme = {
   },
   color: {
     text: "#fefefe",
+    lightText: "grey",
     background: "#2b2b2b",
     hover: "#c6c6c6",
     light: "#B3DB97",

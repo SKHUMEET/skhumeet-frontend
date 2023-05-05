@@ -16,10 +16,10 @@ const HomeList = ({ category, items }: HomeList) => {
   return (
     <HomeListContainer>
       <HomeListTitle onClick={() => router.push(`/${category}`)}>
-        {ConvertKorean[category]}
+        <p>{ConvertKorean[category]}</p>
       </HomeListTitle>
       {items.length ? (
-        items.slice(0, 5).map((item, idx) => {
+        items.slice(0, 4).map((item, idx) => {
           return (
             <HomeListItem
               key={idx}
@@ -62,7 +62,7 @@ const HomeListContainer = styled.div`
   box-shadow: 0px 0px 5px -1.5px ${({ theme }) => theme.color.main};
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const HomeListTitle = styled.div`
@@ -72,6 +72,11 @@ const HomeListTitle = styled.div`
   border-bottom: 1.5px solid ${({ theme }) => theme.color.light};
 
   font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2 ease-in-out;
+  > p:hover {
+    transform: translateY(-3px);
+  }
 `;
 
 const HomeListItem = styled.div`
@@ -82,9 +87,8 @@ const HomeListItem = styled.div`
 
   line-height: 25px;
 
-  cursor: default;
-  transition: 0.2s;
-
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
   :hover {
     transform: translateY(-3px);
   }

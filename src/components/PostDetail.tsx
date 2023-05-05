@@ -6,7 +6,7 @@ import {
   formDate,
   storageConstants,
 } from "@/types";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "./modal";
 import RegisterForm from "./register/RegisterForm";
 import Comment from "./comment/Comment";
@@ -74,9 +74,9 @@ const PostDetail = ({ data }: { data: MAIN }) => {
             <span>&nbsp; &#183; &nbsp;</span>
             <span>작성자 {data.member}</span>
             <span>&nbsp; &#183; &nbsp;</span>
-            마감일 {formDate(data.endDate)}
+            <span>마감일 {formDate(data.endDate)}</span>
+            <span>&nbsp; &#183; &nbsp;</span>
             <span></span>
-            &nbsp; &#183; &nbsp;
             <span></span>
             <span>
               작성일
@@ -132,12 +132,17 @@ const ContactContainer = styled.div`
 
   border-bottom: 2px solid ${({ theme }) => theme.color.light};
 
-  color: ${({ theme }) => theme.color.hover};
+  color: ${({ theme }) => theme.color.lightText};
   font-size: 12px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.medium}) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr 10px);
+    /* grid-auto-flow: column; */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    > :nth-child(even) {
+      display: none;
+    }
   }
 `;
 

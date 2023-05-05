@@ -1,12 +1,7 @@
 import { del, post } from "@/libs/api";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import styled from "styled-components";
-import customAlert from "../modal/CustomModalAlert";
-import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/router";
-import { queryKeys } from "@/react-query/constants";
-import { getPostById } from "@/hooks/main";
 import { useDeleteBookmark, usePostBookmark } from "@/hooks/main/bookmark";
 
 const Bookmark = ({

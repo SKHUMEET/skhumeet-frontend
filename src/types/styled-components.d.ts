@@ -9,6 +9,7 @@ declare module "styled-components" {
     };
     color: {
       text: string;
+      lightText: string;
       background: string;
       hover: string;
       light: string;

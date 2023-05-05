@@ -70,3 +70,9 @@ export const useAuth = (): UseAuth => {
     signup,
   };
 };
+
+export const useHandleLogout = async () => {
+  localStorage.clear();
+
+  window.location.href = "/auth"; // 로그인 페이지로 이동
+};

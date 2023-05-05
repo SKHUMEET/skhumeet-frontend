@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
-
+import { createRoot } from "react-dom/client";
 interface CustomAlertProps {
   message: string;
   onConfirm: () => void;
@@ -40,12 +39,10 @@ const customAlert = (message: string) => {
     const subDiv = document.createElement("div");
     subDiv.id = "modal-alert-portal-wrapper";
     document.body.appendChild(subDiv);
-    ReactDOM.render(
-      <>
-        <CustomAlert message={message} onConfirm={handleConfirm} />
-      </>,
-      subDiv
-    );
+
+    const root = createRoot(subDiv);
+    root.render(<CustomAlert message={message} onConfirm={handleConfirm} />);
+    // https://react.dev/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis
   }
 };
 

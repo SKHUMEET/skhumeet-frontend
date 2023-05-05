@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { MAIN, Status, formDate } from "@/types";
 import { GrView } from "react-icons/gr";
 import StatusBtn from "../utils/StatusBtn";
-//  북마크,댓글개수,제목,현황,마감일, 작성자
 
 //todo: view 수 말고 댓글수로 보이기
 const ListItem = ({ item }: { item: MAIN }) => {
